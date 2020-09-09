@@ -2,6 +2,7 @@ import firebase from "firebase/app";
 import "firebase/auth";
 import "firebase/firestore";
 
+
 const config = {
   dbUrl: process.env.NEXT_PUBLIC_FB_DB_URL,
   apiKey: process.env.NEXT_PUBLIC_FB_API_KEY,

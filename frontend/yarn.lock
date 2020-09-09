@@ -10486,6 +10486,11 @@ verror@1.10.0:
     core-util-is "1.0.2"
     extsprintf "^1.2.0"
 
+vivid-studio@^0.6.6:
+  version "0.6.6"
+  resolved "https://registry.yarnpkg.com/vivid-studio/-/vivid-studio-0.6.6.tgz#9a5c3367d4ebfabcf97fd70c93e4e7a3a09dec36"
+  integrity sha512-Z8t5SZ1oqyhpLdFxpq1pdWv8SJFMQze72O23yWWnHSlFRWaA5JisCRt/AZGZSZcg23Hw34dPB7Oa0LOfjrJMCA==
+
 vm-browserify@1.1.2, vm-browserify@^1.0.1:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz#78641c488b8e6ca91a75f511e7a3b32a86e5dda0"

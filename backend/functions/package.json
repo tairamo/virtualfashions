@@ -13,9 +13,6 @@
     "env": "test -f env.json && firebase functions:config:unset env && node setEnv.js",
     "logs": "firebase functions:log"
   },
-  "engines": {
-    "node": "14"
-  },
   "main": "lib/index.js",
   "dependencies": {
     "axios": "^0.21.1",
