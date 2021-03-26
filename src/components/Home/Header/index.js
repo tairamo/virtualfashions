@@ -3,11 +3,13 @@ import {
   Navigator,
   NavigatorItem,
   ButtonConnect,
+  Logo,
 } from "./styles";
 
 export const Header = () => (
   <HeaderContainer>
     <div className="d1">
+      <Logo>Visual Fashion</Logo>
       <Navigator>
         <NavigatorItem href="#">Artworks</NavigatorItem>
         <NavigatorItem href="#" active>

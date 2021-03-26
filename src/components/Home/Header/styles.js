@@ -45,8 +45,8 @@ export const Navigator = styled.div`
 
   @media screen and (min-width: 1400px) {
     display: flex;
-    left: 50%;
-    transform: translate(-50%, -50%);
+    /* left: 50%; */
+    /* transform: translate(-50%, -50%); */
   }
 `;
 
@@ -105,4 +105,10 @@ export const ButtonConnect = styled.button`
   @media screen and (min-width: 52em) {
     padding: 16px 24px;
   }
+`;
+
+export const Logo = styled.h3`
+  font-size: 24px;
+  font-weight: 600;
+  font-family: serif;
 `;
