@@ -20,15 +20,13 @@ export default createGlobalStyle`
 
   body {
     margin: 0;
-    font: 400 14px/24px Roboto;
     font-family: "Public Sans", "Open Sans", Roboto, sans-serif;
-    font-size: .9375rem;
     font-weight: 400;
     line-height: 1.5;
     color: #a6b0cf;
-		text-align: left;
-		height: 100vh;
-		background-color: #303841;
+		opacity: 0;
+		background-color: transparent;
+		transition: background-color 300ms ease-in-out 0s, opacity 800ms ease-in-out 0s;
 		
 
 		::-webkit-scrollbar{
