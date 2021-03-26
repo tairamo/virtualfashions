@@ -53,5 +53,35 @@ export const CardHeader = styled.div`
     align-items: center;
     text-decoration: none;
     margin-top: auto;
+
+    span {
+      margin-left: 10px;
+    }
+  }
+`;
+
+export const CardFooter = styled.div`
+  padding: 24px;
+  width: 100%;
+  background-color: #000000;
+  display: flex;
+
+  .foo-1,
+  .foo-2 {
+    font-family: "Roobert", -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol";
+    font-size: 18px;
+    font-weight: 600;
+    margin-bottom: 8px;
+    line-height: 1;
+  }
+  .foo-1 {
+    color: #7f7f7f;
+    /* color: #CCCCCC; */
+  }
+
+  .foo-2 {
+    color: #ffffff;
   }
 `;
