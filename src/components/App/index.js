@@ -1,10 +1,11 @@
-import GlobalStyle from '../styles'
+import GlobalStyle from "../styles";
+import Home from "../Home";
 
 function App() {
   return (
     <div>
       <GlobalStyle />
-      <p>Virtual Fashion</p>
+      <Home />
     </div>
   );
 }

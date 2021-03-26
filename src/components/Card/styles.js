@@ -12,13 +12,22 @@ export const CardContainer = styled.div`
   text-decoration: none;
   color: inherit;
   will-change: transform;
+
+  @media (hover: hover) {
+    :hover {
+      transform: translateY(-4px);
+      box-shadow: 0px 10px 20px rgb(0 0 0 / 10%);
+    }
+  }
 `;
 
 export const CardImage = styled.div`
   min-width: 0;
+  width: 100%;
+  height: 300px;
   position: relative;
   overflow: hidden;
-  background: var(--gray);
+  background: var(--blue-bold);
 `;
 
 export const CardHeader = styled.div`

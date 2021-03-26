@@ -1,11 +1,7 @@
 import styled, { css } from "styled-components";
 
-export const HomeContainer = styled.div`
+export const HeaderContainer = styled.div`
   .d1 {
-    @media screen and (min-width: 40em) {
-      padding-top: 32px;
-    }
-
     box-sizing: border-box;
     margin: 0;
     min-width: 0;
@@ -24,31 +20,34 @@ export const HomeContainer = styled.div`
     flex-flow: row nowrap;
     align-items: center;
     justify-content: space-between;
+
+    @media screen and (min-width: 40em) {
+      padding-top: 32px;
+    }
   }
 `;
 
 export const Navigator = styled.div`
+  box-sizing: border-box;
+  margin: 0;
+  min-width: 0;
+  display: flex;
+  /* left: 50%; */
+  /* transform: translate(-50%, -50%); */
+  height: 64px;
+  box-shadow: 0px 10px 20px rgb(0 0 0 / 5%);
+  border-radius: 10px;
+  /* position: absolute; */
+  /* top: 50%; */
+  background-color: #ffffff;
+  padding: 8px;
+  align-items: center;
+
   @media screen and (min-width: 1400px) {
     display: flex;
     left: 50%;
     transform: translate(-50%, -50%);
   }
-
-  box-sizing: border-box;
-  margin: 0;
-  min-width: 0;
-  display: flex;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  display: none;
-  height: 64px;
-  box-shadow: 0px 10px 20px rgb(0 0 0 / 5%);
-  border-radius: 10px;
-  position: absolute;
-  top: 50%;
-  background-color: #ffffff;
-  padding: 8px;
-  align-items: center;
 `;
 
 export const NavigatorItem = styled.a`
@@ -70,13 +69,11 @@ export const NavigatorItem = styled.a`
     css`
       border-radius: 10px;
       background-color: #000000;
+      color: var(--white-100);
     `}
 `;
 
 export const ButtonConnect = styled.button`
-  @media screen and (min-width: 52em) {
-    padding: 16px 24px;
-  }
   box-sizing: border-box;
   margin: 0px;
   min-width: 0px;
@@ -104,4 +101,8 @@ export const ButtonConnect = styled.button`
   border-radius: 999px;
   min-height: 54px;
   max-height: 54px;
+
+  @media screen and (min-width: 52em) {
+    padding: 16px 24px;
+  }
 `;

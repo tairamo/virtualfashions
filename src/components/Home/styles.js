@@ -14,20 +14,6 @@ export const FirstSection = styled.div`
   padding-right: 24px;
 
   .fd-1 {
-    @media screen and (min-width: 72em) {
-      gap: 96px;
-    }
-
-    @media screen and (min-width: 64em) {
-      padding-top: 96px;
-      gap: 48px;
-    }
-    @media screen and (min-width: 52em) {
-      padding-top: 64px;
-      grid-template-columns: repeat(2, 1fr);
-      gap: 32px;
-      align-items: center;
-    }
     box-sizing: border-box;
     margin: 0;
     min-width: 0;
@@ -35,6 +21,22 @@ export const FirstSection = styled.div`
     grid-gap: 3px;
     gap: 0;
     min-height: calc(80vh - 86px);
+
+    @media screen and (min-width: 52em) {
+      padding-top: 64px;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 32px;
+      align-items: center;
+    }
+
+    @media screen and (min-width: 64em) {
+      padding-top: 96px;
+      gap: 48px;
+    }
+
+    @media screen and (min-width: 72em) {
+      gap: 96px;
+    }
 
     .fd-child-1 {
       @media screen and (min-width: 52em) {
@@ -51,18 +53,6 @@ export const FirstSection = styled.div`
 `;
 
 export const LiveAuctionsSection = styled.div`
-  @media screen and (min-width: 64em) {
-    padding-bottom: 96px;
-  }
-
-  @media screen and (min-width: 52em) {
-    padding-bottom: 64px;
-    gap: 32px;
-  }
-  @media screen and (min-width: 40em) {
-    padding-bottom: 48px;
-  }
-
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
@@ -84,39 +74,58 @@ export const LiveAuctionsSection = styled.div`
     position: relative;
     z-index: 4;
   }
+  @media screen and (min-width: 40em) {
+    padding-bottom: 48px;
+  }
+  @media screen and (min-width: 64em) {
+    padding-bottom: 96px;
+  }
 `;
 
-export const AudictionsHeader = styled.div`
+export const AuctionsHeader = styled.div`
+  justify-content: space-between;
+  @media screen and (min-width: 40em) {
+    padding-top: 64px;
+  }
   @media screen and (min-width: 52em) {
     padding-top: 96px;
   }
 
-  @media screen and (min-width: 40em) {
-    padding-top: 64px;
+  &,
+  :first-child {
+    display: flex;
+    align-items: center;
   }
 
   :first-child {
-    width: 10px;
-    height: 10px;
-    background-color: black;
-    border-radius: 999px;
-    opacity: ${() => Math.random()};
-    transform: ${() => `scale(${Math.random()})`} translateZ(0px);
-    position: relative;
-    top: 2px;
-
     & h1 {
       font-weight: 600;
       font-size: 24px;
+      margin-left: 15px;
     }
 
     p {
       font-size: 14px;
+      font-weight: 600;
+      color: #888;
+      cursor: pointer;
     }
   }
 `;
 
-export const AudictionsContent = styled.div`
+export const LiveCir = styled.div`
+  width: 10px;
+  height: 10px;
+  background-color: #888;
+  border-radius: 999px;
+  opacity: 1;
+  /* opacity: ${() => Math.random()};
+    transform: ${() => `scale(${Math.random()})`} translateZ(0px); */
+  position: relative;
+  top: 2px;
+`;
+
+export const AuctionsContent = styled.div`
   margin: 0;
   min-width: 0;
   display: grid;
@@ -124,23 +133,24 @@ export const AudictionsContent = styled.div`
 `;
 
 export const AudContentFirst = styled.div`
-  @media screen and (min-width: 72em) {
-    grid-template-columns: repeat(4, 1fr);
-  }
-
-  @media screen and (min-width: 52em) {
-    grid-gap: 32px;
-    grid-template-columns: repeat(3, 1fr);
-  }
-  @media screen and (min-width: 40em) {
-    grid-gap: 24px;
-    grid-template-columns: repeat(2, 1fr);
-  }
-
   box-sizing: border-box;
   margin: 0;
   min-width: 0;
   display: grid;
   grid-gap: 16px;
   grid-template-columns: repeat(1, 1fr);
+
+  @media screen and (min-width: 40em) {
+    grid-gap: 24px;
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  @media screen and (min-width: 52em) {
+    grid-gap: 32px;
+    grid-template-columns: repeat(3, 1fr);
+  }
+
+  @media screen and (min-width: 72em) {
+    grid-template-columns: repeat(4, 1fr);
+  }
 `;

@@ -10,9 +10,12 @@ export const Header = () => (
     <div className="d1">
       <Navigator>
         <NavigatorItem href="#">Artworks</NavigatorItem>
-        <NavigatorItem href="#">Home</NavigatorItem>
-        <ButtonConnect>Connect Wallet</ButtonConnect>
+        <NavigatorItem href="#" active>
+          Home
+        </NavigatorItem>
+        <NavigatorItem href="#">Creators</NavigatorItem>
       </Navigator>
+      <ButtonConnect>Connect Wallet</ButtonConnect>
     </div>
   </HeaderContainer>
 );

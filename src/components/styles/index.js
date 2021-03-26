@@ -13,32 +13,15 @@ export default createGlobalStyle`
 		box-sizing: border-box !important;
 	}
 
-	*::before, *::after {
-		-webkit-box-sizing: inherit;
-		box-sizing: inherit;
-	}
-
   body {
     margin: 0;
     font-family: "Public Sans", "Open Sans", Roboto, sans-serif;
     font-weight: 400;
     line-height: 1.5;
-    color: #a6b0cf;
-		opacity: 0;
+    color: #000;
+		opacity: 1;
 		background-color: transparent;
 		transition: background-color 300ms ease-in-out 0s, opacity 800ms ease-in-out 0s;
-		
-
-		::-webkit-scrollbar{
-			width: 12px;
-			cursor: pointer;
-		}
-
-		::-webkit-scrollbar-trace,
-		::-webkit-scrollbar-thumb {
-			border-radius: 8px;
-			background-color: #264653;
-		}
   }
 
   html {
@@ -47,7 +30,7 @@ export default createGlobalStyle`
     -webkit-tap-highlight-color: rgba(0,0,0,0);
   }
 
-  :root {
+  body {
 		--chat-bg: #262e35;
 		--blue: #7269ef;
 		--blue-bold: #073b4c;
