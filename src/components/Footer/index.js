@@ -24,7 +24,7 @@ const Items = styled.div`
 
   span {
     margin-right: 10px;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 600;
     cursor: pointer;
     color: var(--black-600);
