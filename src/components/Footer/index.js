@@ -1,11 +1,31 @@
 import styled from "styled-components";
+import { Logo } from "../common";
 
 const Container = styled.footer`
-  padding-top: 48px;
-  padding-bottom: 48px;
+  padding: 48px 20px;
   background-color: #f2f2f2;
+  max-width: 100%;
 
-  & > div {
+  .vf-info {
+    padding-left: 24px;
+    padding-right: 24px;
+    display: flex;
+    flex-flow: row nowrap;
+    align-items: center;
+    margin-bottom: 40px;
+
+    & > :first-child {
+      margin-right: 15px;
+    }
+
+    h1 {
+      font-size: 14px;
+      color: #888;
+      font-family: cursive, serif;
+    }
+  }
+
+  .vf-social-law {
     width: 100%;
     max-width: 1600px;
     margin-left: auto;
@@ -23,6 +43,7 @@ const Items = styled.div`
   align-items: center;
 
   span {
+    width: max-content;
     margin-right: 10px;
     font-size: 13px;
     font-weight: 600;
@@ -38,7 +59,10 @@ const Items = styled.div`
 
 export const Footer = () => (
   <Container>
-    <div>
+    <div className="vf-info">
+      <Logo /> <h1>Virtual Fashion</h1>
+    </div>
+    <div className="vf-social-law">
       <Items>
         <span>Instagram</span>
         <span>Twitter</span>

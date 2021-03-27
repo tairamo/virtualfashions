@@ -15,7 +15,7 @@ import {
   ButtonSection,
   SectionInfo,
 } from "./styles";
-import { ButtonConnect } from "./Header/styles";
+import { Button } from "../common";
 
 const Section = () => (
   <SectionChild>
@@ -38,9 +38,9 @@ const Section = () => (
         </ButtonSection>
       </div>
     </SectionInfo>
-    <ButtonConnect style={{ margin: "10px 0", borderRadius: "10px" }}>
+    <Button style={{ margin: "10px 0", borderRadius: "10px" }}>
       View artwork
-    </ButtonConnect>
+    </Button>
   </SectionChild>
 );
 
@@ -73,9 +73,9 @@ export const Home = () => (
         </AuctionsContent>
       </div>
     </LiveAuctionsSection>
-    <ButtonConnect style={{ margin: "auto auto 40px" }}>
+    <Button style={{ margin: "auto auto 40px" }}>
       Become a creator on Virtual Fashion
-    </ButtonConnect>
+    </Button>
     <Footer />
   </Container>
 );

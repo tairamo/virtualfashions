@@ -1,15 +1,11 @@
-import {
-  HeaderContainer,
-  Navigator,
-  NavigatorItem,
-  ButtonConnect,
-  Logo,
-} from "./styles";
+import { Logo } from "../../common";
+import WalletButton from "../../WalletButton";
+import { HeaderContainer, Navigator, NavigatorItem } from "./styles";
 
 export const Header = () => (
   <HeaderContainer>
     <div className="d1">
-      <Logo>Visual Fashion</Logo>
+      <Logo />
       <Navigator>
         <NavigatorItem href="#">Artworks</NavigatorItem>
         <NavigatorItem href="#" active>
@@ -17,7 +13,7 @@ export const Header = () => (
         </NavigatorItem>
         <NavigatorItem href="#">Creators</NavigatorItem>
       </Navigator>
-      <ButtonConnect>Connect Wallet</ButtonConnect>
+      <WalletButton />
     </div>
   </HeaderContainer>
 );
