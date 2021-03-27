@@ -1,0 +1,20 @@
+name: Deploy React App
+
+on:
+  push:
+    branches: main
+
+jobs:
+  deploy:
+
+    runs-on: virtualfashion
+
+    steps:
+    - uses: actions/checkout@v2
+    - run: |
+        whoami
+        pwd
+        ls -la
+    - run: |
+        npm ci
+        npm run build
