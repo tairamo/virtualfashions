@@ -7,8 +7,8 @@ const Container = styled.footer`
   max-width: 100%;
 
   .vf-info {
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 14px;
+    padding-right: 14px;
     display: flex;
     flex-flow: row nowrap;
     align-items: center;
@@ -30,8 +30,8 @@ const Container = styled.footer`
     max-width: 1600px;
     margin-left: auto;
     margin-right: auto;
-    padding-left: 24px;
-    padding-right: 24px;
+    padding-left: 14px;
+    padding-right: 14px;
     display: flex;
     flex-flow: row wrap;
     justify-content: space-between;
@@ -41,6 +41,7 @@ const Container = styled.footer`
 const Items = styled.div`
   display: flex;
   align-items: center;
+  flex-flow: row wrap;
 
   span {
     width: max-content;
