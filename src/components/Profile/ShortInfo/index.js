@@ -5,9 +5,9 @@ export const ShortInfo = () => (
     <Header>About</Header>
     <Content>
       <p>
-        A passionate Software Engineer with more then 5 years of experience in
+        A passionate Software Engineer with more than 5 years of experience in
         software development and analysis. Designer, Hotaku & Gamer. Curently
-        based in Luanda, Angola but In few months...
+        based in Luanda, Angola but in few months...
       </p>
       <SocialInfo>
         <div></div>

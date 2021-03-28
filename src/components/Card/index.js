@@ -4,7 +4,7 @@ import Avatar from "../Avatar";
 import { CardContainer, CardImage, CardHeader, CardFooter } from "./styles";
 
 export const Card = () => (
-  <Link to="/profile">
+  <Link to="/product">
     <CardContainer>
       <CardImage></CardImage>
       <CardHeader>
