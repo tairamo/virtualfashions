@@ -17,7 +17,7 @@ import {
 const Header = () => {
   return (
     <>
-      <MainHeader style={{ position: "absolute", background: "transparent" }} />
+      <MainHeader absolute />
       <div>
         <Container>
           <div>

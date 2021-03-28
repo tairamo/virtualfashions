@@ -26,6 +26,13 @@ export const HeaderContainer = styled.div`
     @media screen and (min-width: 40em) {
       padding-top: 32px;
     }
+
+    ${(props) =>
+      props.absolute &&
+      css`
+        position: absolute;
+        background: transparent;
+      `}
   }
 `;
 

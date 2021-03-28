@@ -1,15 +1,20 @@
 import styled from "styled-components";
-import { ReactComponent as VFLogo } from "../../images/niftyicon.svg";
+import VFLogo from "../../images/vfs.png";
 
 const Container = styled.div`
-  width: 30px;
-  height: 30px;
+  width: 60px;
+  height: 60px;
   cursor: pointer;
+
+  img {
+    width: 100%;
+    height: auto;
+  }
 `;
 
 export const Logo = (props) => (
   <Container>
-    <VFLogo />
+    <img src={VFLogo} alt="virtual fashion" />
   </Container>
 );
 
