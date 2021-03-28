@@ -1,7 +1,9 @@
+import { Link } from "react-router-dom";
+
 import Avatar from "../Avatar";
+import RenderArtworks from "../RenderArtworks";
 import Footer from "../Footer";
 import Header from "./Header";
-import Card from "../Card";
 
 import {
   Container,
@@ -9,7 +11,6 @@ import {
   LiveAuctionsSection,
   AuctionsHeader,
   AuctionsContent,
-  AudContentFirst,
   LiveCir,
   SectionChild,
   ButtonSection,
@@ -19,9 +20,11 @@ import { Button } from "../common";
 
 const Section = () => (
   <SectionChild>
-    <ButtonSection>
-      <Avatar width={40} /> <span>@dedaldino</span>
-    </ButtonSection>
+    <Link to="/profile">
+      <ButtonSection>
+        <Avatar width={40} /> <span>@dedaldino</span>
+      </ButtonSection>
+    </Link>
     <div>
       <h2>HEADQUARTERS</h2>
     </div>
@@ -65,11 +68,7 @@ export const Home = () => (
           <p>View all live auctions</p>
         </AuctionsHeader>
         <AuctionsContent>
-          <AudContentFirst>
-            {[0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11].map((i) => (
-              <Card key={i} />
-            ))}
-          </AudContentFirst>
+          <RenderArtworks />
         </AuctionsContent>
       </div>
     </LiveAuctionsSection>
