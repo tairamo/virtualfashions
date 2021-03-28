@@ -1,5 +1,6 @@
-import { Container } from "./styles";
+import Header from "./Header";
+// import { Container } from "./styles";
 
-const Profile = () => <Container></Container>;
+const Profile = () => <Header />;
 
 export default Profile;
