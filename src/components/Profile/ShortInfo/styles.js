@@ -25,6 +25,29 @@ export const Content = styled.div`
   @media screen and (min-width: 64em) {
     grid-template-columns: auto 400px;
   }
+
+  div,
+  p {
+    font-family: "Roobert", -apple-system, BlinkMacSystemFont, "Segoe UI",
+      Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
+      "Segoe UI Symbol";
+    font-size: 16px;
+    font-weight: 400;
+    line-height: 1.5;
+    font-size: 16px;
+
+    @media screen and (min-width: 40em) {
+      font-size: 18px;
+    }
+
+    @media screen and (min-width: 52em) {
+      font-size: 24px;
+    }
+  }
+
+  div {
+    font-size: 14px;
+  }
 `;
 
 export const SocialInfo = styled.div`
