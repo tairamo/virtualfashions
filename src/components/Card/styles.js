@@ -45,6 +45,7 @@ export const CardHeader = styled.div`
     justify-content: space-between;
     font-size: 24px;
     font-weight: 600;
+    color: #000;
   }
   .card-info {
     min-width: 0;
@@ -53,7 +54,7 @@ export const CardHeader = styled.div`
     align-items: center;
     text-decoration: none;
     margin-top: auto;
-
+    color: #000;
     span {
       margin-left: 10px;
     }
