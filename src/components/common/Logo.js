@@ -3,7 +3,6 @@ import VFLogo from "../../images/vfs.png";
 
 const Container = styled.div`
   width: 60px;
-  height: 60px;
   cursor: pointer;
 
   img {

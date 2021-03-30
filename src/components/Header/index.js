@@ -1,21 +1,46 @@
-import { Logo } from "../common";
+import { useState } from "react";
+import {
+  Nav,
+  NavLink,
+  NavBars,
+  NavMenu,
+  NewWalletButton,
+} from "./styles";
 import WalletButton from "../WalletButton";
-import { HeaderContainer, Navigator, NavigatorItem } from "./styles";
+import { Logo } from "../common";
 
-export const Header = (props) => (
-  <HeaderContainer absolute={props.absolute}>
-    <div className="d1">
-      <Logo />
-      <Navigator>
-        <NavigatorItem href="#">Artworks</NavigatorItem>
-        <NavigatorItem href="#" active>
-          Home
-        </NavigatorItem>
-        <NavigatorItem href="#">Creators</NavigatorItem>
-      </Navigator>
-      <WalletButton />
-    </div>
-  </HeaderContainer>
-);
+const Header = (props) => {
+  const [open, setOpen] = useState(false);
+
+  return (
+    <>
+      <Nav absolute={props.absolute}>
+        <Logo />
+        <NavMenu open={open} absolute={props.absolute}>
+          <NavLink to="#" activeClassName="nav--activ">
+            Artworks
+          </NavLink>
+          <NavLink to="/" activeClassName="nav--active">
+            Home
+          </NavLink>
+          <NavLink to="#" activeClassName="nav--activ">
+            Creators
+          </NavLink>
+          <NewWalletButton>
+            <WalletButton />
+          </NewWalletButton>
+        </NavMenu>
+        <NavBars open={open} onClick={() => setOpen(!open)}>
+          <div />
+          <div />
+          <div />
+        </NavBars>
+        <NewWalletButton minor>
+          <WalletButton />
+        </NewWalletButton>
+      </Nav>
+    </>
+  );
+};
 
 export default Header;

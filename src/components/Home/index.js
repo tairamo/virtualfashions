@@ -35,7 +35,6 @@ export const Home = () => (
     <Header />
     <FirstSection>
       <div className="fd-1">
-        <div className="fd-child-1"></div>
         <div className="fd-child-2">
           <Section />
         </div>
