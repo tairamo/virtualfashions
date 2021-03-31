@@ -1,25 +1,6 @@
 import Avatar from "../../Avatar";
-import { Container, BidEnded, BidRemaining as BidReContainer } from "./styles";
-
-const BidRemaining = (props) => (
-  <BidReContainer>
-    <div>Action ending in</div>
-    <div className="bid-remaining-time">
-      <div>
-        <div>{new Date().getHours()}</div>
-        <div>Hours</div>
-      </div>
-      <div>
-        <div>{new Date().getMinutes()}</div>
-        <div>Minutes</div>
-      </div>
-      <div>
-        <div>{new Date().getSeconds()}</div>
-        <div>Seconds</div>
-      </div>
-    </div>
-  </BidReContainer>
-);
+import { Container, BidEnded } from "./styles";
+import RemainingTime from "./RemainingTime";
 
 export const BidInfo = (props) => (
   <Container>
@@ -37,7 +18,7 @@ export const BidInfo = (props) => (
           </BidEnded>
         </>
       ) : (
-        <BidRemaining />
+        <RemainingTime />
       )}
     </div>
   </Container>
