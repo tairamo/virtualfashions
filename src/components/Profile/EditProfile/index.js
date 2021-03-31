@@ -1,5 +1,6 @@
-import { Upload } from "../../common";
+import { Button, Upload } from "../../common";
 import Header from "../../Header";
+import SocialLinks from "./SocialLinks";
 import {
   Container,
   Title,
@@ -115,6 +116,17 @@ const EditProfile = () => {
               </div>
               <div></div>
             </Form>
+            <SocialLinks />
+            <Button
+              style={{
+                borderRadius: "5px",
+                width: "100%",
+                marginTop: "20px",
+                padding: "0 50%",
+              }}
+            >
+              Save changes
+            </Button>
           </div>
         </MainContent>
       </Container>
