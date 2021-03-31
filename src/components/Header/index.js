@@ -1,11 +1,5 @@
 import { useState } from "react";
-import {
-  Nav,
-  NavLink,
-  NavBars,
-  NavMenu,
-  NewWalletButton,
-} from "./styles";
+import { Nav, NavLink, NavBars, NavMenu, NewWalletButton } from "./styles";
 import WalletButton from "../WalletButton";
 import { Logo } from "../common";
 
@@ -17,10 +11,10 @@ const Header = (props) => {
       <Nav absolute={props.absolute}>
         <Logo />
         <NavMenu open={open} absolute={props.absolute}>
-          <NavLink to="#" activeClassName="nav--activ">
+          <NavLink to="/edit" activeClassName="nav--active">
             Artworks
           </NavLink>
-          <NavLink to="/" activeClassName="nav--active">
+          <NavLink exact to="/" activeClassName="nav--active">
             Home
           </NavLink>
           <NavLink to="#" activeClassName="nav--activ">

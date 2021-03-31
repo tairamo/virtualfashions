@@ -61,12 +61,17 @@ export const NewWalletButton = styled.div`
 export const Nav = styled.nav`
   background: transparent;
   height: 64px;
+  padding-top: 24px;
+  padding-left: 24px;
+  padding-right: 24px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.2rem 10px;
   z-index: 12;
 
+  @media screen and (min-width: 40em) {
+    padding-top: 32px;
+  }
   @media screen and (min-width: 768px) {
     align-items: center;
   }
@@ -126,6 +131,7 @@ export const NavMenu = styled.div`
   box-shadow: 0px 10px 20px rgb(0 0 0 / 5%);
   background: ${(props) => (props.absolute ? "transparent" : "#fff")};
   padding: 8px;
+  border-radius: 10px;
 
   @media screen and (max-width: 768px) {
     flex-direction: column;
