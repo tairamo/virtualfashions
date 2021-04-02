@@ -11,9 +11,6 @@
 # production
 /build
 
-# ignore navbar test
-src/components/Header/NavBar
-
 # misc
 .DS_Store
 .env.local
