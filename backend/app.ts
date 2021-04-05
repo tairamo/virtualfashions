@@ -3,6 +3,8 @@ import express from "express";
 import session from "express-session";
 import cors from "cors";
 
+import fnSetRoutes from "./routes";
+
 const app = express();
 
 app.options("*", cors());
@@ -14,7 +16,7 @@ const allowedOrigins = [
   "http://localhost:3000",
   "http://localhost:8000",
   "http://127.0.0.1:8000",
-  "http://virtualfashion.com",
+  "http://virtualfashion.io",
 ];
 
 app.use(
@@ -33,6 +35,8 @@ app.use(
 );
 
 app.listen(app.get("port"), () => {
+  fnSetRoutes(app);
+
   console.log(
     "Virtual Fashion NFT Backend listening on port " + app.get("port")
   );
