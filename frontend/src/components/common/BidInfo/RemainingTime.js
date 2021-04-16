@@ -3,12 +3,13 @@ import React from "react";
 import { BidRemaining as BidReContainer } from "./styles";
 
 class RemainingTime extends React.Component {
-  constructor() {
-    super();
+  constructor(props) {
+    super(props);
+    let time = props.time * 1000;
     this.state = {
-      hours: new Date().getHours(),
-      minutes: new Date().getMinutes(),
-      seconds: new Date().getSeconds(),
+      hours: new Date(time).getHours(),
+      minutes: new Date(time).getMinutes(),
+      seconds: new Date(time).getSeconds(),
     };
     this.timer = 0;
   }
@@ -22,7 +23,8 @@ class RemainingTime extends React.Component {
   }
 
   startTimer = () => {
-    if (this.timer === 0 && this.state.seconds > 0) {
+    const chker = this.state.seconds && this.state.minutes && this.state.hours;
+    if (this.timer === 0 && chker) {
       this.timer = setInterval(this.countDown, 1000);
     }
   };
@@ -39,14 +41,18 @@ class RemainingTime extends React.Component {
       seconds = 59;
     }
     // Check if we're at zero.
-    if (minutes === 0) {
+    if (minutes === 0 && seconds === 0) {
       hours = this.state.hours - 1;
       seconds = 59;
       minutes = 59;
     }
+    if (hours === 0 && minutes === 0 && seconds === 0) {
+      console.log("BID - TIMED OUT");
+      clearInterval(this.timer);
+    }
     this.setState({
       ...this.state,
-      hours: hours,
+      hours,
       seconds,
       minutes,
     });
@@ -54,8 +60,10 @@ class RemainingTime extends React.Component {
 
   render() {
     return (
-      <BidReContainer>
-        <div>Action ending in</div>
+      <BidReContainer short={this.props.short}>
+        {this.props.header && (
+          <div className="bid-re-header">Auction ending in</div>
+        )}
         <div className="bid-remaining-time">
           <div>
             <div>{this.state.hours}</div>

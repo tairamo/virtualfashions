@@ -95,27 +95,26 @@ export const BidEnded = styled.div`
 `;
 
 export const BidRemaining = styled.div`
-  & > :first-child {
+  max-width: 100%;
+  & .bid-re-header {
     font-size: 16px;
     font-weight: 600;
   }
 
-  & > :last-child {
+  & .bid-remaining-time {
     display: grid;
-    gap: 16px;
+    gap: ${(props) => (props.short ? "2px" : "14px")};
     grid-template-columns: repeat(3, 56px);
-  }
-  .bid-remaining-time {
     & > div :first-child {
       margin: 0px 0px 10px;
       font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI",
         Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
         "Segoe UI Symbol";
       font-weight: 600;
-      font-size: 24px;
+      font-size: ${(props) => (props.short ? "18px" : "24px")};
 
       @media screen and (min-width: 72em) {
-        font-size: 36px;
+        font-size: ${(props) => (props.short ? "26px" : "36px")};
       }
     }
 
@@ -123,7 +122,7 @@ export const BidRemaining = styled.div`
       font-family: Roobert, -apple-system, BlinkMacSystemFont, "Segoe UI",
         Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji",
         "Segoe UI Symbol";
-      font-size: 16px;
+      font-size: ${(props) => (props.short ? "12px" : "16px")};
       font-weight: 600;
       color: #666666;
     }
