@@ -5,17 +5,17 @@ import { Button } from "../common";
 
 const ButtonContainer = styled(Button)``;
 
+export let web3Provider =
+  typeof web3 !== "undefined"
+    ? window.web3.currentProvider
+    : new Web3.providers.HttpProvider("https://mainnet.infura.io");
+
 let netCallbacks = [];
 export const onNetworkUpdate = (callback) => {
   netCallbacks.push(callback);
 };
 
-const connectWallet = () => {
-  let web3Provider =
-    typeof web3 !== "undefined"
-      ? window.web3.currentProvider
-      : new Web3.providers.HttpProvider("https://mainet.infura.io");
-
+export const connectWallet = () => {
   if (!window.web3) {
     console.log("Web3 not found in window");
     // web3Provider = new PortisProvider({
