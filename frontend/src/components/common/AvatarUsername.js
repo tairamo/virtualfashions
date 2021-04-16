@@ -53,7 +53,8 @@ const Container = styled.div`
 
 export const AvatarUsername = (props) => (
   <Container>
-    <Avatar width={props.width} /> <span>@{props.username}</span>
+    <Avatar width={props.width} source={props.imageUrl} />{" "}
+    <span>@{props.username}</span>
   </Container>
 );
 

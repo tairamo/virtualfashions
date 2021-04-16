@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 export const Container = styled.div`
   min-width: 0;
+  max-width: 100%;
   display: grid;
   grid-gap: 16px;
   grid-template-columns: repeat(1, 1fr);

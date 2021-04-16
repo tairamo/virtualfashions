@@ -28,6 +28,11 @@ export const CardImage = styled.div`
   position: relative;
   overflow: hidden;
   background: var(--blue-bold);
+
+  img{
+    width: 100%;
+    height: 100%;
+  }
 `;
 
 export const CardHeader = styled.div`
@@ -46,6 +51,11 @@ export const CardHeader = styled.div`
     font-size: 24px;
     font-weight: 600;
     color: #000;
+
+    h3{
+      text-overflow: ellipsis;
+      line-height: 1.5;
+    }
   }
   .card-info {
     min-width: 0;

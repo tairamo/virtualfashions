@@ -47,6 +47,11 @@ export const FirstSection = styled.div`
         width: 80%;
         height: 80%;
       }
+
+      img {
+        width: 100%;
+        height: 100%;
+      }
     }
 
     .fd-child-2 {
