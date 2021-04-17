@@ -16,5 +16,6 @@ jobs:
         pwd
         ls -la
     - run: |
+        cd frontend
         npm install
         npm run build
