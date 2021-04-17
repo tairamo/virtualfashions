@@ -3,6 +3,9 @@ name: Deploy React App
 on:
   push:
     branches: main
+    
+env:
+  CI: false
 
 jobs:
   deploy:
