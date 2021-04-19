@@ -10,7 +10,7 @@ const ListBidHistory = () => (
         <Avatar width={40} />
         <div>
           <div>
-            Bid placed by <Link to="/profile">@dedaldino</Link>
+            Bid placed by <Link to="/profile">@bobdoyle</Link>
           </div>
           <div>March 28, 2021 at 10:54am</div>
         </div>

@@ -12,10 +12,10 @@ export const ProductCreator = () => (
         <HeaderUsername>
           <div>
             <div>
-              <font style={{ verticalAlign: "middle" }}>Teemu Airamu</font>
+              <font style={{ verticalAlign: "middle" }}>Bob Doyle</font>
             </div>
             <div className="username-1">
-              <div>@tairamu</div>
+              <div>@bobdoyle</div>
             </div>
           </div>
         </HeaderUsername>
