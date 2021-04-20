@@ -24,7 +24,7 @@ class RemainingTime extends React.Component {
 
   startTimer = () => {
     const chker = this.state.seconds && this.state.minutes && this.state.hours;
-    if (this.timer === 0 && chker) {
+    if (this.timer === 0) {
       this.timer = setInterval(this.countDown, 1000);
     }
   };
