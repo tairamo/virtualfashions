@@ -61,9 +61,7 @@ class Home extends React.Component {
   }
 
   async fetchData() {
-    // const { accountAddress, seaport } = this.props;
     const { accountAddress, seaport } = window;
-    console.log("Sea port HOME:", seaport);
     const { orders, count } = await seaport.api.getOrders({}, this.state.page);
 
     this.setState({ order: orders[0] });
