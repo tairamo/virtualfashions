@@ -2,6 +2,7 @@ import React from "react";
 import { object, string } from "prop-types";
 import { Link } from "react-router-dom";
 
+import Loading, {ContainerLoading} from "../common/Loading"
 import RenderArtworks from "../RenderArtworks";
 import Footer from "../Footer";
 import Header from "../Header";
@@ -17,9 +18,10 @@ import {
 } from "./styles";
 import { Button, BidInfo, AvatarUsername } from "../common";
 
-const Section = ({ account, asset }) => {
-  const _username = account.user ? account.user.username : null;
-  const _address = account.address;
+const Section = ({ order }) => {
+  const { makerAccount, asset } = order;
+  const _username = makerAccount.user ? makerAccount.user.username : null;
+  const _address = makerAccount.address;
   const displayName = _username
     ? _username
     : _address.substring(2, 6 + 2).toUpperCase();
@@ -29,14 +31,14 @@ const Section = ({ account, asset }) => {
       <Link to="/profile">
         <AvatarUsername
           width={40}
-          imageUrl={account.profile_img_url}
+          imageUrl={makerAccount.profile_img_url}
           username={displayName}
         />
       </Link>
       <div>
         <h2>{asset.name}</h2>
       </div>
-      <BidInfo />
+      <BidInfo order={order}/>
       <Button style={{ margin: "10px 0", borderRadius: "10px" }}>
         View artwork
       </Button>
@@ -68,30 +70,26 @@ class Home extends React.Component {
   }
 
   render() {
-    if (this.state.order === undefined) {
-      return <h1>Loading...</h1>;
-    }
-    const { asset, makerAccount } = this.state.order;
 
     return (
       <Container>
         <Header />
-        <FirstSection>
+        {this.state.order === undefined ? <ContainerLoading><Loading/></ContainerLoading> : <FirstSection>
           <div className="fd-1">
             <div className="fd-child-1">
               <a
                 target="_blank"
                 rel="noopnener noreferrer"
-                href={asset.openseaLink}
+                href={this.state.order.asset.openseaLink}
               >
-                <img alt="Asset artwork" src={asset.imageUrl} />
+                <img alt="Asset artwork" src={this.state.order.asset.imageUrl} />
               </a>
             </div>
-            <div className="fd-child-2">
-              <Section asset={asset} account={makerAccount} />
-            </div>
+            {!this.state.order.asset ? <Loading/> : <div className="fd-child-2">
+              <Section order={this.state.order} />
+            </div>}
           </div>
-        </FirstSection>
+        </FirstSection>}
         <LiveAuctionsSection>
           <div>
             <AuctionsHeader>

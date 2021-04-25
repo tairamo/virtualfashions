@@ -14,6 +14,16 @@ function getColor(props) {
   return color;
 }
 
+
+export const ContainerLoading = styled.div`
+  margin: auto;
+  max-width: 100%;
+  min-height: 200px;
+  display: flex;
+  align-items:center;
+  justify-content: center;
+`
+
 const RotateSpin = styled.div`
   animation: ${(props) => `spinner ${props.duration}s infinite linear`};
   @keyframes spinner {

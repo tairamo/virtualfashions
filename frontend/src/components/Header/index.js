@@ -11,13 +11,13 @@ const Header = (props) => {
       <Nav absolute={props.absolute}>
         <Logo />
         <NavMenu open={open} absolute={props.absolute}>
-          <NavLink to="/edit" activeClassName="nav--active">
+          <NavLink to="/artworks" activeClassName="nav--active">
             Artworks
           </NavLink>
           <NavLink exact to="/" activeClassName="nav--active">
             Home
           </NavLink>
-          <NavLink to="#" activeClassName="nav--activ">
+          <NavLink to="/creators" activeClassName="nav--active">
             Creators
           </NavLink>
           <NewWalletButton>

@@ -98,7 +98,8 @@ export const NavLink = styled(Link)`
   margin-left: 2px;
   margin-right: 2px;
   cursor: pointer;
-
+  font-weight: 700;
+  
   &.nav--active {
     border-radius: 10px;
     background-color: #000000;

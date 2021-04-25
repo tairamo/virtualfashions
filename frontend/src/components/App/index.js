@@ -8,6 +8,8 @@ import Profile from "../Profile";
 import EditProfile from "../Profile/EditProfile";
 import Product from "../Product";
 import { onNetworkUpdate, web3Provider } from "../WalletButton";
+import Artworks from "../Artworks";
+import ListCreators from "../ListCreators";
 
 export class App extends React.Component {
   state = {
@@ -43,6 +45,8 @@ export class App extends React.Component {
             <Route path="/profile" exact component={Profile} />
             <Route path="/edit" exact component={EditProfile} />
             <Route path="/product" exact component={Product} />
+            <Route path="/artworks" exact component={Artworks} />
+            <Route path="/creators" exact component={ListCreators} />
           </Switch>
         </Router>
       </main>

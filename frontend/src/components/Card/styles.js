@@ -77,6 +77,10 @@ export const CardFooter = styled.div`
   background-color: #000000;
   display: flex;
 
+  @media screen and (min-width: 52em) {
+    padding: 14px;
+  }
+
   .foo-1,
   .foo-2 {
     font-family: "Roobert", -apple-system, BlinkMacSystemFont, "Segoe UI",
@@ -87,6 +91,7 @@ export const CardFooter = styled.div`
     margin-bottom: 8px;
     line-height: 1;
   }
+  
   .foo-1 {
     color: #7f7f7f;
     /* color: #CCCCCC; */

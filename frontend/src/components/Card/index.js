@@ -8,6 +8,7 @@ import Account from "./Account";
 
 import { CardContainer, CardImage, CardHeader, CardFooter } from "./styles";
 import RemainingTime from "../common/BidInfo/RemainingTime";
+import SalePrice from "../common/SalePrice";
 
 const AssetMetadata = (props) => {
   const { asset, makerAccount } = props;
@@ -81,7 +82,7 @@ export class Card extends React.Component {
           <CardFooter>
             <div style={{ marginRight: "24px" }}>
               <div className="foo-1">Current bid</div>
-              <div className="foo-2">4.0 ETH</div>
+              <div className="foo-2"><SalePrice order={order}/></div>
             </div>
             <div>
               <div className="foo-1">Ending in</div>
