@@ -36,17 +36,17 @@ class RemainingTime extends React.Component {
     let hours = this.state.hours;
     seconds = this.state.seconds - 1;
     // Check if we're at zero.
-    if (seconds === 0) {
+    if (seconds <= 0) {
       minutes = this.state.minutes - 1;
       seconds = 59;
     }
     // Check if we're at zero.
-    if (minutes === 0 && seconds === 0) {
+    if (minutes <= 0 && seconds <= 0) {
       hours = this.state.hours - 1;
       seconds = 59;
       minutes = 59;
     }
-    if (hours === 0 && minutes === 0 && seconds === 0) {
+    if (hours <= 0 && minutes <= 0 && seconds <= 0) {
       console.log("BID - TIMED OUT");
       clearInterval(this.timer);
     }

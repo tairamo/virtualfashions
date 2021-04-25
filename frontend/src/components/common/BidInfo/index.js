@@ -1,27 +1,42 @@
 import Avatar from "../../Avatar";
+import SalePrice from "../SalePrice"
 import { Container, BidEnded } from "./styles";
 import RemainingTime from "./RemainingTime";
 
-export const BidInfo = (props) => (
+export const BidInfo = ({order, account}) => (
   <Container>
     <div className="nft-info">
-      <div>Sold for</div>
-      <div>4.0 ETH</div>
+    {order.expirationTime ? 
+    <>
+      <div>Current bid</div>
+      <div><SalePrice order={order}/></div>
       <div>$6,866.32</div>
-    </div>
-    <div>
-      {!props.active ? (
-        <>
+      </>:
+      <><div>Sold for</div>
+      <div><SalePrice order={order}/></div>
+      <div>$6,866.32</div></>}
+    </div>    
+  <div>
+      {!order.expirationTime ? (
+        <> 
           <div>Owned by</div>
           <BidEnded>
             <Avatar width={40} /> <span>0x5190...2d6d</span>
           </BidEnded>
         </>
       ) : (
-        <RemainingTime />
+        <RemainingTime time={order.expirationTime}/>
       )}
     </div>
   </Container>
 );
+
+
+
+
+
+
+
+
 
 export default BidInfo;
