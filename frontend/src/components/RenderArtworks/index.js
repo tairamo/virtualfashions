@@ -1,6 +1,7 @@
 import React from "react";
 import { object, string } from "prop-types";
 
+import Loading, { ContainerLoading } from "../common/Loading"
 import Card from "../Card";
 import { Container } from "./styles";
 
@@ -23,7 +24,7 @@ export class RenderArtworks extends React.Component {
   }
 
   async fetchData() {
-    const { accountAddress, seaport } = window;
+    const { seaport } = window;
     const { orders, count } = await seaport.api.getOrders({}, this.state.page);
 
     this.setState({ orders, total: count });
@@ -37,12 +38,12 @@ export class RenderArtworks extends React.Component {
     const { orders } = this.state;
     return (
       <Container>
-        {orders != null ? (
+        {orders ? (
           orders.map((order, i) => (
             <Card key={i} {...this.props} order={order} />
           ))
         ) : (
-          <div style={{ margin: "auto" }}>Loading...</div>
+        <ContainerLoading><Loading /></ContainerLoading>
         )}
       </Container>
     );

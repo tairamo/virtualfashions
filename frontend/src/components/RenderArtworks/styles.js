@@ -4,11 +4,11 @@ export const Container = styled.div`
   min-width: 0;
   max-width: 100%;
   display: grid;
-  grid-gap: 16px;
+  grid-gap: 14px;
   grid-template-columns: repeat(1, 1fr);
 
   @media screen and (min-width: 40em) {
-    grid-gap: 24px;
+    grid-gap: 16px;
     grid-template-columns: repeat(2, 1fr);
   }
 
