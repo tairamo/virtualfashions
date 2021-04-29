@@ -1,7 +1,9 @@
+import { useEffect } from "react"
 import * as Web3 from "web3";
 import styled from "styled-components";
 
 import { Button } from "../common";
+import Account from "../Profile/Account"
 
 const ButtonContainer = styled(Button)``;
 
@@ -15,14 +17,14 @@ export const onNetworkUpdate = (callback) => {
   netCallbacks.push(callback);
 };
 
-export const connectWallet = () => {
+export const connectWallet = async () => {
   if (!window.web3) {
     console.log("Web3 not found in window");
     // web3Provider = new PortisProvider({
     //   // TODO: put Portis API key here
     // });
   } else if (window.ethereum) {
-    window.ethereum.enable();
+    await window.ethereum.enable();
   } else {
     const errorMessage =
       "You need an Ethereum wallet to interact with this marketplace, Unlock your wallet, get MetaMask.io or Portis on desktop, or get Trust Wallet or Coinbase Wallet on mobile.";
@@ -33,9 +35,21 @@ export const connectWallet = () => {
 };
 
 const WalletButton = () => {
-  return (
-    <ButtonContainer onClick={connectWallet}>Connect Wallet</ButtonContainer>
-  );
+
+  useEffect(() => {
+    connectWallet();
+  },[]);
+
+  const address = window.accountAddress;
+  if(!address){
+    return (
+      <ButtonContainer onClick={connectWallet}>Connect Wallet</ButtonContainer>
+    );
+  }else{
+    return (
+      <Account address={address}/>
+    );
+  }
 };
 
 export default WalletButton;
