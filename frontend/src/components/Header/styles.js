@@ -61,6 +61,7 @@ export const NewWalletButton = styled.div`
 export const Nav = styled.nav`
   background: transparent;
   height: 64px;
+  max-width: 1600px;
   padding-top: 24px;
   padding-left: 24px;
   padding-right: 24px;
@@ -68,6 +69,7 @@ export const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   z-index: 12;
+  margin: 0 auto;
 
   @media screen and (min-width: 40em) {
     padding-top: 32px;

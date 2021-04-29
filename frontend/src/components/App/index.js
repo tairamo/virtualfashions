@@ -10,12 +10,13 @@ import Product from "../Product";
 import { onNetworkUpdate, web3Provider } from "../WalletButton";
 import Artworks from "../Artworks";
 import ListCreators from "../ListCreators";
+import JoinCommunity from "../JoinCommunity";
 
 export class App extends React.Component {
   state = {
     accountAddress: null,
   };
-
+  
   constructor(props) {
     super(props);
     this.onChangeAddress();
@@ -25,7 +26,6 @@ export class App extends React.Component {
     this.seaport = new OpenSeaPort(web3Provider, {
       networkName: Network.Main,
     });
-    console.log("Sea port:", this.seaport);
     window.seaport = this.seaport;
     this.web3 = this.seaport.web3;
     this.web3.eth.getAccounts((err, res) => {
@@ -33,8 +33,10 @@ export class App extends React.Component {
       this.setState({
         accountAddress: res[0],
       });
+      console.log("error eth accounts", err);
     });
   };
+
   render() {
     return (
       <main>
@@ -47,6 +49,7 @@ export class App extends React.Component {
             <Route path="/product" exact component={Product} />
             <Route path="/artworks" exact component={Artworks} />
             <Route path="/creators" exact component={ListCreators} />
+            <Route path="/creators/create" exact component={JoinCommunity} />
           </Switch>
         </Router>
       </main>
