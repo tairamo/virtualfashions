@@ -1,4 +1,4 @@
-import * as mongoose from "mongoose";
+import mongoose from "mongoose";
 
 const Schema = mongoose.Schema;
 
@@ -8,9 +8,21 @@ const usersSchema = new Schema({
   name: String,
   username: String,
   bio: String,
-  profileImage: Buffer,
-  coverImage: Buffer,
+  profileImage: String,
+  coverImage: String,
+  email: String,
+  facebook_link: String,
+  instagram_link: String,
+  twitch_link: String,
+  youtube_link: String,
+  discord_link: String,
+  twitter_link: String,
+  tiktok_link: String,
+  website_link: String,
+  snapchat_link: String,
+  isCreator: Boolean,
 });
 
 const Users = mongoose.model("Users", usersSchema);
-export default Users;
+
+export default Users

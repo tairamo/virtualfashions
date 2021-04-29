@@ -122,4 +122,4 @@ abstract class DAO {
   };
 }
 
-export default DAO;
+export default DAO

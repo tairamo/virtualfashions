@@ -34,7 +34,7 @@ export default class UsersController {
    */
   fnCreateUser = (req, res) => {
     usersDAO
-      .fnCreateUsers(req)
+      .fnCreateUser(req)
       .then((user) => res.status(201).json(user))
       .catch((err) => res.status(400).json(err));
   };
@@ -51,3 +51,4 @@ export default class UsersController {
       .catch((err) => res.status(400).json(err));
   };
 }
+
