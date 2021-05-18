@@ -3,7 +3,7 @@
 import Avatar from "../../Avatar";
 import { Container, Header, Content, HeaderUsername } from "./styles";
 
-export const ProductCreator = () => (
+export const ProductCreator = (props) => (
   <Container>
     <Header>Creator</Header>
     <Content>
@@ -12,18 +12,17 @@ export const ProductCreator = () => (
         <HeaderUsername>
           <div>
             <div>
-              <font style={{ verticalAlign: "middle" }}>Bob Doyle</font>
+              <font style={{ verticalAlign: "middle" }}>{props.name}</font>
             </div>
             <div className="username-1">
-              <div>@bobdoyle</div>
+              <div>{props.username}</div>
             </div>
           </div>
         </HeaderUsername>
       </div>
       <p>
-        A passionate Software Engineer with more than 5 years of experience in
-        software development and analysis. Designer, Hotaku & Gamer. Curently
-        based in Luanda, Angola but in few months...
+        Taking a Global Overview. Change your way of thinking and after that you
+        can expect to change the world
       </p>
     </Content>
   </Container>
