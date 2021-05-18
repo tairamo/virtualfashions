@@ -1,6 +1,6 @@
 import React from "react";
 import { object, string } from "prop-types";
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, withRouter } from "react-router-dom";
 
 import Loading, { ContainerLoading } from "../common/Loading";
 import RenderArtworks from "../RenderArtworks";
@@ -127,7 +127,13 @@ class Home extends React.Component {
             </AuctionsContent>
           </div>
         </LiveAuctionsSection>
-        <Button style={{ margin: "auto auto 40px" }}>
+        <Button
+          onClick={(e) => {
+            e.stopPropagation();
+            this.props.history.push("/creators/create");
+          }}
+          style={{ margin: "auto auto 40px" }}
+        >
           Become a creator on Virtual Fashion
         </Button>
         <Footer />
@@ -136,4 +142,4 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+export default withRouter(Home);

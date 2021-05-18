@@ -1,5 +1,8 @@
+import { useEffect } from "react";
+import { FaShare } from "react-icons/fa";
+
 import Avatar from "../../Avatar";
-import RenderArtworks from "../../RenderArtworks";
+import ListCreations from "../ListCreations";
 import MainHeader from "../../Header";
 import Footer from "../../Footer";
 import { Button } from "../../common";
@@ -14,18 +17,30 @@ import {
   HeaderUsername,
 } from "./styles";
 
+const bgST = {
+  backgroundImage:
+    "url(https://f8n-production.imgix.net/creators/profile/fcusz42mh-obs-gif-4i7ctk.gif?q=90&w=1500)",
+};
+
 const Header = () => {
+  useEffect(() => {
+    document.title = "☆Chris☆ (@nyancat) | TokensBy";
+  }, []);
+
   return (
     <>
-      <MainHeader absolute />
+      <MainHeader absolute white />
       <div>
         <Container>
           <div>
             <div></div>
-            <div></div>
+            <div style={{ ...bgST }}></div>
           </div>
           <HeaderContent>
-            <Avatar width={130} />
+            <Avatar
+              width={130}
+              source="https://f8n-production.imgix.net/creators/profile/c8gley51s-nyan-cat-large-gif-gif-mbf1sa.gif?fit=fill&q=80&w=360"
+            />
             <div>
               <Button
                 style={{
@@ -35,6 +50,7 @@ const Header = () => {
                   backgroundColor: "#fff",
                 }}
               >
+                <FaShare style={{ marginRight: "5px" }} />
                 Share
               </Button>
             </div>
@@ -61,12 +77,10 @@ const Header = () => {
               <HeaderUsername>
                 <div>
                   <div>
-                    <font style={{ verticalAlign: "middle" }}>
-                      Dedaldino M. Antonio
-                    </font>
+                    <font style={{ verticalAlign: "middle" }}>☆Chris☆</font>
                   </div>
                   <div className="username-1">
-                    <div>@dedaldino</div>
+                    <div>@nyancat</div>
                   </div>
                 </div>
               </HeaderUsername>
@@ -75,7 +89,7 @@ const Header = () => {
               <CreationsHeader>
                 <div>Creations</div>
               </CreationsHeader>
-              <RenderArtworks />
+              <ListCreations />
             </Creations>
             <ShortInfo />
           </HeaderUserInfo>

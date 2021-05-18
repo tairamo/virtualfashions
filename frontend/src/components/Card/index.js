@@ -1,8 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
 
-import { connectWallet } from "../WalletButton";
-
 import Avatar from "../Avatar";
 import Account from "./Account";
 
@@ -16,9 +14,7 @@ const AssetMetadata = (props) => {
   return (
     <>
       <CardImage>
-        <a target="_blank" rel="noopnener noreferrer" href={asset.openseaLink}>
-          <img alt="Asset artwork" src={asset.imageUrl} />
-        </a>
+        <img alt="Asset artwork" src={asset.imageUrl} />
       </CardImage>
       <CardHeader>
         <div className="card-title">
@@ -33,41 +29,6 @@ const AssetMetadata = (props) => {
 };
 
 export class Card extends React.Component {
-  fullfillOrder = async () => {
-    const { order, accountAddress } = this.props;
-    if (!accountAddress) {
-      await connectWallet();
-    }
-    try {
-      this.setState({ creatingOrder: true });
-      await this.props.seaport.fullfillOrder({ order, accountAddress });
-    } catch (err) {
-      console.log("Something went wrong: ", err);
-    } finally {
-      this.setState({ creatingOrder: false });
-    }
-  };
-
-  renderBuyButton = (canAccept = true) => {
-    const { creatingOrder } = this.state;
-    const { accountAddres, order } = this.props;
-
-    const buyAsset = async () => {
-      if (accountAddres && !canAccept) {
-        this.setState({
-          errorMessage: "You already own this asset!",
-        });
-        return;
-      }
-      this.fullfillOrder();
-    };
-    // return (
-    //   <button disabled={creatingOrder}
-    //   onClick={buyAsset}
-    //   >Buy</button>
-    // )
-  };
-
   render() {
     const { order, accountAddress } = this.props;
     console.log("ORDER:", order);
@@ -76,13 +37,15 @@ export class Card extends React.Component {
     const owner = asset ? asset.owner : assetBundle.assets[0].owner;
 
     return (
-      <Link to="/product">
+      <Link to={`/products/${asset.tokenId}/${asset.assetContract.address}`}>
         <CardContainer>
           <AssetMetadata asset={asset} makerAccount={makerAccount} />
           <CardFooter>
             <div style={{ marginRight: "24px" }}>
               <div className="foo-1">Current bid</div>
-              <div className="foo-2"><SalePrice order={order}/></div>
+              <div className="foo-2">
+                <SalePrice order={order} />
+              </div>
             </div>
             <div>
               <div className="foo-1">Ending in</div>

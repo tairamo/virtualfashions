@@ -11,12 +11,13 @@ import { onNetworkUpdate, web3Provider } from "../WalletButton";
 import Artworks from "../Artworks";
 import ListCreators from "../ListCreators";
 import JoinCommunity from "../JoinCommunity";
+import ErrorBoundary from "../ErrorBoundaries";
 
 export class App extends React.Component {
   state = {
     accountAddress: null,
   };
-  
+
   constructor(props) {
     super(props);
     this.onChangeAddress();
@@ -39,20 +40,22 @@ export class App extends React.Component {
 
   render() {
     return (
-      <main>
-        <GlobalStyle />
-        <Router>
-          <Switch>
-            <Route path="/" exact component={() => <Home />} />
-            <Route path="/profile" exact component={Profile} />
-            <Route path="/edit" exact component={EditProfile} />
-            <Route path="/product" exact component={Product} />
-            <Route path="/artworks" exact component={Artworks} />
-            <Route path="/creators" exact component={ListCreators} />
-            <Route path="/creators/create" exact component={JoinCommunity} />
-          </Switch>
-        </Router>
-      </main>
+      <ErrorBoundary>
+        <main>
+          <GlobalStyle />
+          <Router>
+            <Switch>
+              <Route path="/" exact component={Home} />
+              <Route path="/profile" exact component={Profile} />
+              <Route path="/edit" exact component={EditProfile} />
+              <Route path="/artworks" exact component={Artworks} />
+              <Route path="/creators" exact component={ListCreators} />
+              <Route path="/creators/create" exact component={JoinCommunity} />
+              <Route path="/products/:tokenId/:productId" component={Product} />
+            </Switch>
+          </Router>
+        </main>
+      </ErrorBoundary>
     );
   }
 }

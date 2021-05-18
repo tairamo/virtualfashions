@@ -10,7 +10,7 @@ const Header = (props) => {
     <>
       <Nav absolute={props.absolute}>
         <Logo />
-        <NavMenu open={open} absolute={props.absolute}>
+        <NavMenu open={open} absolute={props.absolute} white={props.white}>
           <NavLink to="/artworks" activeClassName="nav--active">
             Artworks
           </NavLink>

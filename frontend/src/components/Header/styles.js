@@ -101,7 +101,7 @@ export const NavLink = styled(Link)`
   margin-right: 2px;
   cursor: pointer;
   font-weight: 700;
-  
+
   &.nav--active {
     border-radius: 10px;
     background-color: #000000;
@@ -133,6 +133,7 @@ export const NavMenu = styled.div`
   height: 64px;
   box-shadow: 0px 10px 20px rgb(0 0 0 / 5%);
   background: ${(props) => (props.absolute ? "transparent" : "#fff")};
+  background: ${(props) => (props.white ? "#fff" : "transparent")};
   padding: 8px;
   border-radius: 10px;
 

@@ -62,13 +62,16 @@ const Img = styled.img`
 `;
 
 const NoImage = styled.div`
-  background-color: #ddd;
   width: ${(props) => `${props.width}px`};
   height: ${(props) => `${props.width}px`};
   border-radius: 50%;
   max-width: 100%;
   cursor: pointer;
   flex: 0 0 auto;
+  background: linear-gradient(135deg, #54bcfb, #4342f3);
+  background-color: #f2f2f2;
+  background-size: cover;
+  background-position: center;
 
   ${(props) =>
     props.quarter &&
