@@ -1,11 +1,12 @@
 import React from "react";
 import { object, string } from "prop-types";
-import { Link } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 
-import Loading, {ContainerLoading} from "../common/Loading"
+import Loading, { ContainerLoading } from "../common/Loading";
 import RenderArtworks from "../RenderArtworks";
 import Footer from "../Footer";
 import Header from "../Header";
+import ErrorBoundary from "../ErrorBoundaries";
 
 import {
   Container,
@@ -26,23 +27,35 @@ const Section = ({ order }) => {
     ? _username
     : _address.substring(2, 6 + 2).toUpperCase();
 
+  const history = useHistory();
+
+  const viewProduct = (e) => {
+    e.stopPropagation();
+    history.push(`/products/${asset.tokenId}/${asset.assetContract.address}`);
+  };
+
   return (
-    <SectionChild>
-      <Link to="/profile">
-        <AvatarUsername
-          width={40}
-          imageUrl={makerAccount.profile_img_url}
-          username={displayName}
-        />
-      </Link>
-      <div>
-        <h2>{asset.name}</h2>
-      </div>
-      <BidInfo order={order}/>
-      <Button style={{ margin: "10px 0", borderRadius: "10px" }}>
-        View artwork
-      </Button>
-    </SectionChild>
+    <ErrorBoundary>
+      <SectionChild>
+        <Link to="/profile">
+          <AvatarUsername
+            width={40}
+            imageUrl={makerAccount.profile_img_url}
+            username={displayName}
+          />
+        </Link>
+        <div>
+          <h2>{asset.name}</h2>
+        </div>
+        <BidInfo order={order} />
+        <Button
+          onClick={viewProduct}
+          style={{ margin: "10px 0", borderRadius: "10px" }}
+        >
+          View artwork
+        </Button>
+      </SectionChild>
+    </ErrorBoundary>
   );
 };
 
@@ -70,26 +83,34 @@ class Home extends React.Component {
   }
 
   render() {
-
     return (
       <Container>
         <Header />
-        {this.state.order === undefined ? <ContainerLoading><Loading/></ContainerLoading> : <FirstSection>
-          <div className="fd-1">
-            <div className="fd-child-1">
-              <a
-                target="_blank"
-                rel="noopnener noreferrer"
-                href={this.state.order.asset.openseaLink}
-              >
-                <img alt="Asset artwork" src={this.state.order.asset.imageUrl} />
-              </a>
-            </div>
-            {!this.state.order.asset ? <Loading/> : <div className="fd-child-2">
-              <Section order={this.state.order} />
-            </div>}
-          </div>
-        </FirstSection>}
+        {this.state.order === undefined ? (
+          <ContainerLoading>
+            <Loading />
+          </ContainerLoading>
+        ) : (
+          <ErrorBoundary>
+            <FirstSection>
+              <div className="fd-1">
+                <div className="fd-child-1">
+                  <img
+                    alt="Asset artwork"
+                    src={this.state.order.asset.imageUrl}
+                  />
+                </div>
+                {!this.state.order.asset ? (
+                  <Loading />
+                ) : (
+                  <div className="fd-child-2">
+                    <Section order={this.state.order} />
+                  </div>
+                )}
+              </div>
+            </FirstSection>
+          </ErrorBoundary>
+        )}
         <LiveAuctionsSection>
           <div>
             <AuctionsHeader>
@@ -100,7 +121,9 @@ class Home extends React.Component {
               <p>View all live auctions</p>
             </AuctionsHeader>
             <AuctionsContent>
-              <RenderArtworks />
+              <ErrorBoundary>
+                <RenderArtworks />
+              </ErrorBoundary>
             </AuctionsContent>
           </div>
         </LiveAuctionsSection>
