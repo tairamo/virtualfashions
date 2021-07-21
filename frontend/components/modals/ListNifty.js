@@ -177,7 +177,7 @@ export const ListNifty = ({ modal, showModal }) => {
               <div className="grid gap-0.5 grid-cols-1fr-1fr">
                 <div className="">
                   <div className="relative">
-                    <div className="font-normal top-2.5 left-5 text-xss pointer-events-none absolute	opacity-100	transform translate-y-px transition-all ease-trans-expo">
+                    <div className="font-normal top-2.5 left-5 text-0.625 pointer-events-none absolute	opacity-100	transform translate-y-px transition-all ease-trans-expo">
                       Minimum Bid
                     </div>
                     <input
@@ -214,7 +214,7 @@ export const ListNifty = ({ modal, showModal }) => {
 
             <div className="">
               <div className="relative">
-                <div className="font-normal top-2.5 left-5 text-xss pointer-events-none absolute	opacity-100	transform translate-y-px transition-all ease-trans-expo z-10">
+                <div className="font-normal top-2.5 left-5 text-0.625 pointer-events-none absolute	opacity-100	transform translate-y-px transition-all ease-trans-expo z-10">
                   Date
                 </div>
                 <Datepicker

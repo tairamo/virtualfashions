@@ -118,13 +118,13 @@ export default function navBar() {
     );
   } else if (ETHAccount) {
     ETHInfo = (
-      <div className="md:flex hidden flex-col items-end text-right ml-4 bg-black text-white border-2 border-black rounded-full px-2.5 py-1">
+      <div className="md:flex hidden flex-col items-end text-right ml-4 bg-black text-white border-2 border-black rounded-full px-3 py-1">
         <div className="mb-0.5 text-base leading-none font-semibold">
           {chainId !== "" && chainId !== process.env.NEXT_PUBLIC_CHAIN_ID
             ? WRONG_NETWORK
             : `${balance} ETH`}
         </div>
-        <div className="text-sm leading-none font-normal">
+        <div className="text-xs leading-none font-normal font-Formular-Mono">
           {convertAddress(ETHAccount)}
         </div>
       </div>

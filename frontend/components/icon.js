@@ -3,13 +3,13 @@ export default function Icon() {
     <>
       <img
         className="block lg:hidden h-8 w-auto"
-        src="/niftyicon.svg"
-        alt="Nifty"
+        src="/placeholders/vfs.png"
+        alt="logo"
       />
       <img
         className="hidden lg:block h-8 w-auto"
-        src="/logo.png"
-        alt="NiftyNudes"
+        src="/placeholders/vfs.png"
+        alt="logo"
       />
     </>
   );

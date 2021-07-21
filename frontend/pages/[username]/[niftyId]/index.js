@@ -33,7 +33,7 @@ import {
   WALLET_ERROR,
   AUCTION_ENDED,
   CHAINID_ERROR,
-  TRANSFER_NIFTY,
+  TRANSFER_ART,
   TOKEN_TRANSFER_ERROR,
   AUCTION_SETTLED_ERROR,
   AUCTION_ALREADY_SETTLED,
@@ -174,7 +174,7 @@ function ANifty({ nifty, niftyMetadata, auctionResult }) {
   }
 
   let isDisabled = false;
-  let buttonText = TRANSFER_NIFTY;
+  let buttonText = TRANSFER_ART;
   if (!ETHAccount) {
     buttonText = WALLET_ERROR;
     isDisabled = true;

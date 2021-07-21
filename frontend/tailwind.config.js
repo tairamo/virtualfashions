@@ -7,6 +7,8 @@ module.exports = {
       colors: {
         brand: {
           DEFAULT: "#db2777",
+          black: "#000000",
+          white: "#ffffff",
           dark: "#c4216b",
           light: "#e15192",
           lighter: "#f8d3e4",
@@ -40,18 +42,19 @@ module.exports = {
         57.14: "57.14%",
         3.25: "3.25rem",
       },
+      fontFamily: {
+        ThomRodger: ["ThomRodger"],
+        Roobert: ["Roobert"],
+        "Formular-Mono": ["Formular-Mono"],
+      },
       fontSize: {
         2: "2rem",
-        xss: "0.625rem",
+        0.625: "0.625rem",
         1.375: "1.375rem",
         2.875: "2.875rem",
         3.5: "3.5rem",
         4.125: "4.125rem",
-      },
-      fontFamily: {
-        Avenir: ["Avenir", "system-ui"],
-        ThomRodger: ["ThomRodger", "sans-serif"],
-        Roobert: ["Roobert"],
+        "13px": "13px",
       },
       transitionTimingFunction: {
         "trans-expo": "cubic-bezier(0.23, 1, 0.32, 1)",
@@ -154,6 +157,7 @@ module.exports = {
         3.125: "3.125rem",
         13.75: "13.75rem",
         17.5: "17.5rem",
+        100: "100rem",
       },
       dropShadow: {
         "01010": "0px 10px 10px rgba(0, 0, 0, 0.25)",
@@ -208,6 +212,7 @@ module.exports = {
         0.4: "0.035em",
         0.6: "0.0375em",
         1: "0.0625em",
+        0.1: "0.1rem",
       },
       gap: {
         0.75: "0.188rem",

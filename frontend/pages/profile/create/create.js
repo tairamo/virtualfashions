@@ -26,7 +26,7 @@ import { Spinner } from "../../../components/ui/Spinner/Spinner";
 import { SuccessMsg } from "../../../components/alerts/success";
 import {
   TOKEN,
-  CREATE_NIFTY,
+  CREATE_ART,
   WALLET_ERROR,
   CHAINID_ERROR,
   FILE_UPLOAD_ERROR,
@@ -291,7 +291,7 @@ function Create({ ETH }) {
   }, []);
 
   let isDisabled = false;
-  let buttonText = CREATE_NIFTY;
+  let buttonText = CREATE_ART;
   if (!ETHAccount) {
     buttonText = WALLET_ERROR;
     isDisabled = true;
@@ -380,7 +380,7 @@ function Create({ ETH }) {
     <Layout>
       <div>
         <h2 className="sm:pt-8 sm:text-4xl md:pt-16 md:text-5xl lg:pt-24 mx-auto max-w-46.25 text-center text-3xl font-semibold tracking-tight">
-          Create Nifty
+          Create Art
         </h2>
         <div className="sm:py-8 md:py-16 md:px-12 lg:py-24 grid gap-6 py-6">
           <div className="sm:px-8 md:px-12 md:py-8 md:mx-auto md:w-full lg:py-12 block p-6 shadow-3xl bg-white rounded-2xl no-underline max-w-46.25">
@@ -389,13 +389,13 @@ function Create({ ETH }) {
                 <div className="grid md:gap-16 md:grid-cols-250">
                   <div>
                     <h2 className="mb-6 text-2xl font-semibold">
-                      Enter nifty details.
+                      Enter art details.
                     </h2>
                   </div>
 
                   <div className="mb-2.5 min-w-0">
                     <div className="relative">
-                      <div className="font-normal top-2.5 left-5 text-xss pointer-events-none absolute	opacity-100	transform translate-y-px transition-all ease-trans-expo">
+                      <div className="font-normal top-2.5 left-5 text-0.625 pointer-events-none absolute	opacity-100	transform translate-y-px transition-all ease-trans-expo">
                         Title
                       </div>
                       <input
@@ -422,7 +422,7 @@ function Create({ ETH }) {
                   <div className="mb-2.5 min-w-0">
                     <div className="relative">
                       <div
-                        className={`font-normal top-2.5 left-5 text-xss pointer-events-none absolute transform translate-y-px transition-all ease-trans-expo ${
+                        className={`font-normal top-2.5 left-5 text-0.625 pointer-events-none absolute transform translate-y-px transition-all ease-trans-expo ${
                           text.length > 0 ? "opacity-100" : "opacity-0"
                         }`}
                       >

@@ -315,7 +315,7 @@ function RegisterDetails({ userData }) {
 
                   <div className="mb-2.5 grid gap-2.5  min-w-0">
                     <div className="relative">
-                      <div className="font-normal top-2.5 left-5 text-xss pointer-events-none absolute	opacity-100	transform translate-y-px transition-all ease-trans-expo">
+                      <div className="font-normal top-2.5 left-5 text-0.625 pointer-events-none absolute	opacity-100	transform translate-y-px transition-all ease-trans-expo">
                         Name
                       </div>
                       <input
@@ -333,7 +333,7 @@ function RegisterDetails({ userData }) {
                           @
                         </div>
                         <div className="relative w-full">
-                          <div className="font-normal top-2.5 left-5 text-xss pointer-events-none absolute	opacity-100	transform translate-y-px transition-all ease-trans-expo">
+                          <div className="font-normal top-2.5 left-5 text-0.625 pointer-events-none absolute	opacity-100	transform translate-y-px transition-all ease-trans-expo">
                             Username
                           </div>
                           <input
@@ -399,7 +399,7 @@ function RegisterDetails({ userData }) {
                   <div className=" min-w-0">
                     <div className="relative">
                       <div
-                        className={`font-normal top-2.5 left-5 text-xss pointer-events-none absolute transform translate-y-px transition-all ease-trans-expo ${
+                        className={`font-normal top-2.5 left-5 text-0.625 pointer-events-none absolute transform translate-y-px transition-all ease-trans-expo ${
                           text.length > 0 ? "opacity-100" : "opacity-0"
                         }`}
                       >
@@ -427,7 +427,7 @@ function RegisterDetails({ userData }) {
                         {errors.bio.message}
                       </p>
                     )}
-                    {/* <div className="pt-2 text-right	tracking-wide	text-gray-500 text-xss font-normal">
+                    {/* <div className="pt-2 text-right	tracking-wide	text-gray-500 text-0.625 font-normal">
                       0/200
                     </div> */}
                   </div>

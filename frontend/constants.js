@@ -28,7 +28,10 @@ export const BID_SUBMITTED = "BID_SUBMITTED";
 export const AUCTION_SETTLED = "AUCTION_SETTLED";
 
 // Url
+export const DISCORD_URL = "https://discord.com";
 export const DISNEY_URL = "https://www.disney.com/";
+export const TWITTER_URL = "https://www.twitter.com";
+export const INSTAGRAM_URL = "https://www.instagram.com";
 
 // Common
 export const AUCTION_ENDED = "Auction has ended";
@@ -92,8 +95,8 @@ export const PLACE_A_BID = "Place a bid";
 export const CLAIM_NFT = "Claim your NFT";
 export const VERIFY_EMAIL = "Verify Email";
 export const PLEASE_LOGIN = "Please login";
-export const CREATE_NIFTY = "Create Nifty";
+export const CREATE_ART = "Create Art";
 export const SHOW_AUCTIONS = "Show Auctions";
-export const TRANSFER_NIFTY = "Transfer nifty";
+export const TRANSFER_ART = "Transfer art";
 export const REQUEST_LISTING = "Request Listing";
 export const ENOUGH_ETH = "You don’t have enough ETH";
