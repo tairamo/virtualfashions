@@ -13,7 +13,7 @@ import { useAuth } from "../../utils/auth";
 import Web3Instance from "../../utils/web3";
 import { SuccessMsg } from "../alerts/success";
 import { useModal } from "../../context/Modal";
-import NiftyService from "../../services/api/NiftyService";
+import TokenService from "../../services/api/TokenService";
 import { bidDuration, counterTime, auctionWonDelay } from "../../utils/general";
 import {
   INTERVAL,
@@ -21,8 +21,8 @@ import {
   AUCTION_ENDED,
   CHAINID_ERROR,
   MINTING_ERROR,
-  MODAL_LIST_NIFTY,
-  NIFTY_MINTED_SUCCESS,
+  MODAL_LIST_TOKEN,
+  TOKEN_MINTED_SUCCESS,
   DEFAULT_PROFILE_IMAGE_URL,
 } from "../../constants";
 
@@ -30,7 +30,7 @@ const web3 = new Web3Instance();
 
 export default function Cards({
   auction,
-  nifty,
+  token,
   bid,
   collected,
   created,
@@ -78,10 +78,10 @@ export default function Cards({
       // Set show loader
       setIsLoading(true);
 
-      const tokenURI = `${process.env.NEXT_PUBLIC_API_URL}/niftys/${nifty._id}/metadata`;
+      const tokenURI = `${process.env.NEXT_PUBLIC_API_URL}/tokens/${token._id}/metadata`;
 
-      // Mint nifty
-      const data = await web3.mintNifty(ETHAccount, tokenURI);
+      // Mint token
+      const data = await web3.mintToken(ETHAccount, tokenURI);
       const tokenId = data.events.Transfer.returnValues.tokenId;
       const txId = data.transactionHash;
 
@@ -91,13 +91,13 @@ export default function Cards({
         tokenURI,
       };
 
-      // Update nifty chain info
-      await NiftyService.updateNifty(nifty._id, {
+      // Update token chain info
+      await TokenService.updateToken(token._id, {
         chainInfo,
       });
 
       // Show success message
-      toast.success(<SuccessMsg msg={NIFTY_MINTED_SUCCESS} />);
+      toast.success(<SuccessMsg msg={TOKEN_MINTED_SUCCESS} />);
 
       // Set show loader
       setIsLoading(false);
@@ -142,12 +142,12 @@ export default function Cards({
 
   let username = auction?.createdBy?.username;
   if (created) {
-    username = nifty?.user?.username;
+    username = token?.user?.username;
   }
 
   let profileImage = DEFAULT_PROFILE_IMAGE_URL;
-  if (created && nifty?.user?.profileUrl) {
-    profileImage = nifty.user.profileUrl;
+  if (created && token?.user?.profileUrl) {
+    profileImage = token.user.profileUrl;
   }
 
   if (!created && auction?.createdBy?.profileUrl) {
@@ -239,7 +239,7 @@ export default function Cards({
     (auction?.status === "Close" ||
       (auction?.status === "Open" && auction?.bids?.length === 0) ||
       !auction) &&
-    nifty?.ownedBy?._id === user?._id &&
+    token?.ownedBy?._id === user?._id &&
     router.query?.username === user?.username
   ) {
     requestListingButton = (
@@ -248,8 +248,8 @@ export default function Cards({
         onClick={(e) => {
           showModal({
             showCloseBtn: true,
-            name: MODAL_LIST_NIFTY,
-            payload: { ...nifty },
+            name: MODAL_LIST_TOKEN,
+            payload: { ...token },
           });
         }}
       >
@@ -260,8 +260,8 @@ export default function Cards({
 
   let mintingButton = null;
   if (
-    nifty?.ownedBy?._id === user?._id &&
-    !nifty?.chainInfo &&
+    token?.ownedBy?._id === user?._id &&
+    !token?.chainInfo &&
     router.query?.username === user?.username
   ) {
     mintingButton = isLoading ? (
@@ -280,24 +280,24 @@ export default function Cards({
 
   let file = (
     <Image
-      alt={nifty?.title}
-      url={nifty?.thumbnailUrl}
+      alt={token?.title}
+      url={token?.thumbnailUrl}
       className="box-border m-0 min-w-0 opacity-1 max-w-full h-full w-full object-cover block"
     />
   );
 
-  if (nifty?.thumbnailContentType?.includes("video")) {
+  if (token?.thumbnailContentType?.includes("video")) {
     file = (
       <Video
-        url={nifty?.thumbnailUrl}
+        url={token?.thumbnailUrl}
         className="box-border m-0 min-w-0 opacity-1 max-w-full h-full w-full object-cover block"
       />
     );
   }
 
   return (
-    <div className="nifty-card box-border m-0 min-w-0 shadow-3xl rounded-xl relative transition-all duration-300 ease-trans-expo overflow-hidden flex flex-col transform-4px hover:shadow-ho3xl">
-      <Link href={`/${nifty?.user?.username}/${nifty?._id}`} passHref>
+    <div className="token-card box-border m-0 min-w-0 shadow-3xl rounded-xl relative transition-all duration-300 ease-trans-expo overflow-hidden flex flex-col transform-4px hover:shadow-ho3xl">
+      <Link href={`/${token?.user?.username}/${token?._id}`} passHref>
         <a>
           <div className="box-border m-0 min-w-0 relative overflow-hidden">
             <div className="box-border m-0 min-w-0 w-full h-0 pb-100%"></div>
@@ -311,8 +311,8 @@ export default function Cards({
       <div className="box-border m-0 min-w-0 grid gap-6 shadow-3xl px-3 py-4 flex-1 bg-white">
         <div className="box-border m-0 min-w-0 flex justify-between">
           <div className="box-border m-0 min-w-0 text-xl font-semibold overflow-ellipsis overflow-hidden">
-            <Link href={`/${nifty?.user?.username}/${nifty?._id}`}>
-              <div>{nifty?.title}</div>
+            <Link href={`/${token?.user?.username}/${token?._id}`}>
+              <div>{token?.title}</div>
             </Link>
           </div>
         </div>

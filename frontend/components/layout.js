@@ -30,12 +30,12 @@ export default function layout({ children }) {
     classes = "w-full mx-auto px-6";
   } else if (router.pathname === "/") {
     classes = "mx-auto px-4 sm:px-6 lg:px-8";
-  } else if (router.pathname === "/[username]/[niftyId]/bid") {
+  } else if (router.pathname === "/[username]/[tokenId]/bid") {
     classes = "bg-brand-f2f2f2 mx-auto md:py-10 py-6 px-4 sm:px-6 lg:px-8";
   } else if (
     router.pathname !== "/[username]" &&
     router.pathname !== "/creators" &&
-    router.pathname !== "/[username]/[niftyId]" &&
+    router.pathname !== "/[username]/[tokenId]" &&
     router.pathname !== "/bids"
   ) {
     classes = "container mx-auto px-4 sm:px-6 lg:px-8";
@@ -50,7 +50,7 @@ export default function layout({ children }) {
       <div className={classes}>{children}</div>
 
       {/* Footer */}
-      {router.pathname !== "/[username]/[niftyId]/bid" && <Footer />}
+      {router.pathname !== "/[username]/[tokenId]/bid" && <Footer />}
     </div>
   );
 }

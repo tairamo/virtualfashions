@@ -18,7 +18,7 @@ const contextClass = {
   dark: "bg-white-600 text-gray-300",
 };
 
-function Nifty({ Component, pageProps }) {
+function Token({ Component, pageProps }) {
   return (
     <ModalProvider>
       <AuthProvider>
@@ -40,4 +40,4 @@ function Nifty({ Component, pageProps }) {
   );
 }
 
-export default Nifty;
+export default Token;

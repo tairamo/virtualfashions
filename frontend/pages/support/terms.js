@@ -13,7 +13,7 @@ export default function Terms({ html }) {
           <div className="text-lg max-w-prose mx-auto text-justify">
             <h1 className="border-0">
               <span className="block text-base text-center text-pink-600 font-semibold tracking-wide uppercase">
-                NiftyNudes
+                Virtual Fashion
               </span>
               <span className="mt-2 block text-3xl text-center leading-8 font-extrabold tracking-tight text-gray-900 sm:text-4xl">
                 Terms Of Service
@@ -35,7 +35,7 @@ export default function Terms({ html }) {
 export async function getStaticProps() {
   const filePath = path.join(
     process.cwd(),
-    "legal/nifty-termsOfServiceAgreement.html"
+    "legal/token-termsOfServiceAgreement.html"
   );
   const content = fs.readFileSync(filePath, "utf8");
 

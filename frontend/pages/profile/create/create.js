@@ -20,7 +20,7 @@ import { Video } from "../../../components/widget/video";
 import { Image } from "../../../components/widget/image";
 import Loading from "../../../components/loading/Spinner";
 import { ErrorMsg } from "../../../components/alerts/error";
-import NiftyService from "../../../services/api/NiftyService";
+import TokenService from "../../../services/api/TokenService";
 import { fileValidation } from "../../../utils/fileValidation";
 import { Spinner } from "../../../components/ui/Spinner/Spinner";
 import { SuccessMsg } from "../../../components/alerts/success";
@@ -30,7 +30,7 @@ import {
   WALLET_ERROR,
   CHAINID_ERROR,
   FILE_UPLOAD_ERROR,
-  NIFTY_CREATED_SUCCESS,
+  TOKEN_CREATED_SUCCESS,
 } from "../../../constants";
 
 const web3 = new Web3Instance();
@@ -45,7 +45,7 @@ function Create({ ETH }) {
 
   // State
   const [text, setText] = useState("");
-  const [niftyId, setNiftyId] = useState(null);
+  const [tokenId, setTokenId] = useState(null);
   const [showLoader, setShowLoader] = useState(false);
   const [isArtVideoLoaded, setIsArtVideoLoaded] = useState(false);
   const [isThumbVideoLoaded, setIsThumbVideoLoaded] = useState(false);
@@ -82,8 +82,8 @@ function Create({ ETH }) {
 
       const { file, title, about, thumbnail } = values;
 
-      // Create nifty
-      const niftyData = {
+      // Create token
+      const tokenData = {
         title: title,
         about: about,
         url: file.url,
@@ -92,12 +92,12 @@ function Create({ ETH }) {
         thumbnailContentType: thumbnail.contentType,
       };
 
-      const { data: nifty } = await NiftyService.createNifty(niftyData);
+      const { data: token } = await TokenService.createToken(tokenData);
 
-      const tokenURI = `${process.env.NEXT_PUBLIC_API_URL}/niftys/${nifty._id}/metadata`;
+      const tokenURI = `${process.env.NEXT_PUBLIC_API_URL}/tokens/${token._id}/metadata`;
 
-      // Mint nifty
-      const data = await web3.mintNifty(ETHAccount, tokenURI);
+      // Mint token
+      const data = await web3.mintToken(ETHAccount, tokenURI);
       const tokenId = data.events.Transfer.returnValues.tokenId;
       const txId = data.transactionHash;
 
@@ -107,8 +107,8 @@ function Create({ ETH }) {
         tokenURI,
       };
 
-      // Update nifty chain info
-      await NiftyService.updateNifty(nifty._id, {
+      // Update token chain info
+      await TokenService.updateToken(token._id, {
         chainInfo,
       });
 
@@ -116,7 +116,7 @@ function Create({ ETH }) {
       setShowLoader(false);
 
       // Show toast notification
-      toast.success(<SuccessMsg msg={NIFTY_CREATED_SUCCESS} />);
+      toast.success(<SuccessMsg msg={TOKEN_CREATED_SUCCESS} />);
 
       // Redirect to profile page
       router.push(`/${user.username}`);
@@ -161,9 +161,9 @@ function Create({ ETH }) {
 
       // Upload file to storage
       const artUploadTask = await storageRef
-        .child("nifty")
+        .child("token")
         .child(user._id)
-        .child(niftyId)
+        .child(tokenId)
         .child("asset")
         .put(file);
 
@@ -203,9 +203,9 @@ function Create({ ETH }) {
 
       // Upload file to storage
       const thumbnailUploadTask = await storageRef
-        .child("nifty")
+        .child("token")
         .child(user._id)
-        .child(niftyId)
+        .child(tokenId)
         .child("thumbnail")
         .put(file);
 
@@ -245,9 +245,9 @@ function Create({ ETH }) {
       setValue("file", { url: "", contentType: "" }, { shouldValidate: true });
 
       const artFileRef = storageRef
-        .child("nifty")
+        .child("token")
         .child(user._id)
-        .child(niftyId)
+        .child(tokenId)
         .child("asset");
 
       // Delete file
@@ -271,9 +271,9 @@ function Create({ ETH }) {
       );
 
       const thumbnailFileRef = storageRef
-        .child("nifty")
+        .child("token")
         .child(user._id)
-        .child(niftyId)
+        .child(tokenId)
         .child("thumbnail");
 
       // Delete file
@@ -284,10 +284,10 @@ function Create({ ETH }) {
   };
 
   useEffect(() => {
-    const niftyId = uuidv4();
+    const tokenId = uuidv4();
 
-    // Set nifty id state
-    setNiftyId(niftyId);
+    // Set token id state
+    setTokenId(tokenId);
   }, []);
 
   let isDisabled = false;

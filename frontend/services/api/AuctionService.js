@@ -13,8 +13,8 @@ class ActionService {
     return await axios.get(endpoint);
   }
 
-  // Claim auction nifty
-  static async claimAuctionNifty(id, data) {
+  // Claim auction token
+  static async claimAuctionToken(id, data) {
     const endpoint = `${process.env.NEXT_PUBLIC_API_URL}/auctions/${id}/claim`;
     return await axios.put(endpoint, data, { withCredentials: true });
   }

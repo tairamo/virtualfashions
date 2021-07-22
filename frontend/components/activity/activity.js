@@ -2,8 +2,8 @@ import { ActivityList } from "../widget/activity/activityList";
 import { AuctionWonWidget } from "../widget/activity/auctionWon";
 import {
   AUCTION_WON,
-  NIFTY_LISTED,
-  NIFTY_MINTED,
+  TOKEN_LISTED,
+  TOKEN_MINTED,
   BID_SUBMITTED,
   AUCTION_SETTLED,
   DEFAULT_PROFILE_IMAGE_URL,
@@ -24,13 +24,13 @@ export const Activity = ({ activity, auction }) => {
   );
 
   switch (activity.event) {
-    case NIFTY_MINTED:
+    case TOKEN_MINTED:
       event = "Minted by ";
       renderAcitvity = (
         <ActivityList event={event} bidPrice={bidPrice} activity={activity} />
       );
       break;
-    case NIFTY_LISTED:
+    case TOKEN_LISTED:
       event = "Listed by ";
       bidPrice = auction?.minimumBid.toFixed(2) || "";
       renderAcitvity = (

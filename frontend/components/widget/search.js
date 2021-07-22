@@ -3,14 +3,14 @@ import { Spinner } from "../ui/Spinner/Spinner";
 import { DEFAULT_PROFILE_IMAGE_URL } from "../../constants";
 import { ReactComponent as SearchIcon } from "../../public/icons/input-search.svg";
 
-export const SearchBox = ({ users, niftys, isLoading }) => {
+export const SearchBox = ({ users, tokens, isLoading }) => {
   let profileImage = DEFAULT_PROFILE_IMAGE_URL;
 
   return (
     <div className="w-full absolute left-0 top-4 z-50">
       <div className="md:shadow-0.15 bg-white rounded-md p-5 g-3 shadow-0.1 grid">
-        {(!users && !niftys && !isLoading) ||
-        (users?.length === 0 && niftys?.length === 0) ? (
+        {(!users && !tokens && !isLoading) ||
+        (users?.length === 0 && tokens?.length === 0) ? (
           <div className="items-center flex flex-col py-24 gap-4">
             <div className="grid gap-8 justify-center">
               <div className="grid gap-4">
@@ -48,19 +48,19 @@ export const SearchBox = ({ users, niftys, isLoading }) => {
                 </div>
               )}
 
-              {niftys?.length > 0 && (
+              {tokens?.length > 0 && (
                 <div className="gap-2 grid">
                   <div className="font-bold text-base text-gray-500 leading-1.2">
-                    Niftys
+                    Tokens
                   </div>
-                  {niftys.map((nifty) => (
+                  {tokens.map((token) => (
                     <SearchResult
-                      nifty
-                      name={nifty.title}
-                      key={nifty._id}
-                      imageUrl={nifty.url}
-                      username={nifty.user.username}
-                      url={`/${nifty.user.username}/${nifty._id}`}
+                      token
+                      name={token.title}
+                      key={token._id}
+                      imageUrl={token.url}
+                      username={token.user.username}
+                      url={`/${token.user.username}/${token._id}`}
                     />
                   ))}
                 </div>

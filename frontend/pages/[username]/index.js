@@ -11,7 +11,7 @@ import Cards from "../../components/Cards/card";
 import { Loader } from "../../components/ui/Loader";
 import WebUrl from "../../components/web-url/WebUrl";
 import UserService from "../../services/api/UserService";
-import NiftyService from "../../services/api/NiftyService";
+import TokenService from "../../services/api/TokenService";
 import { Spinner } from "../../components/ui/Spinner/Spinner";
 import {
   FETCHING_DATA_ERROR,
@@ -23,9 +23,9 @@ function Profile({
   userData,
   username,
   createdCurrPage,
-  createdNiftysData,
+  createdTokensData,
   createdTotalDocs,
-  collectedNiftysData,
+  collectedTokensData,
   collectedCurrPage,
   collectedTotalDocs,
   error,
@@ -38,8 +38,8 @@ function Profile({
   const [tab, setTab] = useState("");
   const [err, setErr] = useState(error);
   const [isLoading, setIsLoading] = useState(false);
-  const [createdNiftys, setCreatedNiftys] = useState([]);
-  const [collectedNiftys, setCollectedNiftys] = useState([]);
+  const [createdTokens, setCreatedTokens] = useState([]);
+  const [collectedTokens, setCollectedTokens] = useState([]);
   const [createdCurrentPage, setCreatedCurrPage] = useState(1);
   const [collectedCurrentPage, setCollectedCurrPage] = useState(1);
   const [createdTotalDocuments, setCreatedTotalDocuments] = useState(0);
@@ -51,8 +51,8 @@ function Profile({
     </div>
   );
 
-  // Fetch created niftys
-  const fetchCreatdNiftys = async () => {
+  // Fetch created tokens
+  const fetchCreatdTokens = async () => {
     try {
       // Set is loading state
       setIsLoading(true);
@@ -60,10 +60,10 @@ function Profile({
       const page = createdCurrentPage + 1;
 
       // fetch auctions
-      const { data } = await NiftyService.fetchCreatdNiftys(userData._id, page);
+      const { data } = await TokenService.fetchCreatdTokens(userData._id, page);
 
-      // Set created niftys state
-      setCreatedNiftys(data.createdNiftys);
+      // Set created tokens state
+      setCreatedTokens(data.createdTokens);
 
       // Set created documents state
       setCreatedTotalDocuments(data.totalDocuments);
@@ -84,8 +84,8 @@ function Profile({
     }
   };
 
-  // Fetch collected niftys
-  const fetchCollectedNiftys = async () => {
+  // Fetch collected tokens
+  const fetchCollectedTokens = async () => {
     try {
       // Set is loading state
       setIsLoading(true);
@@ -93,13 +93,13 @@ function Profile({
       const page = collectedCurrentPage + 1;
 
       // fetch auctions
-      const { data } = await NiftyService.fetchCollectedNiftys(
+      const { data } = await TokenService.fetchCollectedTokens(
         userData._id,
         page
       );
 
-      // Set collected niftys state
-      setCollectedNiftys(data.collectedNiftys);
+      // Set collected tokens state
+      setCollectedTokens(data.collectedTokens);
 
       // Set collected documents state
       setCollectedTotalDocuments(data.totalDocuments);
@@ -134,11 +134,11 @@ function Profile({
     // Set error state
     setErr(error);
 
-    // Set created niftys state
-    setCreatedNiftys(createdNiftysData);
+    // Set created tokens state
+    setCreatedTokens(createdTokensData);
 
-    // Set collected niftys state
-    setCollectedNiftys(collectedNiftysData);
+    // Set collected tokens state
+    setCollectedTokens(collectedTokensData);
 
     // Set created curr page state
     setCreatedCurrPage(createdCurrPage);
@@ -152,10 +152,10 @@ function Profile({
     // Set collected total docs state
     setCollectedTotalDocuments(collectedTotalDocs);
 
-    if (createdNiftysData?.length > 0) {
+    if (createdTokensData?.length > 0) {
       // Set tab state
       setTab("Created");
-    } else if (collectedNiftysData?.length > 0) {
+    } else if (collectedTokensData?.length > 0) {
       // Set tab state
       setTab("Collected");
     }
@@ -277,7 +277,7 @@ function Profile({
           <div className="md:gap-12 sm:gap-8 gap-6 m-0 grid">
             <div className="z-30 relative">
               <div className="md:mb-3 dl:mb-4 mb-3 flex border-b border-gray-200">
-                {createdNiftys.length > 0 && (
+                {createdTokens.length > 0 && (
                   <div
                     onClick={() => onTabChangeHandler("Created")}
                     className={`leading-1.2 cursor-pointer transition-all duration-300 trans-expo pb-5 border-b-2 border-transparent text-lg mr-6 -mb-0.5 ${
@@ -287,7 +287,7 @@ function Profile({
                     Created
                   </div>
                 )}
-                {collectedNiftys.length > 0 && (
+                {collectedTokens.length > 0 && (
                   <div
                     onClick={() => onTabChangeHandler("Collected")}
                     className={`leading-1.2 cursor-pointer transition-all duration-300 trans-expo pb-5 border-b-2 border-transparent text-lg mr-6 -mb-0.5 ${
@@ -298,23 +298,23 @@ function Profile({
                   </div>
                 )}
               </div>
-              {createdNiftys?.length > 0 || collectedNiftys?.length > 0 ? (
+              {createdTokens?.length > 0 || collectedTokens?.length > 0 ? (
                 <div className="z-30 relative">
                   <InfiniteScroll
                     dataLength={
                       tab === "Created"
-                        ? createdNiftys.length
-                        : collectedNiftys.length
+                        ? createdTokens.length
+                        : collectedTokens.length
                     }
                     hasMore={
                       tab === "Created"
-                        ? createdNiftys.length < createdTotalDocuments
-                        : collectedNiftys.length < collectedTotalDocuments
+                        ? createdTokens.length < createdTotalDocuments
+                        : collectedTokens.length < collectedTotalDocuments
                     }
                     next={
                       tab === "Created"
-                        ? fetchCreatdNiftys
-                        : fetchCollectedNiftys
+                        ? fetchCreatdTokens
+                        : fetchCollectedTokens
                     }
                     loader={
                       <div
@@ -329,29 +329,29 @@ function Profile({
                     }
                   >
                     <div className="lg:gap-8 lg:grid-cols-3lg sm:gap-6 sm:grid-cols-2sm grid grid-cols-1fr gap-4 py-5">
-                      {((tab === "Created" && createdNiftys) || []).map(
-                        (nifty) => {
+                      {((tab === "Created" && createdTokens) || []).map(
+                        (token) => {
                           return (
                             <Cards
                               created
-                              nifty={nifty}
-                              key={nifty._id}
-                              bid={nifty.auction?.bids?.[0]}
-                              auction={nifty.auction}
+                              token={token}
+                              key={token._id}
+                              bid={token.auction?.bids?.[0]}
+                              auction={token.auction}
                             />
                           );
                         }
                       )}
-                      {((tab === "Collected" && collectedNiftys) || []).map(
-                        (nifty) => {
+                      {((tab === "Collected" && collectedTokens) || []).map(
+                        (token) => {
                           return (
                             <Cards
                               collected
-                              nifty={nifty}
-                              key={nifty._id}
-                              bid={nifty.auction?.bids?.[0]}
-                              auction={nifty.auction}
-                              openAuction={nifty.openAuction}
+                              token={token}
+                              key={token._id}
+                              bid={token.auction?.bids?.[0]}
+                              auction={token.auction}
+                              openAuction={token.openAuction}
                             />
                           );
                         }
@@ -366,7 +366,7 @@ function Profile({
                       Your collection is empty.
                     </h2>
                     <div className="mb-8 font-normal max-w-xs font-base leading-relaxed	text-center">
-                      Start creating nifty.
+                      Start creating token.
                     </div>
                   </div>
                 </div>
@@ -390,8 +390,8 @@ export async function getServerSideProps({ params, res }) {
       return {
         props: {
           userData: {},
-          createdNiftys: [],
-          collectedNiftys: [],
+          createdTokens: [],
+          collectedTokens: [],
           error: { message: FETCHING_DATA_ERROR, statusCode: status },
         },
       };
@@ -399,27 +399,27 @@ export async function getServerSideProps({ params, res }) {
 
     const page = 1;
 
-    // Fetch creatd Niftys
-    const { data: createdNiftysData } = await NiftyService.fetchCreatdNiftys(
+    // Fetch creatd Tokens
+    const { data: createdTokensData } = await TokenService.fetchCreatdTokens(
       user._id,
       page
     );
 
-    // Fetch collected Niftys
-    const { data: collectedNiftysData } =
-      await NiftyService.fetchCollectedNiftys(user._id, page);
+    // Fetch collected Tokens
+    const { data: collectedTokensData } =
+      await TokenService.fetchCollectedTokens(user._id, page);
 
     return {
       props: {
         error: null,
         userData: user,
         username: params.username,
-        createdCurrPage: createdNiftysData.currPage,
-        createdNiftysData: createdNiftysData.createdNiftys,
-        createdTotalDocs: createdNiftysData.totalDocuments,
-        collectedNiftysData: collectedNiftysData.collectedNiftys,
-        collectedCurrPage: collectedNiftysData.currPage,
-        collectedTotalDocs: collectedNiftysData.totalDocuments,
+        createdCurrPage: createdTokensData.currPage,
+        createdTokensData: createdTokensData.createdTokens,
+        createdTotalDocs: createdTokensData.totalDocuments,
+        collectedTokensData: collectedTokensData.collectedTokens,
+        collectedCurrPage: collectedTokensData.currPage,
+        collectedTotalDocs: collectedTokensData.totalDocuments,
       },
     };
   } catch (err) {
@@ -430,9 +430,9 @@ export async function getServerSideProps({ params, res }) {
         userData: {},
         username: null,
         createdCurrPage: 0,
-        createdNiftys: [],
+        createdTokens: [],
         createdTotalDocs: 0,
-        collectedNiftys: [],
+        collectedTokens: [],
         collectedCurrPage: 0,
         collectedTotalDocs: 0,
         error: {

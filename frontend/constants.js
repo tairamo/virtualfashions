@@ -4,7 +4,7 @@ export const MAINNET_CHAIN_ID = "0x1";
 export const AGE_VERIFIED = "age-verified";
 export const joindedDataFormat = "MMMM YYYY";
 export const AUTH_TOKEN_IDENTIFIER = "token";
-export const MODAL_LIST_NIFTY = "list-nifty";
+export const MODAL_LIST_TOKEN = "list-token";
 export const DATE_FORMAT = "YYYY-MM-DDTHH:mm";
 export const MODAL_WRONG_NETWORK = "wrong-network";
 export const MODAL_AGE_VERIFICATION = "age-verification";
@@ -22,8 +22,8 @@ export const phoneRegExp = /^\(?([0-9]{3})\)?[-. ]?([0-9]{3})[-. ]?([0-9]{4})$/;
 
 // Auction events
 export const AUCTION_WON = "AUCTION_WON";
-export const NIFTY_MINTED = "NIFTY_MINTED";
-export const NIFTY_LISTED = "NIFTY_LISTED";
+export const TOKEN_MINTED = "TOKEN_MINTED";
+export const TOKEN_LISTED = "TOKEN_LISTED";
 export const BID_SUBMITTED = "BID_SUBMITTED";
 export const AUCTION_SETTLED = "AUCTION_SETTLED";
 
@@ -54,7 +54,7 @@ export const DESCRIPTION = "Please enter description";
 export const VALID_EMAIL = "Please enter valid email";
 export const VALID_AMOUNT = "Please enter valid amount";
 export const CHAINID_ERROR = "Please connect to mainnet";
-export const MINTING_ERROR = "Error while minting nifty";
+export const MINTING_ERROR = "Error while minting token";
 export const ENTER_VALID_DATE = "Please enter valid date";
 export const PASSWORD_MUST_MATCH = "Passwords must match";
 export const VALID_TOKEN_ERROR = "Please use valid token!";
@@ -70,18 +70,18 @@ export const END_DATE_REQUIRED = "Bidding end date is required";
 export const MIN_20_WORDS = "Please enter minimum 20 characters";
 export const AUCTION_ALREADY_SETTLED = "Auction is already settled";
 export const MIN_AMOUNT_REQUIRED = "Minimum bid amount is required";
-export const REQUEST_LISTING_ERROR = "Error while listing nifty for auction";
+export const REQUEST_LISTING_ERROR = "Error while listing token for auction";
 export const AUCTION_SETTLED_ERROR =
   "execution reverted: Auction is already settled";
 export const INTERNAL_SERVER_ERROR =
   "Something went wrong, Please try again later";
 
 // Success messages
-export const NIFTY_MINTED_SUCCESS = "Nifty minted successfully";
+export const TOKEN_MINTED_SUCCESS = "Token minted successfully";
 export const SUPPORT_REQUEST_SUCCESS = "Support requested successfully";
-export const NIFTY_LISTED_SUCCESS = "Nifty has been successfully listed";
-export const NIFTY_CREATED_SUCCESS =
-  "Nifty successfully created and under varification process. You will be inform by email, once varification process completed";
+export const TOKEN_LISTED_SUCCESS = "Token has been successfully listed";
+export const TOKEN_CREATED_SUCCESS =
+  "Token successfully created and under varification process. You will be inform by email, once varification process completed";
 
 // Button text
 export const SAVE = "SAVE";
@@ -89,8 +89,8 @@ export const SUBMIT = "Submit";
 export const SIGN_IN = "Sign In";
 export const SIGN_UP = "Sign up";
 export const BID_AGAIN = "Bid again";
-export const VIEW_NIFTY = "View nifty";
-export const NIFTY_SOLD = "Nifty sold!";
+export const VIEW_TOKEN = "View token";
+export const TOKEN_SOLD = "Token sold!";
 export const PLACE_A_BID = "Place a bid";
 export const CLAIM_NFT = "Claim your NFT";
 export const VERIFY_EMAIL = "Verify Email";

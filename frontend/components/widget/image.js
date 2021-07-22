@@ -7,6 +7,6 @@ export const Image = ({ alt, url, className, bgImage }) => {
       }}
     ></div>
   ) : (
-    <img alt={alt || "nifty-image"} src={url} className={className} />
+    <img alt={alt || "token-image"} src={url} className={className} />
   );
 };

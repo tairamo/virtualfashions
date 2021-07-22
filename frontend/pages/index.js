@@ -4,7 +4,7 @@ import InfiniteScroll from "react-infinite-scroll-component";
 
 import { useAuth } from "../utils/auth";
 import Layout from "../components/layout";
-import { Nifty } from "../components/nifty";
+import { Token } from "../components/token";
 import Card from "../components/Cards/card";
 import { FETCHING_DATA_ERROR } from "../constants";
 import CtaRegister from "../components/CTA/ctaRegister";
@@ -63,7 +63,7 @@ function Home({ auctionsData, totalDocuments, currPage, error }) {
   return (
     <Layout>
       {auctions[randomNum] && (
-        <Nifty auction={auctions[randomNum]} key={auctions[randomNum]._id} />
+        <Token auction={auctions[randomNum]} key={auctions[randomNum]._id} />
       )}
 
       {user ? "" : <CtaRegister />}
@@ -80,7 +80,7 @@ function Home({ auctionsData, totalDocuments, currPage, error }) {
               No Auctions available
             </h2>
             <div className="mb-8 font-normal max-w-xs font-base leading-relaxed	text-center">
-              Start creating nifty.
+              Start creating token.
             </div>
           </div>
         )}
@@ -105,7 +105,7 @@ function Home({ auctionsData, totalDocuments, currPage, error }) {
               <Card
                 key={auction._id}
                 auction={auction}
-                nifty={auction.nifty}
+                token={auction.token}
                 bid={auction.bids?.[0]}
               />
             ))}
@@ -118,7 +118,7 @@ function Home({ auctionsData, totalDocuments, currPage, error }) {
 
 export async function getServerSideProps() {
   try {
-    // Niftys
+    // Tokens
     const page = 1;
     const { data } = await AuctionService.fetchAuctions(page);
 

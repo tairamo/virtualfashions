@@ -82,7 +82,7 @@ function Bids() {
                 Your bids will be shown here
               </h2>
               <div className="mb-8 mx-auto font-base font-normal leading-1.7 max-w-18.75">
-                When you place a bid on a nifty, it will show up here.
+                When you place a bid on a token, it will show up here.
               </div>
               <Button
                 text={SHOW_AUCTIONS}

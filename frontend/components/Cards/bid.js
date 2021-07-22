@@ -23,7 +23,7 @@ import {
   INTERVAL,
   BID_AGAIN,
   CLAIM_NFT,
-  VIEW_NIFTY,
+  VIEW_TOKEN,
   WALLET_ERROR,
   AUCTION_ENDED,
   CHAINID_ERROR,
@@ -40,7 +40,7 @@ export default function BidCard({ bid }) {
   const router = useRouter();
   const { user } = useAuth();
   const { ETHAccount, chainId } = useETH();
-  const { auction, nifty, bids } = bid;
+  const { auction, token, bids } = bid;
 
   const interval = useRef();
   const biddingEndDate = moment(auction?.biddingEndDate);
@@ -139,12 +139,12 @@ export default function BidCard({ bid }) {
       const data = await web3.settleAuction(listId, ETHAccount);
 
       const updateData = {
-        niftyId: nifty._id,
+        tokenId: token._id,
         userId: lastBibCreatedBy,
         chainInfo: { ...auction.chainInfo, txId: data.transactionHash },
       };
 
-      const { data: result } = await AuctionService.claimAuctionNifty(
+      const { data: result } = await AuctionService.claimAuctionToken(
         auction._id,
         updateData
       );
@@ -249,15 +249,15 @@ export default function BidCard({ bid }) {
 
       <div className="">
         <Button
-          text={VIEW_NIFTY}
-          onClick={() => router.push(`/${nifty?.user?.username}/${nifty._id}`)}
+          text={VIEW_TOKEN}
+          onClick={() => router.push(`/${token?.user?.username}/${token._id}`)}
           className="md:py-4 px-6 rounded-2xl appearance-none inline-block text-base text-center font-semibold px-2 py-4 border-2 min-h-3.75 h-3.75 w-full leading-1.2 focus:outline-none text-black bg-white border-black transition-all duration-300 ease-trans-expo hover:shadow-btn transform-2px hover:bg-black hover:text-white"
         />
       </div>
     </div>
   );
 
-  if (auction?.status === "Close" && nifty.ownedBy === user._id) {
+  if (auction?.status === "Close" && token.ownedBy === user._id) {
     bidDetails = (
       <div className="grid gap-2.5 lg:grid-cols-1fr md:grid-cols-1fr-1fr grid-cols-1fr items-center sm:max-h-12.625 lg:min-w-18.75 lg:max-w-18.75 pt-2.5">
         <div className="dl:grid gap-2.5 grid-cols-1fr">
@@ -271,15 +271,15 @@ export default function BidCard({ bid }) {
           </div>
 
           <div className="text-sm leading-relaxed">
-            NFT claimed successfully. Nifty added to your collection.
+            NFT claimed successfully. Token added to your collection.
           </div>
         </div>
 
         <div className="">
           <Button
-            text={VIEW_NIFTY}
+            text={VIEW_TOKEN}
             onClick={() =>
-              router.push(`/${nifty?.user?.username}/${nifty._id}`)
+              router.push(`/${token?.user?.username}/${token._id}`)
             }
             className="md:py-4 px-6 rounded-2xl appearance-none inline-block text-base text-center font-semibold px-2 py-4 border-2 min-h-3.75 h-3.75 w-full leading-1.2 focus:outline-none text-black bg-white border-black transition-all duration-300 ease-trans-expo hover:shadow-btn transform-2px hover:bg-black hover:text-white"
           />
@@ -289,7 +289,7 @@ export default function BidCard({ bid }) {
   } else if (
     auctionWon &&
     auction?.status === "Open" &&
-    nifty.ownedBy !== user._id &&
+    token.ownedBy !== user._id &&
     lastBibCreatedBy === user._id
   ) {
     bidDetails = (
@@ -305,7 +305,7 @@ export default function BidCard({ bid }) {
           </div>
 
           <div className="text-sm leading-relaxed">
-            Congratulations, you won the auction for this nifty. Now claim your
+            Congratulations, you won the auction for this token. Now claim your
             NFT and add it to your collection.
           </div>
         </div>
@@ -365,15 +365,15 @@ export default function BidCard({ bid }) {
             <Button
               text={BID_AGAIN}
               onClick={() =>
-                router.push(`/${nifty?.user?.username}/${nifty._id}/bid`)
+                router.push(`/${token?.user?.username}/${token._id}/bid`)
               }
               className="md:py-4 px-6 rounded-2xl appearance-none inline-block text-base text-center font-semibold px-2 py-4 border-2 min-h-3.75 h-3.75 w-full leading-1.2 focus:outline-none text-white bg-black border-black transition-all duration-300 ease-trans-expo hover:shadow-btn transform-2px"
             />
           ) : (
             <Button
-              text={VIEW_NIFTY}
+              text={VIEW_TOKEN}
               onClick={() =>
-                router.push(`/${nifty?.user?.username}/${nifty._id}`)
+                router.push(`/${token?.user?.username}/${token._id}`)
               }
               className="md:py-4 px-6 rounded-2xl appearance-none inline-block text-base text-center font-semibold px-2 py-4 border-2 min-h-3.75 h-3.75 w-full leading-1.2 focus:outline-none text-black bg-white border-black transition-all duration-300 ease-trans-expo hover:shadow-btn transform-2px hover:bg-black hover:text-white"
             />
@@ -386,17 +386,17 @@ export default function BidCard({ bid }) {
   let file = (
     <Image
       bgImage
-      url={nifty?.thumbnailUrl}
+      url={token?.thumbnailUrl}
       className="bg-cover bg-center bg-gray-200 min-h-12.625 min-w-12.625 max-w-12.625 max-h-12.625 rounded-md overflow-hidden"
     />
   );
 
-  if (nifty?.thumbnailContentType?.includes("video")) {
+  if (token?.thumbnailContentType?.includes("video")) {
     file = (
       <div className="flex justify-center w-full">
         <div className="flex relative">
           <Video
-            url={nifty?.thumbnailUrl}
+            url={token?.thumbnailUrl}
             onLoadedData={() => setIsVideoLoaded(true)}
             className={`bg-cover bg-center bg-gray-200 min-h-12.625 min-w-12.625 max-w-12.625 max-h-12.625 rounded-md overflow-hidden object-cover ${
               !isVideoLoaded && "filter blur drop-shadow-02020"
@@ -420,16 +420,16 @@ export default function BidCard({ bid }) {
       <div className="grid gap-8 grid-cols-1fr-auto lg:grid-cols-1fr-auto md:grid-cols-1fr p-6">
         <div className="grid gap-6 md:grid-cols-auto-1fr grid-cols-1fr lg:border-r lg:border-gray-300">
           <div className="cursor-pointer">
-            <Link href={`/${nifty?.user?.username}/${nifty._id}`} passHref>
+            <Link href={`/${token?.user?.username}/${token._id}`} passHref>
               <a>{file}</a>
             </Link>
           </div>
           {/* flex flex-col justify-between py-2.5 */}
           <div className="grid gap-2.5 grid-cols-1fr py-2.5">
             <div className="mb-1.5">
-              <Link href={`/${nifty?.user?.username}/${nifty._id}`}>
+              <Link href={`/${token?.user?.username}/${token._id}`}>
                 <h2 className="font-semibold text-lg leading-1.2 mb-4 cursor-pointer">
-                  {nifty.title}
+                  {token.title}
                 </h2>
               </Link>
               <Link href={`/${auction?.createdBy?.username}`}>

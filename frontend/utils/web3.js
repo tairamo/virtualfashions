@@ -1,10 +1,10 @@
 import * as Web3 from "web3";
 
-import { abi as niftyTokenAbi } from "../build/contracts/NiftyToken.json";
+import { abi as tokenTokenAbi } from "../build/contracts/NiftyToken.json";
 import { abi as auctionManagerAbi } from "../build/contracts/AuctionManager.json";
 
 class Web3Instance {
-  contractAddress = process.env.NEXT_PUBLIC_AUCTION_NIFTY_CONTRACT_ADDRESS;
+  contractAddress = process.env.NEXT_PUBLIC_AUCTION_TOKEN_CONTRACT_ADDRESS;
   auctionMangerContractAddress =
     process.env.NEXT_PUBLIC_AUCTION_MANAGER_CONTRACT_ADDRESS;
   defaultGasPrice = process.env.NEXT_PUBLIC_DEFAULT_GAS_PRICE; // 30 gwei
@@ -23,9 +23,9 @@ class Web3Instance {
   }
 
   initializeContracts(options = {}) {
-    // Nifty contract
+    // Token contract
     this.contract = new this.web3.eth.Contract(
-      niftyTokenAbi,
+      tokenTokenAbi,
       this.contractAddress,
       options
     );
@@ -53,13 +53,13 @@ class Web3Instance {
     return this.web3.utils.toWei(balance, type);
   }
 
-  // Mint nifty
-  async mintNifty(account, tokenURI) {
+  // Mint token
+  async mintToken(account, tokenURI) {
     const gas = await this.contract.methods
       .mint(tokenURI)
       .estimateGas({ from: account });
 
-    // Call mint method of nifty contract
+    // Call mint method of token contract
     return await this.contract.methods.mint(tokenURI).send({
       from: account,
       gas: gas + this.extendGasLimit,
@@ -68,7 +68,7 @@ class Web3Instance {
   }
 
   // List item
-  async listNifty(tokenId, biddingEndTimeStamp, account) {
+  async listToken(tokenId, biddingEndTimeStamp, account) {
     const gas = await this.auctionContract.methods
       .listItem(tokenId, biddingEndTimeStamp)
       .estimateGas({ from: account });
@@ -89,7 +89,7 @@ class Web3Instance {
       .approve(this.auctionMangerContractAddress, tokenId)
       .estimateGas({ from: account });
 
-    // Call approve method of nifty contract
+    // Call approve method of token contract
     return await this.contract.methods
       .approve(this.auctionMangerContractAddress, tokenId)
       .send({

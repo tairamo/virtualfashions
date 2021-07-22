@@ -11,7 +11,7 @@ function Privacy({ html }) {
 }
 
 export async function getServerSideProps() {
-  const filePath = path.join(process.cwd(), "legal/nifty-privacy.md");
+  const filePath = path.join(process.cwd(), "legal/token-privacy.md");
   const content = fs.readFileSync(filePath, "utf8");
 
   const converter = new showdown.Converter();

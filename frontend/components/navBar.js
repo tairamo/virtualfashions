@@ -11,7 +11,7 @@ import WalletButton from "./wallet-button";
 import { SearchBox } from "./widget/search";
 import { INTERVAL, TOKEN } from "../constants";
 import { convertAddress } from "../utils/general";
-import NiftyService from "../services/api/NiftyService";
+import TokenService from "../services/api/TokenService";
 import { DEFAULT_PROFILE_IMAGE_URL, WRONG_NETWORK } from "../constants";
 import { ReactComponent as CloseIcon } from "../public/icons/input-close.svg";
 import { ReactComponent as SearchIcon } from "../public/icons/input-search.svg";
@@ -41,7 +41,7 @@ export default function navBar() {
     setShowSearchBox(true);
 
     // Call api
-    const { data } = await NiftyService.searchNiftys(value);
+    const { data } = await TokenService.searchTokens(value);
 
     // Set search result
     setSearchResult(data);
@@ -213,7 +213,7 @@ export default function navBar() {
                   <SearchBox
                     isLoading={isLoading}
                     users={searchResult?.users}
-                    niftys={searchResult?.niftys}
+                    tokens={searchResult?.tokens}
                   />
                 )}
               </div>

@@ -1,22 +1,22 @@
 const moment = require("moment");
 
-const NiftyToken = artifacts.require("NiftyToken");
+const Token = artifacts.require("NiftyToken");
 const AuctionManager = artifacts.require("AuctionManager");
 
 contract("AuctionManager", (accounts) => {
   console.log(accounts);
 
   it("should list item", async () => {
-    const niftyOwner = accounts[0];
+    const tokenOwner = accounts[0];
 
-    // Create nifty
-    const niftyTokenInstance = await NiftyToken.deployed();
-    let result = await niftyTokenInstance.mint("https://test.com", {
-      from: niftyOwner,
+    // Create token
+    const tokenTokenInstance = await Token.deployed();
+    let result = await tokenTokenInstance.mint("https://test.com", {
+      from: tokenOwner,
     });
     const tokenId = result.logs[0].args.tokenId.words[0];
 
-    // List nifty
+    // List token
     const auctionManagerInstance = await AuctionManager.deployed();
     const biddingEndTimestamp = moment().unix() + 240;
     result = await auctionManagerInstance.listItem(
@@ -25,7 +25,7 @@ contract("AuctionManager", (accounts) => {
     );
     result.logs.forEach((log) => console.log(log.args));
 
-    // await niftyTokenInstance.getOwner(1)
+    // await tokenTokenInstance.getOwner(1)
   });
 
   //   it("should call a function that depends on a linked library", async () => {

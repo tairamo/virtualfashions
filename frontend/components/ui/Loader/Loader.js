@@ -3,7 +3,7 @@ export const Loader = ({ height = 100 }) => {
     <div>
       <img
         className="mx-auto w-auto"
-        src="/nifty-loading.gif"
+        src="/token-loading.gif"
         alt="Loading..."
         style={{ height: `${height}px` }}
       />

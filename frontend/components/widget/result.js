@@ -1,6 +1,6 @@
 import Link from "next/link";
 
-export const SearchResult = ({ url, imageUrl, name, username, nifty }) => {
+export const SearchResult = ({ url, imageUrl, name, username, token }) => {
   return (
     <Link href={url}>
       <div className="lg:px-6 lg:py-5 p-3 items-center transition-all duration-100 ease-trans-expo rounded-lg flex hover:bg-brand-f2f2f2 cursor-pointer">
@@ -8,7 +8,7 @@ export const SearchResult = ({ url, imageUrl, name, username, nifty }) => {
           <div
             style={{ backgroundImage: `url(${imageUrl})` }}
             className={`m-0 min-w-2rem max-w-2rem min-h-2rem max-h-2rem lg:min-h-3.125 lg:min-w-3.125 lg:max-h-3.125 lg:max-w-3.125 bg-gray-200 bg-cover bg-center ${
-              nifty ? "rounded-0.625" : "rounded-full"
+              token ? "rounded-0.625" : "rounded-full"
             }`}
           ></div>
         </div>

@@ -51,36 +51,36 @@
 //     <>
 //       <Head>
 //         {/* Primary Meta Tags */}
-//         <title>Nifty Nudes</title>
+//         <title>Virtual Fashion</title>
 
 //         <meta
 //           name="viewport"
 //           content="initial-scale=1.0, width=device-width, user-scalable=no, width=device-width, height=device-height, viewport-fit=cover"
 //         />
-//         <meta name="title" content="Nifty Nudes" />
+//         <meta name="title" content="Virtual Fashion" />
 //         <meta name="description" content="NFT market for adult content" />
 
 //         {/* Open Graph / Facebook */}
 //         <meta property="og:type" content="website" />
-//         <meta property="og:url" content="http://niftynudes.io/" />
-//         <meta property="og:title" content="Nifty Nudes" />
+//         <meta property="og:url" content="http://virtualfashion.io/" />
+//         <meta property="og:title" content="Virtual Fashion" />
 //         <meta
 //           property="og:description"
 //           content="NFT market for adult content"
 //         />
-//         <meta property="og:image" content="niftyThumb.png" />
+//         <meta property="og:image" content="tokenThumb.png" />
 
 //         {/* Twitter */}
 //         <meta property="twitter:card" content="summary_large_image" />
 //         <meta property="twitter:url" content="NFT market for adult content" />
-//         <meta property="twitter:title" content="Nifty Nudes" />
+//         <meta property="twitter:title" content="Virtual Fashion" />
 //         <meta
 //           property="twitter:description"
 //           content="NFT market for adult content"
 //         />
-//         <meta property="twitter:image" content="niftyThumb.png" />
+//         <meta property="twitter:image" content="tokenThumb.png" />
 
-//         <link rel="shortcut icon" href="/niftyicon.svg" />
+//         <link rel="shortcut icon" href="/tokenicon.svg" />
 //       </Head>
 
 //       <div className="relative bg-white overflow-hidden">
@@ -203,8 +203,8 @@
 //                     <TwitterShareButton
 //                       id="twitterShare"
 //                       title="Checkout the sexiest NFT marketplace for adult content"
-//                       hashtags={["niftynudes", "nft"]}
-//                       url="niftynudes.io"
+//                       hashtags={["tokennudes", "nft"]}
+//                       url="tokennudes.io"
 //                       className="flex m-auto h-10 items-center space-x-2"
 //                     >
 //                       <span className="text-blue-500">

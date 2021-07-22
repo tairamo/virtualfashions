@@ -1,11 +1,13 @@
-0 - 100 real quick! 
+0 - 100 real quick!
 
-### Me 
-Me folder is about current user. 
+### Me
 
-### Creator 
-Any creator 
+Me folder is about current user.
 
-niftynudes.io/username/artwork
+### Creator
 
-### 
+Any creator
+
+virtualfashion.io/username/tokenId
+
+###

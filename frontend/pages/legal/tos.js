@@ -11,7 +11,7 @@ function TOS({ html }) {
 export async function getServerSideProps() {
   const filePath = path.join(
     process.cwd(),
-    "legal/nifty-termsOfServiceAgreement.md"
+    "legal/token-termsOfServiceAgreement.md"
   );
 
   const content = fs.readFileSync(filePath, "utf8");

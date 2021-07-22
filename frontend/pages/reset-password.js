@@ -109,7 +109,7 @@ export default function Register() {
         <img
           className="mx-auto h-12 w-auto"
           src="/logo.png"
-          alt="Nifty Nudes"
+          alt="Virtual Fashion"
         />
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">
           Reset password

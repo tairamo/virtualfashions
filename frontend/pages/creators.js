@@ -87,7 +87,7 @@ function Creators({ creatorsData, currPage, totalDocuments, error }) {
                 No creators found
               </h2>
               <div className="mb-8 mx-auto font-base font-normal leading-1.7 max-w-18.75">
-                Become the first one by creating nifty.
+                Become the first one by creating token.
               </div>
             </div>
           </div>
