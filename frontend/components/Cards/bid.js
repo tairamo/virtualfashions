@@ -17,7 +17,6 @@ import { Spinner } from "../ui/Spinner/Spinner";
 import { CurrentBid } from "../widget/bids/bid";
 import { WinningBid } from "../widget/bids/winningBid";
 import AuctionService from "../../services/api/AuctionService";
-import { auctionWonDelay, bidDuration } from "../../utils/general";
 import { ReactComponent as CheckmarkIcon } from "../../public/icons/checkmark.svg";
 import {
   bidDuration,
