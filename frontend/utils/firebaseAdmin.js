@@ -14,9 +14,9 @@ function createFirebaseApp() {
 // Call create firebase app
 createFirebaseApp();
 
-let firrStore = firebaseAdmin.firestore();
+// let firrStore = firebaseAdmin.firestore();
 
-export { firrStore };
+// export { firrStore };
 
 export const verifyIdToken = async (token) => {
   if (!firebaseAdmin.apps.length) {

@@ -5,13 +5,13 @@ export default {
   profileUrl: "/placeholders/user-img.jpg",
   bannerUrl: "/placeholders/background-img.jpg",
   fb: {
-    dbUrl: "https://nifty-83a73.firebaseio.com",
-    apiKey: "AIzaSyCBQ4PJVuBZtAf4jA_9cNImW53C2TKCsFI",
-    authDomain: "nifty-83a73.firebaseapp.com",
-    projectId: "nifty-83a73",
-    storageBucket: "nifty-83a73.appspot.com",
-    messagingSenderId: "863770946845",
-    appId: "1:863770946845:web:b60b2e58691659310585f4",
+    dbUrl: "https://virtualfashion-60081.firebaseio.com",
+    apiKey: "AIzaSyAqmyVFCoNObyXKnnP_kqIoeuugPXFkFSI",
+    authDomain: "virtualfashion-60081.firebaseapp.com",
+    projectId: "virtualfashion-60081",
+    storageBucket: "virtualfashion-60081.appspot.com",
+    messagingSenderId: "845038234937",
+    appId: "1:845038234937:web:975107e9d43887a7204ce8",
   },
   rackspace: {
     username: "tairamo",
@@ -25,16 +25,17 @@ export default {
   },
   secret: {
     type: "service_account",
-    project_id: "nifty-83a73",
-    private_key_id: "02556a823179bfd6998a5811fdd75cdd3b2533a1",
+    project_id: "virtualfashion-60081",
+    private_key_id: "bf57076e98ae2b5d1a105b5837177e848aacfca5",
     private_key:
-      "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDalwILd0opIf8K\nFlXtASokLR9c6gVEc+qnLB9zRgChcFOpJzR2sTFm7KfYA7tJ53trD3ni3lD4wiUC\nSH+bi2wNVoFDrQpPfWrZqP9kgudU6HK36PyN27WQzoUxFx5OrIYmfQwsnlO3Vvyr\nlLIwwrW0Tw5EXn2XgkRlcGezQlSTIUcYxTdQGCijkGmSoYkXizyOjvmOu+vcypY3\nWFZ+8VopjaKsdyUXUqwWYV8Rq6Lp+H90wf5ss9xqmsFEze2smnGNeSHjYpwWjjcT\nzwmNzEC3tdDqi4cjQNmLrl5wrA/Qij/6YYx3HN4QNZdWuosEyrzMyp0iSfZFFRg2\nUcQJziX7AgMBAAECggEAVZLljYiTQ1wYRKIu3Fxm24fArfa9viklFXIME+w1Rf47\n+k4rV0YSIYmHQeVgFlQleGm0HVFMYL5cj7LDJikkUWpqq4xcK3ddc72Z0gb/OjnP\n41i2OnDneTuoX+n9hu46jGnK8NLA0lcfDqrlQXqQePi0DKbzQvOQBChHqKFQi9Iz\nk+47FuFwwtrtbJVxA3JK+dLaoVMyXZ0v77leqhIrC/dzIPSQNdTBwi6+qsgqLCg9\nN0laVpKAC4JZ+E8Iw9SMzZx+QK4oS1fnlRrSaUo5hbZo0b6wCMnIkiXgyKx9SY57\nvC6oT7+l9I4FMcqeMbOmirgAZgJpA28tTU+LzNL8WQKBgQDsqbLdxGPQ/hFVlJB5\nhz8bL7i9YfFQVf2X1n38CGWzD6yuwiXPQO1OdsvAl4IEylp/5iCNEmANarxViTRZ\nsJFionxsFUXzAAQtbioMCPvPXWuFJdmLAT9Az525js72GdaOmR+Z0ACulLwdMknk\nUlNjSMRWmwpDKhiLqxLxxABBmQKBgQDsc0Y5oAOrvi9dwSmTYkQS69KIn9v1E2jv\nGlm5L0JwKn35rG1pY/Bbqc6ODZ0jXwcyhj+aO73SzQ6YP3qTZGWbkN46k0rsdFC0\neE42MAetgWyuBRunZSUW9jPEaYQ8qT0qpABaSjxIWG1XZqF+VofZzxLNOx0gLmWT\nKNGze1+IswKBgQCuIBGNX4C9dSGV4PAHqn3A5/S5yoU9QXeLLvKU7Cy/eWnpTsl4\n2uF/GKLDOfYcxjGd5tjOUtW/KWgWWxPcZbAibUC0WVaU+s8YCfT/0+BJ6wc/+OA9\niRZb/iWjMDKQGeSmGH2KsuK9kItzw9tgFT5rT0++FOaREjjrElym6znxCQKBgCNc\nZe8uP/5KNfk2bwpMktOlktm91n5DRdkkPrDUIYJ2yFozcDVnrcV3kp1p6cslZgUn\nUJG3R38kDX+1VpZ+WDe4pZNq/bR4/KzQpRmzeyJ2jZNEzkrtdGuHrFw+T3lm8e/T\nkP3vxi4nk0qT3ajwNebb8frhUUzDw4sLerj1xWbDAoGAMYZKP23XrBVR+IFDC/g7\nySx1LbVzO0IsNi1t8ERaC+vD4o0fTp32ATGEwwr2KJeh1FZyimCuDHmgBHS/nWb6\nw1gAWsDLsyvmYJB9pqvc6V4sqgVoP31hcOLadhwBGxNdBBI/zTm5CFi31nURvUBH\ngWPzvO99TtCCJYDzoiJ1808=\n-----END PRIVATE KEY-----\n",
-    client_email: "firebase-adminsdk-j6c5s@nifty-83a73.iam.gserviceaccount.com",
-    client_id: "116400611429159196615",
+      "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQCWRaBWNLspfqFB\n0BQEqlTzDhxRolxyFjGGqXIk+xHf+8XLGONz1tbYdBv+62YHcYw5d4m7UVfW7ta3\nGZ2hdU1p9unEKoFbvcW4YB/iH7axpcpbCJ1gUDgVua/9E8aZTkqPqWfc2E6v1RUq\nT1RFUgA0RQ2psY1JzD+uuQg00OMrD2pCttaH3hKvwOifDTDAaE8HvH6V99kCyM2a\no2ow0jBA9wR/RJZ3mGomBoKggNduOY+9xsVJCuu5VSt4U8MJgSIB0QhEcbqyFB95\nKf210F5R+IsQlsv0w9YXO0Fz7eK8uRy3a+XhpbqH1GnQxGqEYFswp9x81f27GpPk\nTpCEPM0hAgMBAAECggEACDSMETj24UinUHsmpKyST+U82Z5GcvpQQPyenXNSIgtS\n3QiiXtBj0dThNHWxEAX8tKSY0jAaXkOTWNMevtKzY+5WDF6Pyq0djzg8dXHq3V9i\nob7iLQCkV1dYyzZZuURDoP2MjMwI2+QEMFe9j71vAmuk19e4kceD0KwMzSl8xfyP\nhHXP6ulS2g8gKD32gPvBSLKAvVxkygGRYymuEqm4g5xLIA1R7b5C45adRUM/LFVe\n6tf/ghJKWAMRxO5GyeyaYYwQRshxqS4yGlF426G/L1H1fLcxzI7bOL3I2+dt9oew\n2gpC74wXN8H03ogVolj0G++ZIbAKTgRMsbwO3C5+OQKBgQDS5ghQhXZ1OXgQ0zM+\nbMEAgxUBoImBuy8TjhLMbFevsuyoIT0mVA3V7ygyvox6sZNX2kw/h+h/Mtj3itpO\n+/Dsgcj0wLoZ6o0+CcXFywIvFdHGoM3B3hIFp463KFkZy2U7u2f+16Qr13BNKdNG\nzLq1R89dIBrkxc65EDflffEyZQKBgQC2aH9smOd4l6inMgkJeSgp9yqof+JLO453\nks1DkaEn7k8gyXKjv82i/20KiPWnj28Uf13hyJbAWL4a9fLNbQDTBE9XTt7Vx8mb\nClaT6HkRJfbZtPMsqMzxaI4zZf5041S1wj1ryszQjQnkmkhwso/CrQZZSIt0GA51\ntOE43jVmDQKBgBt3N8f8yaOUm21dhAPyN+RwLdErbh0GGqhqTUpwJa9NFwMCaStP\nsQmWft608Ciebbj4RgvUEFRYc+cxHyNALm0urdQqMVJkuIZG0Ynj2WH2bn52vLUt\nzZ0M6Eo0J/5y/bkcu/t1a/0Frqtt8gT7bqljM79GChqXJEf3s7/gegP9AoGAVuLF\nt4PJ1h5fXmyt8047vGmYbzSjJPTUcs6BaasHmY6hMFvkeG1XVUnXtcnxQYRIA/p7\nTJ4QeMSMoSkAI6vFVb5a0Jqn+Cq3NFujS8bTTEDKKX9QybgKDv+fpInzv9e9NOq1\n+Q9bqgdUbAi1csELS07BlGvCyWTgFl83XLAzvU0CgYEAu/DGvIDqBePcNxFk7rpK\ntM+vEq9geOZkF0kxHYbN8CbyX87xWaJIjJ/HcHljVhjEOUgcx0B9e7mOG+6wzEPY\ncswzI2+MdTKrel/0pJCULS7nVX1AqFjwFbj5K4/vGJrU3M6hHXrSGEFpGuDxEHNP\nMX5Fw2vqhl1W3GtVR1A35r4=\n-----END PRIVATE KEY-----\n",
+    client_email:
+      "firebase-adminsdk-a881c@virtualfashion-60081.iam.gserviceaccount.com",
+    client_id: "105653682779706846650",
     auth_uri: "https://accounts.google.com/o/oauth2/auth",
     token_uri: "https://oauth2.googleapis.com/token",
     auth_provider_x509_cert_url: "https://www.googleapis.com/oauth2/v1/certs",
     client_x509_cert_url:
-      "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-j6c5s%40nifty-83a73.iam.gserviceaccount.com",
+      "https://www.googleapis.com/robot/v1/metadata/x509/firebase-adminsdk-a881c%40virtualfashion-60081.iam.gserviceaccount.com",
   },
 };

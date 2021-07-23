@@ -14,7 +14,12 @@ import Web3Instance from "../../utils/web3";
 import { SuccessMsg } from "../alerts/success";
 import { useModal } from "../../context/Modal";
 import TokenService from "../../services/api/TokenService";
-import { bidDuration, counterTime, auctionWonDelay } from "../../utils/general";
+import {
+  bidDuration,
+  counterTime,
+  getProfileUrl,
+  auctionWonDelay,
+} from "../../utils/general";
 import {
   INTERVAL,
   WALLET_ERROR,
@@ -147,11 +152,11 @@ export default function Cards({
 
   let profileImage = DEFAULT_PROFILE_IMAGE_URL;
   if (created && token?.user?.profileUrl) {
-    profileImage = token.user.profileUrl;
+    profileImage = getProfileUrl(token?.user);
   }
 
   if (!created && auction?.createdBy?.profileUrl) {
-    profileImage = auction.createdBy.profileUrl;
+    profileImage = getProfileUrl(auction?.createdBy);
   }
 
   if (openAuction) {

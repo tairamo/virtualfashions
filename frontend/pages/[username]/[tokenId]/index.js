@@ -21,19 +21,24 @@ import { Activity } from "../../../components/activity/activity";
 import { Spinner } from "../../../components/ui/Spinner/Spinner";
 import { CurrentBid } from "../../../components/widget/bids/bid";
 import AuctionService from "../../../services/api/AuctionService";
-import { auctionWonDelay, bidDuration } from "../../../utils/general";
 import { ReactComponent as GotoIcon } from "../../../public/icons/goto.svg";
 import { ReactComponent as IPFSIcon } from "../../../public/icons/ipfs.svg";
 import AuctionResultService from "../../../services/api/AuctionResultService";
 import { ReactComponent as EtherscanIcon } from "../../../public/icons/etherscan.svg";
 import { ReactComponent as IPFSMeatadataICon } from "../../../public/icons/ipfs-metadata.svg";
 import {
+  bidDuration,
+  getProfileUrl,
+  auctionWonDelay,
+} from "../../../utils/general";
+import {
   INTERVAL,
   PLACE_A_BID,
   WALLET_ERROR,
+  TRANSFER_ART,
+  CONFIRMATION,
   AUCTION_ENDED,
   CHAINID_ERROR,
-  TRANSFER_ART,
   TOKEN_TRANSFER_ERROR,
   AUCTION_SETTLED_ERROR,
   AUCTION_ALREADY_SETTLED,
@@ -168,11 +173,6 @@ function AToken({ token, tokenMetadata, auctionResult }) {
     return () => clearInterval(interval.current);
   }, []);
 
-  let profileImage = DEFAULT_PROFILE_IMAGE_URL;
-  if (token?.user?.profileUrl) {
-    profileImage = token.user.profileUrl;
-  }
-
   let isDisabled = false;
   let buttonText = TRANSFER_ART;
   if (!ETHAccount) {
@@ -240,6 +240,7 @@ function AToken({ token, tokenMetadata, auctionResult }) {
               text={buttonText}
               isSubmitting={isLoading}
               onClick={onTokenTransfer}
+              submittingText={CONFIRMATION}
               disabled={isLoading || isDisabled}
               className={`md:px-6 py-4 px-8 appearance-none inline-block text-center font-semibold rounded-xl transition-all duration-300 ease-trans-expo outline-none bg-black text-white border-2 border-black min-h-3.75 w-full  ${
                 isLoading || isDisabled
@@ -318,7 +319,7 @@ function AToken({ token, tokenMetadata, auctionResult }) {
         </div>
 
         <div className="dl:gap-12 md:grid md:grid-cols-1fr-1fr w-full mx-auto px-6 transform -translate-y-6	flex gap-4 -mb-6 relative z-10">
-          <UserWidget user={token?.user} image={profileImage} />
+          <UserWidget user={token?.user} image={getProfileUrl(token?.user)} />
         </div>
       </div>
 
@@ -422,7 +423,9 @@ function AToken({ token, tokenMetadata, auctionResult }) {
                 <div className="shadow-ho3xl transition-all duration-300 ease-trans-expo rounded-full cursor-pointer transform-2px hover:shadow-0.15">
                   <div
                     className="sm:h-7.5 sm:w-7.5 h-20 w-20 bg-gray-200 bg-center bg-cover rounded-full"
-                    style={{ backgroundImage: `url(${profileImage})` }}
+                    style={{
+                      backgroundImage: `url(${getProfileUrl(token?.user)})`,
+                    }}
                   ></div>
                 </div>
               </Link>

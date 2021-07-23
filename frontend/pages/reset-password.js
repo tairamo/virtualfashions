@@ -108,7 +108,7 @@ export default function Register() {
       <div className="sm:mx-auto sm:w-full sm:max-w-md">
         <img
           className="mx-auto h-12 w-auto"
-          src="/logo.png"
+          src="/placeholders/vfs.png"
           alt="Virtual Fashion"
         />
         <h2 className="mt-6 text-center text-3xl font-extrabold text-gray-900">

@@ -64,7 +64,7 @@ export const FETCHING_DATA_ERROR = "Error while faching data";
 export const FILE_UPLOAD_ERROR = "Error while uploading file";
 export const THUMB_REQUIRED = "Thumbnail/Preview is required";
 export const MIN_6_WORDS = "Please enter minimum 6 characters";
-export const TOKEN_TRANSFER_ERROR = "Error while token tranfer";
+export const TOKEN_TRANSFER_ERROR = "Error while token transfer";
 export const EMAIL_PASSOWRD_ERROR = "Invalid email or password";
 export const END_DATE_REQUIRED = "Bidding end date is required";
 export const MIN_20_WORDS = "Please enter minimum 20 characters";
@@ -77,6 +77,8 @@ export const INTERNAL_SERVER_ERROR =
   "Something went wrong, Please try again later";
 
 // Success messages
+export const WITHDRAW_SUCCESS = "Withdraw successfully";
+export const BID_PLACED_SUCCESS = "Bid placed successfully";
 export const TOKEN_MINTED_SUCCESS = "Token minted successfully";
 export const SUPPORT_REQUEST_SUCCESS = "Support requested successfully";
 export const TOKEN_LISTED_SUCCESS = "Token has been successfully listed";
@@ -100,3 +102,4 @@ export const SHOW_AUCTIONS = "Show Auctions";
 export const TRANSFER_ART = "Transfer art";
 export const REQUEST_LISTING = "Request Listing";
 export const ENOUGH_ETH = "You don’t have enough ETH";
+export const CONFIRMATION = "Waiting for confirmation...";

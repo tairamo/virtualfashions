@@ -20,6 +20,7 @@ import ActionService from "../../services/api/AuctionService";
 import Datepicker from "../ui/Datepicker/Datepicker";
 import {
   WALLET_ERROR,
+  CONFIRMATION,
   CHAINID_ERROR,
   REQUEST_LISTING,
   TOKEN_LISTED_SUCCESS,
@@ -246,6 +247,7 @@ export const ListToken = ({ modal, showModal }) => {
               type="submit"
               text={buttonText}
               isSubmitting={isSubmitting}
+              submittingText={CONFIRMATION}
               disabled={isSubmitting || isDisabled}
               className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black ${
                 isSubmitting || isDisabled ? "opacity-50 cursor-default" : ""

@@ -15,13 +15,14 @@ import TokenService from "../../../services/api/TokenService";
 import { Button } from "../../../components/ui/Button/Button";
 import { ReactComponent as Ethericon } from "../../../public/icons/ethicon.svg";
 import {
+  SUBMIT,
+  ENOUGH_ETH,
+  NIFTY_SOLD,
+  PLEASE_LOGIN,
+  CONFIRMATION,
   WALLET_ERROR,
   AUCTION_ENDED,
   BID_PLACING_ERROR,
-  SUBMIT,
-  TOKEN_SOLD,
-  PLEASE_LOGIN,
-  ENOUGH_ETH,
 } from "../../../constants";
 
 const web3 = new Web3Instance();
@@ -151,7 +152,7 @@ function Bid({ token }) {
   useEffect(() => {
     // Call button condition function
     buttonCondition();
-  }, [bidValue, user]);
+  }, [bidValue, user, balance]);
 
   if (user?._id === auction?.createdBy?._id) {
     router.push(`/${auction?.createdBy?.username}/${token?._id}`);
@@ -256,9 +257,10 @@ function Bid({ token }) {
                       text={buttonText}
                       isSubmitting={isLoading}
                       onClick={onSumbitHandler}
-                      disabled={isButtonDisabled}
+                      submittingText={CONFIRMATION}
+                      disabled={isLoading || isButtonDisabled}
                       className={`md:py-4 px-6 rounded-2xl appearance-none inline-block text-base text-center font-semibold px-2 py-4 border-2 min-h-3.75 h-3.75 w-full leading-1.2 focus:outline-none text-white bg-black ${
-                        isButtonDisabled
+                        isLoading || isButtonDisabled
                           ? "opacity-50 cursor-default"
                           : "border-black transition-all duration-300 ease-trans-expo hover:shadow-btn transform-2px"
                       }`}

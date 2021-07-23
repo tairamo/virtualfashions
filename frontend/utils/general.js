@@ -2,6 +2,11 @@ import moment from "moment";
 import nookies from "nookies";
 import * as jwt from "jsonwebtoken";
 
+import {
+  DEFAULT_BANNER_IMAGE_URL,
+  DEFAULT_PROFILE_IMAGE_URL,
+} from "../constants";
+
 export const errorMessage = (error) => {
   let message = "";
   switch (error.code) {
@@ -80,4 +85,18 @@ export const jwtError = (error) => {
   }
 
   return message;
+};
+
+export const getProfileUrl = (user) => {
+  let profileImage = DEFAULT_PROFILE_IMAGE_URL;
+  if (user?.profileUrl) profileImage = user.profileUrl;
+
+  return profileImage;
+};
+
+export const getBannerUrl = (user) => {
+  let bannerImage = DEFAULT_BANNER_IMAGE_URL;
+  if (user?.bannerUrl) bannerImage = user.bannerUrl;
+
+  return bannerImage;
 };

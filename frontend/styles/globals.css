@@ -123,3 +123,7 @@ input[type="number"] {
 .transform-2px:hover {
   transform: translateY(-2px);
 }
+
+.clip {
+  overflow-x: clip;
+}

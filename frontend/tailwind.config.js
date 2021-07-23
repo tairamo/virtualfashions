@@ -44,8 +44,13 @@ module.exports = {
       },
       fontFamily: {
         ThomRodger: ["ThomRodger"],
-        Roobert: ["Roobert"],
-        "Formular-Mono": ["Formular-Mono"],
+        Roobert: ["Roobert", "sans-serif", "system-ui"],
+        "Formular-Mono": [
+          "Formular-Mono",
+          "Roobert",
+          "sans-serif",
+          "system-ui",
+        ],
       },
       fontSize: {
         2: "2rem",
@@ -213,6 +218,7 @@ module.exports = {
         0.6: "0.0375em",
         1: "0.0625em",
         0.1: "0.1rem",
+        "-0.035em": "-0.035em",
       },
       gap: {
         0.75: "0.188rem",
@@ -238,6 +244,7 @@ module.exports = {
       },
       backgroundImage: (theme) => ({
         calendar: "url('/calendar.png')",
+        banner: "linear-gradient(0deg, rgba(0,0,0,0) 0%, rgba(0,0,0,0.5) 100%)",
         username:
           "linear-gradient(110.78deg ,#76E650 -1.13%,#F9D649 15.22%,#F08E35 32.09%,#EC5157 48.96%,#FF18BD 67.94%,#1A4BFF 85.34%,#62D8F9 99.57%)",
       }),

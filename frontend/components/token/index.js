@@ -9,8 +9,8 @@ import { useAuth } from "../../utils/auth";
 import { UserWidget } from "../widget/user";
 import { Button } from "../ui/Button/Button";
 import { Spinner } from "../ui/Spinner/Spinner";
-import { bidDuration } from "../../utils/general";
 import { TokenBid } from "../widget/bids/token-bid";
+import { bidDuration, getProfileUrl } from "../../utils/general";
 import {
   INTERVAL,
   DEFAULT_PROFILE_IMAGE_URL,
@@ -66,11 +66,6 @@ export const Token = ({ auction }) => {
     return () => clearInterval(interval.current);
   }, []);
 
-  let profileImage = DEFAULT_PROFILE_IMAGE_URL;
-  if (token?.ownedBy?.profileUrl) {
-    profileImage = token.ownedBy.profileUrl;
-  }
-
   let file = (
     <Image
       alt={token?.title}
@@ -111,7 +106,10 @@ export const Token = ({ auction }) => {
 
       <div className="dl:pb-6">
         <div className="md:pt-0 flex pt-6 cursor-pointer w-max">
-          <UserWidget user={token?.ownedBy} image={profileImage} />
+          <UserWidget
+            user={token?.ownedBy}
+            image={getProfileUrl(token?.ownedBy)}
+          />
         </div>
 
         <div className="dl:gap-8 gap-6 grid">

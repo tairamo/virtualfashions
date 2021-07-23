@@ -1,19 +1,8 @@
 import Link from "next/link";
 
-import config from "../../config";
+import { getBannerUrl, getProfileUrl } from "../../utils/general";
 
 export default function CreatorCard({ creator }) {
-  let bannerImage = config.bannerUrl;
-  let profileImage = config.profileUrl;
-
-  if (creator.bannerUrl) {
-    bannerImage = creator.bannerUrl;
-  }
-
-  if (creator.profileUrl) {
-    profileImage = creator.profileUrl;
-  }
-
   return (
     <div className="box-border bg-white min-w-0 transition-all duration-300 ease-trans-expo flex flex-col shadow-3xl rounded-xl overflow-hidden flex-1 hover:shadow-ho3xl transform-4px">
       <Link href={`/${creator.username}`}>
@@ -23,7 +12,7 @@ export default function CreatorCard({ creator }) {
               <div className="pb-57.14 w-full h-0"></div>
               <div className="absolute inset-0 bg-gray-100 flex">
                 <img
-                  src={bannerImage}
+                  src={getBannerUrl(creator)}
                   alt="creator-banner"
                   className="max-w-full h-auto block min-h-full min-w-full object-cover"
                 />
@@ -33,7 +22,7 @@ export default function CreatorCard({ creator }) {
               <div className="p-2 bg-white h-24 w-24 absolute left-0 transform -translate-y-2/4	flex rounded-full">
                 <div
                   className="max-h-20	max-w-20 min-w-5 min-h-5 h-20 w-20 bg-gray-200 rounded-full bg-center	bg-cover bg-no-repeat"
-                  style={{ backgroundImage: `url(${profileImage})` }}
+                  style={{ backgroundImage: `url(${getProfileUrl(creator)})` }}
                 ></div>
               </div>
             </div>

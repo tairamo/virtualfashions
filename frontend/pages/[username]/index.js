@@ -10,14 +10,11 @@ import Layout from "../../components/layout";
 import Cards from "../../components/Cards/card";
 import { Loader } from "../../components/ui/Loader";
 import WebUrl from "../../components/web-url/WebUrl";
+import { FETCHING_DATA_ERROR } from "../../constants";
 import UserService from "../../services/api/UserService";
 import TokenService from "../../services/api/TokenService";
 import { Spinner } from "../../components/ui/Spinner/Spinner";
-import {
-  FETCHING_DATA_ERROR,
-  DEFAULT_BANNER_IMAGE_URL,
-  DEFAULT_PROFILE_IMAGE_URL,
-} from "../../constants";
+import { getBannerUrl, getProfileUrl } from "../../utils/general";
 
 function Profile({
   userData,
@@ -31,8 +28,6 @@ function Profile({
   error,
 }) {
   const { user } = useAuth();
-  let bannerUrl = DEFAULT_BANNER_IMAGE_URL;
-  let profileUrl = DEFAULT_PROFILE_IMAGE_URL;
 
   // State
   const [tab, setTab] = useState("");
@@ -174,14 +169,6 @@ function Profile({
 
   if (!userData) return LoaderComponent;
 
-  if (userData?.bannerUrl) {
-    bannerUrl = userData.bannerUrl;
-  }
-
-  if (userData?.profileUrl) {
-    profileUrl = userData.profileUrl;
-  }
-
   let socials;
   if (userData?.socials && Object.entries(userData?.socials).length > 0) {
     socials = Object.entries(userData.socials).map(([key, value]) => {
@@ -207,7 +194,7 @@ function Profile({
           <div className="relative">
             <div
               className="bg-cover bg-no-repeat md:bg-cover sm:bg-cover h-64 bg-transparent box-border"
-              style={{ backgroundImage: `url(${bannerUrl})` }}
+              style={{ backgroundImage: `url(${getBannerUrl(userData)})` }}
             ></div>
           </div>
           <div className="mx-atuo md:px-14 h-14 box-border px-6">
@@ -215,7 +202,7 @@ function Profile({
               <div
                 className="bg-cover bg-center rounded-full bg-white md:border-8 border-4 border-white border-solid md:w-44 md:h-44 w-32 h-32"
                 style={{
-                  backgroundImage: `url(${profileUrl})`,
+                  backgroundImage: `url(${getProfileUrl(userData)})`,
                 }}
               ></div>
             </div>

@@ -1,11 +1,9 @@
 import { SearchResult } from "./result";
 import { Spinner } from "../ui/Spinner/Spinner";
-import { DEFAULT_PROFILE_IMAGE_URL } from "../../constants";
+import { getProfileUrl } from "../../utils/general";
 import { ReactComponent as SearchIcon } from "../../public/icons/input-search.svg";
 
 export const SearchBox = ({ users, tokens, isLoading }) => {
-  let profileImage = DEFAULT_PROFILE_IMAGE_URL;
-
   return (
     <div className="w-full absolute left-0 top-4 z-50">
       <div className="md:shadow-0.15 bg-white rounded-md p-5 g-3 shadow-0.1 grid">
@@ -40,9 +38,7 @@ export const SearchBox = ({ users, tokens, isLoading }) => {
                       name={user.fullname}
                       username={user.username}
                       url={`/${user.username}`}
-                      imageUrl={
-                        user.profileUrl ? user.profileUrl : profileImage
-                      }
+                      imageUrl={getProfileUrl(user)}
                     />
                   ))}
                 </div>

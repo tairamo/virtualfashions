@@ -1,7 +1,5 @@
 import firebase from "firebase/app";
 import "firebase/storage";
-import "firebase/firestore";
-import nookies from "nookies";
 import { toast } from "react-toastify";
 import { useForm } from "react-hook-form";
 import { useEffect, useRef, useState } from "react";
@@ -14,8 +12,8 @@ import { useAuth } from "../../../utils/auth";
 import Web3Instance from "../../../utils/web3";
 import { schema } from "../../../schema/create";
 import Layout from "../../../components/layout";
-import { storage } from "../../../utils/firebase/app";
 import { Button } from "../../../components/ui/Button";
+import { Loader } from "../../../components/ui/Loader";
 import { Video } from "../../../components/widget/video";
 import { Image } from "../../../components/widget/image";
 import Loading from "../../../components/loading/Spinner";
@@ -27,19 +25,21 @@ import { SuccessMsg } from "../../../components/alerts/success";
 import {
   TOKEN,
   CREATE_ART,
+  CONFIRMATION,
   WALLET_ERROR,
   CHAINID_ERROR,
+  MINTING_ERROR,
   FILE_UPLOAD_ERROR,
   TOKEN_CREATED_SUCCESS,
 } from "../../../constants";
 
 const web3 = new Web3Instance();
 
-function Create({ ETH }) {
+function Create(props) {
   const router = useRouter();
-  const { user } = useAuth();
   const artRef = useRef(null);
   const thumbnailRef = useRef(null);
+  const { user, loading } = useAuth();
   const { ETHAccount, chainId } = useETH();
   const storageRef = firebase.storage().ref();
 
@@ -289,6 +289,17 @@ function Create({ ETH }) {
     // Set token id state
     setTokenId(tokenId);
   }, []);
+
+  const LoaderComponent = (
+    <div className="mt-20">
+      <Loader />
+    </div>
+  );
+
+  if (!loading && !user) {
+    router.push("/login");
+    return LoaderComponent;
+  }
 
   let isDisabled = false;
   let buttonText = CREATE_ART;
@@ -603,8 +614,8 @@ function Create({ ETH }) {
                   type="submit"
                   text={buttonText}
                   isSubmitting={showLoader}
+                  submittingText={CONFIRMATION}
                   disabled={showLoader || isDisabled}
-                  submittingText="Waiting for confirmation..."
                   className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black outline-none focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black ${
                     showLoader || isDisabled ? "opacity-50 cursor-default" : ""
                   }`}
@@ -616,44 +627,6 @@ function Create({ ETH }) {
       </div>
     </Layout>
   );
-}
-
-export async function getServerSideProps(context) {
-  try {
-    const cookies = nookies.get(context);
-    if (!cookies.token || cookies?.token === "") {
-      context.res.writeHead(302, { location: "/login" });
-      context.res.end();
-      return { props: {} };
-    }
-
-    let ETH = 0;
-
-    // Fetch ETH price
-    const doc = await storage.collection("price").doc("1027").get();
-
-    ETH = doc.exists && doc.data()["ETH"];
-
-    return {
-      props: {
-        ETH,
-      },
-    };
-  } catch (err) {
-    console.log(err);
-
-    // Destroy token
-    nookies.destroy(context, TOKEN);
-
-    // Redirect to login page
-    context.res.writeHead(302, { location: "/login" });
-    context.res.end();
-    return {
-      props: {
-        ETH: 0,
-      },
-    };
-  }
 }
 
 export default Create;

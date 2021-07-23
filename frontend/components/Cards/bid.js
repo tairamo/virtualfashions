@@ -20,18 +20,24 @@ import AuctionService from "../../services/api/AuctionService";
 import { auctionWonDelay, bidDuration } from "../../utils/general";
 import { ReactComponent as CheckmarkIcon } from "../../public/icons/checkmark.svg";
 import {
+  bidDuration,
+  getProfileUrl,
+  auctionWonDelay,
+} from "../../utils/general";
+import {
   INTERVAL,
   BID_AGAIN,
   CLAIM_NFT,
   VIEW_TOKEN,
   WALLET_ERROR,
+  CONFIRMATION,
   AUCTION_ENDED,
   CHAINID_ERROR,
   WITHDRAW_ERROR,
+  WITHDRAW_SUCCESS,
   TOKEN_TRANSFER_ERROR,
   AUCTION_SETTLED_ERROR,
   AUCTION_ALREADY_SETTLED,
-  DEFAULT_PROFILE_IMAGE_URL,
 } from "../../constants";
 
 const web3 = new Web3Instance();
@@ -100,6 +106,9 @@ export default function BidCard({ bid }) {
 
       // Set withdraw state
       setWithdrawAvailable(false);
+
+      // Show success message
+      toast.success(<SuccessMsg msg={WITHDRAW_SUCCESS} />);
     } catch (err) {
       console.log(err);
 
@@ -235,11 +244,6 @@ export default function BidCard({ bid }) {
     isDisabled = true;
   }
 
-  let profileImage = DEFAULT_PROFILE_IMAGE_URL;
-  if (auction?.createdBy?.profileUrl) {
-    profileImage = auction.createdBy.profileUrl;
-  }
-
   let bidDetails = (
     <div className="grid gap-2.5 lg:grid-cols-1fr md:grid-cols-1fr-1fr grid-cols-1fr items-center sm:max-h-12.625 lg:min-w-18.75 lg:max-w-18.75 pt-2.5">
       <div className="">
@@ -314,6 +318,7 @@ export default function BidCard({ bid }) {
           <Button
             text={buttonText}
             isSubmitting={isLoading}
+            submittingText={CONFIRMATION}
             onClick={onClaimClickHandler}
             disabled={isLoading || isDisabled}
             className={`md:py-4 px-6 rounded-2xl appearance-none inline-block text-base text-center font-semibold px-2 py-4 border-2 min-h-3.75 h-3.75 w-full leading-1.2 focus:outline-none text-white bg-black border-black ${
@@ -338,6 +343,7 @@ export default function BidCard({ bid }) {
         <div className="">
           <Button
             isSubmitting={isLoading}
+            submittingText={CONFIRMATION}
             onClick={onWithdrawClickHandler}
             disabled={isLoading || isDisabled}
             text={isDisabled ? buttonText : "Withdraw"}
@@ -437,7 +443,9 @@ export default function BidCard({ bid }) {
                   <div
                     className="sm:min-w-1.625 sm:min-h-1.625 sm:max-w-1.625 sm:max-h-1.625 w-6 h-6 bg-gray-200 bg-cover bg-center rounded-full"
                     style={{
-                      backgroundImage: `url(${profileImage})`,
+                      backgroundImage: `url(${getProfileUrl(
+                        auction?.createdBy
+                      )})`,
                     }}
                   ></div>
                   <div className="flex font-semibold relative -top-0.5 text-base text-black leading-1.2 ml-2">

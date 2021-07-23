@@ -9,10 +9,10 @@ import { useAuth } from "../utils/auth";
 import { useETH } from "../context/ETH";
 import WalletButton from "./wallet-button";
 import { SearchBox } from "./widget/search";
+import { WRONG_NETWORK } from "../constants";
 import { INTERVAL, TOKEN } from "../constants";
-import { convertAddress } from "../utils/general";
 import TokenService from "../services/api/TokenService";
-import { DEFAULT_PROFILE_IMAGE_URL, WRONG_NETWORK } from "../constants";
+import { convertAddress, getProfileUrl } from "../utils/general";
 import { ReactComponent as CloseIcon } from "../public/icons/input-close.svg";
 import { ReactComponent as SearchIcon } from "../public/icons/input-search.svg";
 
@@ -103,11 +103,6 @@ export default function navBar() {
       search(searchValue);
     }, INTERVAL);
   }, [searchValue]);
-
-  let profileImage = DEFAULT_PROFILE_IMAGE_URL;
-  if (user?.profileUrl) {
-    profileImage = user.profileUrl;
-  }
 
   let ETHInfo;
   if (!ETHAccount) {
@@ -340,7 +335,9 @@ export default function navBar() {
                     {user ? (
                       <div
                         className="min-w-2.25 min-h-2.25 max-w-2.25 max-h-2.25 bg-gray-200 bg-cover bg-center rounded-full"
-                        style={{ backgroundImage: `url(${profileImage})` }}
+                        style={{
+                          backgroundImage: `url(${getProfileUrl(user)})`,
+                        }}
                       ></div>
                     ) : (
                       <>
@@ -489,7 +486,7 @@ export default function navBar() {
               <div className="flex-shrink-0">
                 <img
                   className="h-10 w-10 rounded-full"
-                  src={profileImage}
+                  src={getProfileUrl(user)}
                   alt=""
                 />
               </div>
