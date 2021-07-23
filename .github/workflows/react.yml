@@ -19,7 +19,6 @@ jobs:
         pwd
         ls -la
     - run: |
-        git rm --cached admin
         cd frontend
         yarn install
         yarn build
