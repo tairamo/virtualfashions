@@ -10,7 +10,7 @@ env:
 jobs:
   deploy:
 
-    runs-on: virtualfashion2
+    runs-on: virtualfashion
 
     steps:
     - uses: actions/checkout@v2
