@@ -1,6 +1,6 @@
 import * as path from 'path'
 import * as ejs from 'ejs'
-import * as request from 'request'
+import request from 'request'
 
 import { sendMail } from './mail-transport'
 import { SendMail } from '../interfaces/SendMail'
