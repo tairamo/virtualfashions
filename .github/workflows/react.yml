@@ -18,23 +18,23 @@ jobs:
         whoami
         pwd
         ls -la
-      - run: |
-          echo "NEXT_PUBLIC_API_URL=https://us-central1-virtualfashion-60081.cloudfunctions.net/api" > .env.local
-          echo "NEXT_PUBLIC_FB_API_KEY=AIzaSyCBQ4PJVuBZtAf4jA_9cNImW53C2TKCsFI" >> .env.local
-          echo "NEXT_PUBLIC_FB_PROJECT_ID=virtualfashion-60081" >> .env.local
-          echo "NEXT_PUBLIC_FB_APP_ID=1:863770946845:web:b60b2e58691659310585f4" >> .env.local
-          echo "NEXT_PUBLIC_FB_DB_URL=https://virtualfashion-60081.firebaseio.com" >> .env.local
-          echo "NEXT_PUBLIC_FB_AUTH_DOMAIN=virtualfashion-60081.firebaseapp.com" >> .env.local
-          echo "NEXT_PUBLIC_FB_STORAGE_BUCKET=virtualfashion-60081.appspot.com" >> .env.local
-          echo "NEXT_PUBLIC_FB_MESSAGING_SENDER_ID=845038234937" >> .env.local
-          echo "NEXT_PUBLIC_ETHER_SCAN_URL=https://etherscan.io" >> .env.local
-          echo "NEXT_PUBLIC_JWT_SECRET=VFS-App" >> .env.local
-          echo "NEXT_PUBLIC_AUCTION_TOKEN_CONTRACT_ADDRESS=0xCa4b6A60acd45d15025A0F920eE9Bab25eE8A433" >> .env.local
-          echo "NEXT_PUBLIC_AUCTION_MANAGER_CONTRACT_ADDRESS=0x89d1E216E497637946b867fdb304f86bF2d8F74b" >> .env.local
-          echo "NEXT_PUBLIC_DEFAULT_GAS_PRICE=30000000000" >> .env.local
-          echo "NEXT_PUBLIC_EXTEND_GAS_LIMIT=500" >> .env.local
-          echo "NEXT_PUBLIC_CHAIN_ID=0x4" >> .env.local          
-          ls -al
+    - run: |
+        echo "NEXT_PUBLIC_API_URL=https://us-central1-virtualfashion-60081.cloudfunctions.net/api" > .env.local
+        echo "NEXT_PUBLIC_FB_API_KEY=AIzaSyAqmyVFCoNObyXKnnP_kqIoeuugPXFkFSI" >> .env.local
+        echo "NEXT_PUBLIC_FB_PROJECT_ID=virtualfashion-60081" >> .env.local
+        echo "NEXT_PUBLIC_FB_APP_ID=1:845038234937:web:975107e9d43887a7204ce8" >> .env.local
+        echo "NEXT_PUBLIC_FB_DB_URL=https://virtualfashion-60081.firebaseio.com" >> .env.local
+        echo "NEXT_PUBLIC_FB_AUTH_DOMAIN=virtualfashion-60081.firebaseapp.com" >> .env.local
+        echo "NEXT_PUBLIC_FB_STORAGE_BUCKET=virtualfashion-60081.appspot.com" >> .env.local
+        echo "NEXT_PUBLIC_FB_MESSAGING_SENDER_ID=845038234937" >> .env.local
+        echo "NEXT_PUBLIC_ETHER_SCAN_URL=https://rinkeby.etherscan.io" >> .env.local
+        echo "NEXT_PUBLIC_JWT_SECRET=VFS-App" >> .env.local
+        echo "NEXT_PUBLIC_AUCTION_TOKEN_CONTRACT_ADDRESS=0xCa4b6A60acd45d15025A0F920eE9Bab25eE8A433" >> .env.local
+        echo "NEXT_PUBLIC_AUCTION_MANAGER_CONTRACT_ADDRESS=0x89d1E216E497637946b867fdb304f86bF2d8F74b" >> .env.local
+        echo "NEXT_PUBLIC_DEFAULT_GAS_PRICE=30000000000" >> .env.local
+        echo "NEXT_PUBLIC_EXTEND_GAS_LIMIT=500" >> .env.local
+        echo "NEXT_PUBLIC_CHAIN_ID=0x4" >> .env.local          
+        ls -al
     - run: |
         cd frontend
         yarn install
