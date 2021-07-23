@@ -10,7 +10,7 @@ env:
 jobs:
   deploy:
 
-    runs-on: virtualfashion
+    runs-on: virtualfashion2
 
     steps:
     - uses: actions/checkout@v2
@@ -19,6 +19,7 @@ jobs:
         pwd
         ls -la
     - run: |
+        git rm --cached admin
         cd frontend
         yarn install
         yarn build
