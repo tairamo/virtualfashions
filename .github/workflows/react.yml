@@ -9,8 +9,10 @@ env:
 
 jobs:
   deploy:
-
     runs-on: virtualfashion
+
+    env:
+      PM2_HOME: /root/.pm2
 
     steps:
     - uses: actions/checkout@v2
@@ -19,26 +21,27 @@ jobs:
         pwd
         ls -la
     - run: |
-        echo "NEXT_PUBLIC_API_URL=https://us-central1-virtualfashion-60081.cloudfunctions.net/api" > ./frontend/.env.local
-        echo "NEXT_PUBLIC_FB_API_KEY=AIzaSyAqmyVFCoNObyXKnnP_kqIoeuugPXFkFSI" >> ./frontend/.env.local
-        echo "NEXT_PUBLIC_FB_PROJECT_ID=virtualfashion-60081" >> ./frontend/.env.local
-        echo "NEXT_PUBLIC_FB_APP_ID=1:845038234937:web:975107e9d43887a7204ce8" >> ./frontend/.env.local
-        echo "NEXT_PUBLIC_FB_DB_URL=https://virtualfashion-60081.firebaseio.com" >> ./frontend/.env.local
-        echo "NEXT_PUBLIC_FB_AUTH_DOMAIN=virtualfashion-60081.firebaseapp.com" >> ./frontend/.env.local
-        echo "NEXT_PUBLIC_FB_STORAGE_BUCKET=virtualfashion-60081.appspot.com" >> ./frontend/.env.local
-        echo "NEXT_PUBLIC_FB_MESSAGING_SENDER_ID=845038234937" >> ./frontend/.env.local
-        echo "NEXT_PUBLIC_ETHER_SCAN_URL=https://rinkeby.etherscan.io" >> ./frontend/.env.local
-        echo "NEXT_PUBLIC_JWT_SECRET=VFS-App" >> ./frontend/.env.local
-        echo "NEXT_PUBLIC_AUCTION_TOKEN_CONTRACT_ADDRESS=0xCa4b6A60acd45d15025A0F920eE9Bab25eE8A433" >> ./frontend/.env.local
-        echo "NEXT_PUBLIC_AUCTION_MANAGER_CONTRACT_ADDRESS=0x89d1E216E497637946b867fdb304f86bF2d8F74b" >> ./frontend/.env.local
-        echo "NEXT_PUBLIC_DEFAULT_GAS_PRICE=30000000000" >> ./frontend/.env.local
-        echo "NEXT_PUBLIC_EXTEND_GAS_LIMIT=500" >> ./frontend/.env.local
-        echo "NEXT_PUBLIC_CHAIN_ID=0x4" >> ./frontend/.env.local          
+        echo "NEXT_PUBLIC_API_URL=https://us-central1-virtualfashion-60081.cloudfunctions.net/api" | tee ./frontend/.env.local ./admin/.env.local
+        echo "NEXT_PUBLIC_FB_API_KEY=AIzaSyAqmyVFCoNObyXKnnP_kqIoeuugPXFkFSI" | tee ./frontend/.env.local ./admin/.env.local -a
+        echo "NEXT_PUBLIC_FB_PROJECT_ID=virtualfashion-60081" | tee ./frontend/.env.local ./admin/.env.local -a
+        echo "NEXT_PUBLIC_FB_APP_ID=1:845038234937:web:975107e9d43887a7204ce8" | tee ./frontend/.env.local ./admin/.env.local -a
+        echo "NEXT_PUBLIC_FB_DB_URL=https://virtualfashion-60081.firebaseio.com" | tee ./frontend/.env.local ./admin/.env.local -a
+        echo "NEXT_PUBLIC_FB_AUTH_DOMAIN=virtualfashion-60081.firebaseapp.com" | tee ./frontend/.env.local ./admin/.env.local -a
+        echo "NEXT_PUBLIC_FB_STORAGE_BUCKET=virtualfashion-60081.appspot.com" | tee ./frontend/.env.local ./admin/.env.local -a
+        echo "NEXT_PUBLIC_FB_MESSAGING_SENDER_ID=845038234937" | tee ./frontend/.env.local ./admin/.env.local -a
+        echo "NEXT_PUBLIC_ETHER_SCAN_URL=https://rinkeby.etherscan.io" | tee ./frontend/.env.local ./admin/.env.local -a
+        echo "NEXT_PUBLIC_JWT_SECRET=VFS-App" | tee ./frontend/.env.local ./admin/.env.local -a
+        echo "NEXT_PUBLIC_AUCTION_TOKEN_CONTRACT_ADDRESS=0xCa4b6A60acd45d15025A0F920eE9Bab25eE8A433" | tee ./frontend/.env.local ./admin/.env.local -a
+        echo "NEXT_PUBLIC_AUCTION_MANAGER_CONTRACT_ADDRESS=0x89d1E216E497637946b867fdb304f86bF2d8F74b" | tee ./frontend/.env.local ./admin/.env.local -a
+        echo "NEXT_PUBLIC_DEFAULT_GAS_PRICE=30000000000" | tee ./frontend/.env.local ./admin/.env.local -a
+        echo "NEXT_PUBLIC_EXTEND_GAS_LIMIT=500" | tee ./frontend/.env.local ./admin/.env.local -a
+        echo "NEXT_PUBLIC_CHAIN_ID=0x4" | tee ./frontend/.env.local ./admin/.env.local -a          
         ls -al
     - run: |
         cd frontend
         yarn install
         yarn build
-        export HOME=/root
-        pm2 status
         pm2 restart virtualfashion
+        cd admin
+        yarn install
+        yarn build

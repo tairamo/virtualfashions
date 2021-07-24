@@ -5,7 +5,8 @@
   "scripts": {
     "dev": "next dev -p 8080",
     "build": "next build",
-    "start": "next start"
+    "start": "next start",
+    "start:prod": "next start -p 4005"
   },
   "dependencies": {
     "@headlessui/react": "^0.3.2",
