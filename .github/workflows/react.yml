@@ -39,5 +39,6 @@ jobs:
         cd frontend
         yarn install
         yarn build
+        export HOME=/root
         pm2 status
         pm2 restart virtualfashion
