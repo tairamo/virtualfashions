@@ -1,6 +1,11 @@
 import * as yup from "yup";
 
-import { ART_REQUIRED, DESCRIPTION, THUMB_REQUIRED, TITLE } from "../constants";
+import {
+  TOKEN_REQUIRED,
+  DESCRIPTION,
+  THUMB_REQUIRED,
+  TITLE,
+} from "../constants";
 
 export const schema = yup.object().shape({
   title: yup.string().trim().required(TITLE),
@@ -9,6 +14,6 @@ export const schema = yup.object().shape({
     url: yup.string().required(THUMB_REQUIRED),
   }),
   file: yup.object().shape({
-    url: yup.string().required(ART_REQUIRED),
+    url: yup.string().required(TOKEN_REQUIRED),
   }),
 });

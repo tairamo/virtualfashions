@@ -46,13 +46,15 @@ export default function Footer() {
         </div>
         <div className="flex items-center flex-row flex-wrap">
           <FooterLinkWidget
+            useLink
+            link="/support/terms"
             title="Terms of Service"
-            link="/terms-of-service"
             className="text-13px mr-2.5 p-2.5"
           />
           <FooterLinkWidget
+            useLink
             title="Privacy"
-            link="/privacy"
+            link="/support/privacy"
             className="text-13px mr-2.5 p-2.5"
           />
           <FooterLinkWidget

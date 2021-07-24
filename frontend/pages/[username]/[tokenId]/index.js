@@ -35,10 +35,10 @@ import {
   INTERVAL,
   PLACE_A_BID,
   WALLET_ERROR,
-  TRANSFER_ART,
   CONFIRMATION,
   AUCTION_ENDED,
   CHAINID_ERROR,
+  TRANSFER_TOKEN,
   TOKEN_TRANSFER_ERROR,
   AUCTION_SETTLED_ERROR,
   AUCTION_ALREADY_SETTLED,
@@ -174,10 +174,10 @@ function AToken({ token, tokenMetadata, auctionResult }) {
   }, []);
 
   let isDisabled = false;
-  let buttonText = TRANSFER_ART;
   if (!ETHAccount) {
     buttonText = WALLET_ERROR;
     isDisabled = true;
+    let buttonText = TRANSFER_TOKEN;
   } else if (chainId !== process.env.NEXT_PUBLIC_CHAIN_ID) {
     buttonText = CHAINID_ERROR;
     isDisabled = true;

@@ -3,13 +3,11 @@ import nookies from "nookies";
 import "firebase/auth";
 import { useRouter } from "next/router";
 
-import { AGE_VERIFIED, TOKEN } from "../constants";
 import { getToken } from "./general";
+import { TOKEN } from "../constants";
 import { useModal } from "../context/Modal";
-import { getLocalStorage } from "./localStorage";
 import firebaseClientInit from "./firebaseClient";
 import AuthService from "../services/api/AuthService";
-import { MODAL_AGE_VERIFICATION } from "../constants";
 
 const AuthContext = createContext({});
 
@@ -47,17 +45,6 @@ export const AuthProvider = ({ children }) => {
   };
 
   useEffect(() => {
-    // Get item from local storage
-    const isVerified = getLocalStorage(AGE_VERIFIED);
-
-    if (!isVerified || isVerified === "false") {
-      showModal({
-        payload: {},
-        showCloseBtn: false,
-        name: MODAL_AGE_VERIFICATION,
-      });
-    }
-
     // Get token from cookies
     const token = getToken();
 

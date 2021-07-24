@@ -24,7 +24,7 @@ import { Spinner } from "../../../components/ui/Spinner/Spinner";
 import { SuccessMsg } from "../../../components/alerts/success";
 import {
   TOKEN,
-  CREATE_ART,
+  CREATE_TOKEN,
   CONFIRMATION,
   WALLET_ERROR,
   CHAINID_ERROR,
@@ -302,7 +302,7 @@ function Create(props) {
   }
 
   let isDisabled = false;
-  let buttonText = CREATE_ART;
+  let buttonText = CREATE_TOKEN;
   if (!ETHAccount) {
     buttonText = WALLET_ERROR;
     isDisabled = true;
