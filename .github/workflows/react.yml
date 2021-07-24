@@ -39,4 +39,5 @@ jobs:
         cd frontend
         yarn install
         yarn build
+        pm2 status
         pm2 restart virtualfashion
