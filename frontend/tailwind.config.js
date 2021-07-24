@@ -108,6 +108,7 @@ module.exports = {
         18.75: "18.75rem",
         3.125: "3.125rem",
         20.625: "20.625rem",
+        calc265px: "calc(100vh - 265.55px)",
       },
       maxHeight: {
         "2rem": "2rem",

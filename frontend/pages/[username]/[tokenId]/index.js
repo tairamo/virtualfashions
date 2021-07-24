@@ -174,10 +174,10 @@ function AToken({ token, tokenMetadata, auctionResult }) {
   }, []);
 
   let isDisabled = false;
+  let buttonText = TRANSFER_TOKEN;
   if (!ETHAccount) {
     buttonText = WALLET_ERROR;
     isDisabled = true;
-    let buttonText = TRANSFER_TOKEN;
   } else if (chainId !== process.env.NEXT_PUBLIC_CHAIN_ID) {
     buttonText = CHAINID_ERROR;
     isDisabled = true;
@@ -431,7 +431,7 @@ function AToken({ token, tokenMetadata, auctionResult }) {
               </Link>
               <div className="">
                 <Link href={`/${token?.user?.username}`} passHref>
-                  <a className="md:text-2.875 md:leading-3rem sm:mb-2 sm:text text-4xl block mb-1.5	text-2xl font-semibold tracking-tight	no-underline text-black transition-all duration-300 ease-trans-expo">
+                  <a className="md:text-2.875 md:leading-3rem sm:mb-2 sm:text text-4xl block mb-1.5	text-2xl font-semibold tracking-tight	no-underline text-black transition-all duration-300 ease-trans-expo w-max">
                     {token?.user?.fullname}
                   </a>
                 </Link>

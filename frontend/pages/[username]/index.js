@@ -216,13 +216,15 @@ function Profile({
               <div className="grid gap-12">
                 <div>
                   <div className="space-y-4">
-                    <div className="md:mb-4 sm:mb-2 text-2xl leading-1.1">
+                    <div className="lg:text-2.875 md:mb-4 sm:mb-2 text-4xl leading-1.1 clip overflow-ellipsis tracking-tighter font-semibold">
                       {userData?.fullname}
                     </div>
-                    <div className="text-brand font-semibold">
-                      @{userData?.username}
+                    <div className="lg:text-2xl md:text-xl text-lg flex md:-tracking-0.035em font-semibold overflow-hidden max-w-full">
+                      <div className="text-brand overflow-ellipsis leading-1.2">
+                        @{userData?.username}
+                      </div>
                     </div>
-                    <div className="text-sm text-gray-500">
+                    <div className="text-sm text-gray-500 hover:text-black">
                       {user?._id === userData?._id && (
                         <Link href="/profile/add-details">Edit profile</Link>
                       )}

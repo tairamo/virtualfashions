@@ -217,7 +217,7 @@ export default class Token extends DBModel {
     const result = await this.model.aggregate([facet])
 
     const tokens = result[0].documents
-    const totalDocuments = result[0].count[0].totalDocuments
+    const totalDocuments = result[0].count[0]?.totalDocuments || 0
 
     return {
       tokens,

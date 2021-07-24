@@ -253,14 +253,14 @@ export default function BidCard({ bid }) {
       <div className="">
         <Button
           text={VIEW_TOKEN}
-          onClick={() => router.push(`/${token?.user?.username}/${token._id}`)}
+          onClick={() => router.push(`/${token?.user?.username}/${token?._id}`)}
           className="md:py-4 px-6 rounded-2xl appearance-none inline-block text-base text-center font-semibold px-2 py-4 border-2 min-h-3.75 h-3.75 w-full leading-1.2 focus:outline-none text-black bg-white border-black transition-all duration-300 ease-trans-expo hover:shadow-btn transform-2px hover:bg-black hover:text-white"
         />
       </div>
     </div>
   );
 
-  if (auction?.status === "Close" && token.ownedBy === user._id) {
+  if (auction?.status === "Close" && token?.ownedBy === user._id) {
     bidDetails = (
       <div className="grid gap-2.5 lg:grid-cols-1fr md:grid-cols-1fr-1fr grid-cols-1fr items-center sm:max-h-12.625 lg:min-w-18.75 lg:max-w-18.75 pt-2.5">
         <div className="dl:grid gap-2.5 grid-cols-1fr">
@@ -282,7 +282,7 @@ export default function BidCard({ bid }) {
           <Button
             text={VIEW_TOKEN}
             onClick={() =>
-              router.push(`/${token?.user?.username}/${token._id}`)
+              router.push(`/${token?.user?.username}/${token?._id}`)
             }
             className="md:py-4 px-6 rounded-2xl appearance-none inline-block text-base text-center font-semibold px-2 py-4 border-2 min-h-3.75 h-3.75 w-full leading-1.2 focus:outline-none text-black bg-white border-black transition-all duration-300 ease-trans-expo hover:shadow-btn transform-2px hover:bg-black hover:text-white"
           />
@@ -292,7 +292,7 @@ export default function BidCard({ bid }) {
   } else if (
     auctionWon &&
     auction?.status === "Open" &&
-    token.ownedBy !== user._id &&
+    token?.ownedBy !== user._id &&
     lastBibCreatedBy === user._id
   ) {
     bidDetails = (
@@ -320,7 +320,7 @@ export default function BidCard({ bid }) {
             submittingText={CONFIRMATION}
             onClick={onClaimClickHandler}
             disabled={isLoading || isDisabled}
-            className={`md:py-4 px-6 rounded-2xl appearance-none inline-block text-base text-center font-semibold px-2 py-4 border-2 min-h-3.75 h-3.75 w-full leading-1.2 focus:outline-none text-white bg-black border-black ${
+            className={`md:py-4 px-6 rounded-2xl appearance-none inline-block text-base text-center font-semibold px-2 py-4 border-2 min-h-3.75 w-full leading-1.2 focus:outline-none text-white bg-black border-black ${
               isLoading || isDisabled
                 ? "cursor-default"
                 : "transform-2px hover:shadow-btn transition-all duration-300 ease-trans-expo"
@@ -346,7 +346,7 @@ export default function BidCard({ bid }) {
             onClick={onWithdrawClickHandler}
             disabled={isLoading || isDisabled}
             text={isDisabled ? buttonText : "Withdraw"}
-            className={`md:py-4 px-6 rounded-2xl appearance-none inline-block text-base text-center font-semibold px-2 py-4 border-2 min-h-3.75 h-3.75 w-full leading-1.2 focus:outline-none text-white bg-black border-black ${
+            className={`md:py-4 px-6 rounded-2xl appearance-none inline-block text-base text-center font-semibold px-2 py-4 border-2 min-h-3.75 w-full leading-1.2 focus:outline-none text-white bg-black border-black ${
               isLoading || isDisabled
                 ? "cursor-default"
                 : "transform-2px hover:shadow-btn transition-all duration-300 ease-trans-expo"
@@ -370,7 +370,7 @@ export default function BidCard({ bid }) {
             <Button
               text={BID_AGAIN}
               onClick={() =>
-                router.push(`/${token?.user?.username}/${token._id}/bid`)
+                router.push(`/${token?.user?.username}/${token?._id}/bid`)
               }
               className="md:py-4 px-6 rounded-2xl appearance-none inline-block text-base text-center font-semibold px-2 py-4 border-2 min-h-3.75 h-3.75 w-full leading-1.2 focus:outline-none text-white bg-black border-black transition-all duration-300 ease-trans-expo hover:shadow-btn transform-2px"
             />
@@ -378,7 +378,7 @@ export default function BidCard({ bid }) {
             <Button
               text={VIEW_TOKEN}
               onClick={() =>
-                router.push(`/${token?.user?.username}/${token._id}`)
+                router.push(`/${token?.user?.username}/${token?._id}`)
               }
               className="md:py-4 px-6 rounded-2xl appearance-none inline-block text-base text-center font-semibold px-2 py-4 border-2 min-h-3.75 h-3.75 w-full leading-1.2 focus:outline-none text-black bg-white border-black transition-all duration-300 ease-trans-expo hover:shadow-btn transform-2px hover:bg-black hover:text-white"
             />
@@ -425,16 +425,16 @@ export default function BidCard({ bid }) {
       <div className="grid gap-8 grid-cols-1fr-auto lg:grid-cols-1fr-auto md:grid-cols-1fr p-6">
         <div className="grid gap-6 md:grid-cols-auto-1fr grid-cols-1fr lg:border-r lg:border-gray-300">
           <div className="cursor-pointer">
-            <Link href={`/${token?.user?.username}/${token._id}`} passHref>
+            <Link href={`/${token?.user?.username}/${token?._id}`} passHref>
               <a>{file}</a>
             </Link>
           </div>
           {/* flex flex-col justify-between py-2.5 */}
           <div className="grid gap-2.5 grid-cols-1fr py-2.5">
             <div className="mb-1.5">
-              <Link href={`/${token?.user?.username}/${token._id}`}>
-                <h2 className="font-semibold text-lg leading-1.2 mb-4 cursor-pointer">
-                  {token.title}
+              <Link href={`/${token?.user?.username}/${token?._id}`}>
+                <h2 className="font-semibold text-lg leading-1.2 mb-4 cursor-pointer w-max">
+                  {token?.title}
                 </h2>
               </Link>
               <Link href={`/${auction?.createdBy?.username}`}>
@@ -447,7 +447,7 @@ export default function BidCard({ bid }) {
                       )})`,
                     }}
                   ></div>
-                  <div className="flex font-semibold relative -top-0.5 text-base text-black leading-1.2 ml-2">
+                  <div className="flex font-semibold relative -top-0.5 text-base text-black leading-1.2 ml-2 transition-all duration-300 ease-trans-expo text-gray-500 hover:text-brand-black">
                     @{auction?.createdBy?.username}
                   </div>
                 </div>

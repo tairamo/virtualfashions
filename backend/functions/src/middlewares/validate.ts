@@ -1,5 +1,5 @@
 import { Request, Response } from 'express'
-import * as Validator from 'validatorjs'
+import Validator from '../utils/validator'
 import { ValidationError } from '../errors/ValidationError'
 
 export const validate = (ruleName: string) => {

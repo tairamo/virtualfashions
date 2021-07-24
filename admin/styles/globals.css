@@ -1,0 +1,95 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  @font-face {
+    font-family: "ThomRodger";
+    src: url("/fonts/ThomRodger.woff2") format("woff2"),
+      url("/fonts/ThomRodger.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Roobert";
+    src: url("/fonts/Roobert-SemiBold.woff2") format("woff2"),
+      url("/fonts/Roobert-SemiBold.woff") format("woff");
+    font-weight: 600;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Roobert";
+    src: url("/fonts/Roobert-Medium.woff2") format("woff2"),
+      url("/fonts/Roobert-Medium.woff") format("woff");
+    font-weight: 500;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Roobert";
+    src: url("/fonts/Roobert-Regular.woff2") format("woff2"),
+      url("/fonts/Roobert-Regular.woff") format("woff");
+    font-weight: 400;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Roobert";
+    src: url("/fonts/Roobert-Bold.woff2") format("woff2"),
+      url("/fonts/Roobert-Bold.woff") format("woff");
+    font-weight: 900;
+    font-style: normal;
+  }
+
+  @font-face {
+    font-family: "Formular-Mono";
+    src: url("/fonts/Formular-Mono-Regular.woff2") format("woff2"),
+      url("/fonts/Formular-Mono-Regular.woff") format("woff");
+    font-weight: 900;
+    font-style: normal;
+  }
+}
+
+body {
+  @apply font-Roobert !important;
+}
+
+@layer components {
+  .btn-1 {
+    @apply py-2 px-4 border border-transparent shadow-sm text-sm font-medium rounded-md text-white bg-brand hover:bg-brand-dark focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand;
+  }
+
+  .btn-2 {
+    @apply bg-white py-2 px-4 border border-gray-300 rounded-md shadow-sm text-sm font-medium text-gray-700 hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand;
+  }
+
+  .input {
+    @apply shadow-sm focus:outline-none focus:ring-brand focus:border-brand block w-full sm:text-sm border-gray-300 rounded-md;
+  }
+
+  .text-area {
+    @apply shadow-sm focus:outline-none focus:ring-brand focus:border-brand block w-full sm:text-sm border-gray-300 rounded-md;
+  }
+
+  .input-label {
+    @apply text-sm font-medium text-gray-700;
+  }
+
+  .footer-a {
+    @apply text-base text-gray-300 hover:text-white;
+  }
+
+  .url-link {
+    @apply font-medium text-brand hover:text-brand-light focus:text-brand cursor-pointer;
+  }
+}
+
+.transform-2px {
+  will-change: transform;
+}
+
+.transform-2px:hover {
+  transform: translateY(-2px);
+}

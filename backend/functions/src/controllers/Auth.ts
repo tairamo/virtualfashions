@@ -9,6 +9,7 @@ import { PasswordNotMatch } from '../errors/PasswordNotMatch'
 import { ResetTokenUsed } from '../errors/ResetTokenUsed'
 import { encryptPassword } from '../utils/encryption'
 import { passwordChangedMail } from '../utils/mail'
+import { decodeJwtToken } from '../utils/jwt'
 
 @injectable()
 export class AuthController {
@@ -29,7 +30,10 @@ export class AuthController {
   }
 
   async register(request: Request, response: Response) {
-    const user = await this.userService.register(request.body)
+    const tokenData: any = decodeJwtToken(request.body.token)
+    const data = { ...request.body, email: tokenData?.email || '' }
+
+    const user = await this.userService.register(data)
 
     return response.json(user)
   }

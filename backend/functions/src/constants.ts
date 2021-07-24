@@ -92,9 +92,9 @@ export const TOKEN_PROJECTION = {
 export const USER_LOOKUP = { from: 'users', localField: 'userId', foreignField: '_id', as: 'user' }
 export const OWNEDBY_LOOKUP = { from: 'users', localField: 'ownedBy', foreignField: '_id', as: 'ownedBy' }
 
-export const APP_DOMAIN = 'https://virtualfashion.io/'
+export const APP_DOMAIN = 'https://virtualfashion.io'
 
-export const APP_LOGO = 'https://virtualfashion.io/logo.png'
+export const APP_LOGO = `${APP_DOMAIN}/placeholders/vfs.png`
 export const TWITTER_LOGO = 'https://puamnn.stripocdn.email/content/assets/img/social-icons/logo-colored/twitter-logo-colored.png'
 
 export const TOKENS_MATCH = { $eq: ['$$id', '$tokenId'] }

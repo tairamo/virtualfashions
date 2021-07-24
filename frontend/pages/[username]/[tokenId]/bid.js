@@ -152,7 +152,7 @@ function Bid({ token }) {
   useEffect(() => {
     // Call button condition function
     buttonCondition();
-  }, [bidValue, user, balance]);
+  }, [bidValue, user, balance, ETHAccount]);
 
   if (user?._id === auction?.createdBy?._id) {
     router.push(`/${auction?.createdBy?.username}/${token?._id}`);
@@ -259,7 +259,7 @@ function Bid({ token }) {
                       onClick={onSumbitHandler}
                       submittingText={CONFIRMATION}
                       disabled={isLoading || isButtonDisabled}
-                      className={`md:py-4 px-6 rounded-2xl appearance-none inline-block text-base text-center font-semibold px-2 py-4 border-2 min-h-3.75 h-3.75 w-full leading-1.2 focus:outline-none text-white bg-black ${
+                      className={`md:py-4 px-6 rounded-2xl appearance-none inline-block text-base text-center font-semibold px-2 py-4 border-2 min-h-3.75 w-full leading-1.2 focus:outline-none text-white bg-black ${
                         isLoading || isButtonDisabled
                           ? "opacity-50 cursor-default"
                           : "border-black transition-all duration-300 ease-trans-expo hover:shadow-btn transform-2px"

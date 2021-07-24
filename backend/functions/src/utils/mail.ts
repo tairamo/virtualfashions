@@ -136,7 +136,7 @@ export const registrationContinue = async (toMail: string, token: string) => {
 
   // Registration continue template
   const emailTemplate = await ejs.renderFile(path.join(__dirname, '../templates/registration-continue.ejs'), {
-    continue_link: `${APP_DOMAIN}/register?token=${token}`
+    continue_link: `${APP_DOMAIN}/register?token=${token}&email=${toMail}`
   })
 
   const config: SendMail = {
@@ -218,5 +218,5 @@ export const contactSupport = async (data: Support) => {
 
   return sendMail(configuration, (data: any) => {
     console.log(data)
-  }) 
+  })
 }

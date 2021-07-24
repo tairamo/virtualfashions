@@ -9,3 +9,7 @@ export const verifyJwtToken = (token: string) => {
 export const generateJwtToken = (data: any) => {
   return jwt.sign(data, config.jwtsecret, { expiresIn: '1d' })
 }
+
+export const decodeJwtToken = (token: string) => {
+  return jwt.decode(token, config.jwtsecret)
+}

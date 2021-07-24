@@ -80,7 +80,7 @@ function Creators({ creatorsData, currPage, totalDocuments, error }) {
           </div>
         </InfiniteScroll>
       ) : (
-        <div className="sm:pt-12 md:pt-24 mx-auto w-full px-6 pb-24 flex flex-1 items-center justify-center">
+        <div className="sm:pt-12 md:pt-24 pt-10 min-h-calc265px mx-auto w-full px-6 pb-24 flex flex-1 items-center justify-center">
           <div className="mx-auto w-full">
             <div className="mx-auto text-center max-w-30.625">
               <h2 className="md:text-4xl mb-4 text-2xl tracking-0.01 font-semibold">

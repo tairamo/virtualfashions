@@ -52,6 +52,7 @@ export const WITHDRAW_ERROR = "Error while withdraw";
 export const VALID_PHONE = "Please enter valid phone";
 export const DESCRIPTION = "Please enter description";
 export const VALID_EMAIL = "Please enter valid email";
+export const VALID_TOKEN = "Token is invalid";
 export const VALID_AMOUNT = "Please enter valid amount";
 export const CHAINID_ERROR = "Please connect to mainnet";
 export const MINTING_ERROR = "Error while minting art";
@@ -83,7 +84,7 @@ export const TOKEN_MINTED_SUCCESS = "Art minted successfully";
 export const SUPPORT_REQUEST_SUCCESS = "Support requested successfully";
 export const TOKEN_LISTED_SUCCESS = "Art has been successfully listed";
 export const TOKEN_CREATED_SUCCESS =
-  "Art successfully created and under varification process. You will be inform by email, once varification process completed";
+  "Art successfully created and under varification process. You will be informed by email, once varification process completed";
 
 // Button text
 export const SAVE = "SAVE";

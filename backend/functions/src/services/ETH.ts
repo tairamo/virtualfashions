@@ -23,7 +23,6 @@ export class ETH extends DBModel {
   async etherPrice() {
     const date = moment().subtract(1, 'hour').toDate()
     let doc = await this.model.findOne({ name: 'ethPrice', updatedAt: { $gte: date } })
-    console.log('doc', doc)
     let ethPrice = doc?.value
     if (!doc) {
       const price = await this.fetchEtherPrice()

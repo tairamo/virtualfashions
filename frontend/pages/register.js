@@ -15,7 +15,6 @@ import { verifyEmailSchema } from "../schema/common";
 import AuthService from "../services/api/AuthService";
 import { ErrorMsg } from "../components/alerts/error";
 import { SuccessMsg } from "../components/alerts/success";
-import { jwtError, tokenVerification } from "../utils/general";
 import {
   INTERNAL_SERVER_ERROR,
   SIGN_UP,
@@ -26,12 +25,7 @@ import {
 export default function Register() {
   const router = useRouter();
   const { query } = router;
-  const { token } = query;
   const { user, setUser, loading } = useAuth();
-
-  const [email, setEmail] = useState("");
-  const [isVerify, setIsVerify] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
 
   // Register use form
   const {
@@ -71,16 +65,16 @@ export default function Register() {
 
   const onSubmit = async (values) => {
     try {
-      const { email, password, fullname } = values;
+      const { email, password, fullname, token } = values;
 
       // Register user
-      await AuthService.register({ email, password, fullname });
+      await AuthService.register({ email, password, fullname, token });
 
       const { data } = await AuthService.login({ email, password });
-      const { token, user } = data;
+      const { token: authToken, user } = data;
 
       // Set cookies
-      nookies.set(undefined, TOKEN, token, { path: "/" });
+      nookies.set(undefined, TOKEN, authToken, { path: "/" });
 
       // Set user state
       setUser(user);
@@ -93,59 +87,16 @@ export default function Register() {
     }
   };
 
-  // Verify token
-  const verifyToken = (token) => {
-    try {
-      const data = tokenVerification(token);
-
-      // Set set is verify state
-      setIsVerify(true);
-
-      // Set loadind state
-      setIsLoading(false);
-
-      // Set email state
-      setEmail(data.email);
-    } catch (err) {
-      console.log(err);
-
-      toast.error(<ErrorMsg msg={jwtError(err.message)} />);
-
-      // Set loadind state
-      setIsLoading(false);
-    }
-  };
-
   useEffect(() => {
-    if (!token) {
-      setTimeout(() => {
-        // Set loadind state
-        setIsLoading(false);
-      }, 1000);
-
-      return;
-    }
-
-    // Call verify token
-    verifyToken(token);
-  }, [token]);
-
-  useEffect(() => {
-    if (email.length === 0) return;
-
-    // Set value
-    setValue("email", email, {
-      shouldValidate: true,
-    });
-  }, [email]);
+    if (query?.email) setValue("email", query.email, { shouldValidate: true });
+    if (query?.token) setValue("token", query.token, { shouldValidate: true });
+  }, [query]);
 
   const LoaderComponent = (
     <div className="mt-20">
       <Loader />
     </div>
   );
-
-  if (isLoading || loading) return LoaderComponent;
 
   if (!loading && user) {
     router.replace("/");
@@ -173,7 +124,7 @@ export default function Register() {
 
       <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
         <div className="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
-          {isVerify ? (
+          {query.token && query.email ? (
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
               <Input
                 type="text"
@@ -191,7 +142,7 @@ export default function Register() {
                   id="email"
                   type="email"
                   name="email"
-                  value={email}
+                  value={query.email}
                   label="Email Address"
                   autoComplete="email"
                   register={register}

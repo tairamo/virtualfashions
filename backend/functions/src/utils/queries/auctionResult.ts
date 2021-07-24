@@ -19,7 +19,7 @@ export const auctionsResultWithBid = (query: any, localField: string) => {
     },
     {
       $lookup: {
-        from: 'nifties',
+        from: 'tokens',
         let: { tokenId: '$tokenId' },
         pipeline: [
           { $match: { $expr: query } },

@@ -120,7 +120,8 @@ export default class User extends DBModel {
 
   async searchUsers(search: string) {
     const query = {
-      $or: [{ username: new RegExp(search, 'i') }, { fullname: new RegExp(search, 'i') }]
+      $or: [{ username: new RegExp(search, 'i') }, { fullname: new RegExp(search, 'i') }],
+      role: { $ne: 'Admin' }
     }
     const projection = { password: 0, email: 0, updatedAt: 0, __v: 0 }
 
@@ -147,7 +148,7 @@ export default class User extends DBModel {
 
     const result = await this.model.aggregate([match, facet])
     const users = result[0].documents
-    const totalDocuments = result[0].count[0].totalDocuments
+    const totalDocuments = result[0].count[0]?.totalDocuments || 0
 
     return {
       users,

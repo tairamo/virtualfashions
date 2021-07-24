@@ -47,7 +47,7 @@ export const bidsWithTokenAndAuction = () => {
     },
     {
       $lookup: {
-        from: 'nifties',
+        from: 'tokens',
         let: { tokenId: '$auction.tokenId' },
         pipeline: [
           { $match: { $expr: { $eq: ['$$tokenId', '$_id'] } } },

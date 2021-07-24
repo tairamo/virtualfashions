@@ -67,22 +67,24 @@ function Bids() {
   return (
     <Layout>
       {bids.length > 0 ? (
-        <div className="w-10/12 my-8 mx-auto items-center grid gap-10 grid-cols-1fr">
-          <div className="w-full grid gap-4 grid-cols-1ft">
-            {(bids || []).map((bid) => (
-              <BidCard key={bid._id} bid={bid} />
-            ))}
+        <div className="min-h-calc265px">
+          <div className="w-10/12 my-8 mx-auto items-center grid gap-10 grid-cols-1fr">
+            <div className="w-full grid gap-4 grid-cols-1ft">
+              {(bids || []).map((bid) => (
+                <BidCard key={bid._id} bid={bid} />
+              ))}
+            </div>
           </div>
         </div>
       ) : (
-        <div className="sm:pt-12 md:pt-24 mx-auto w-full px-6 pb-24 flex flex-1 items-center justify-center">
+        <div className="sm:pt-12 md:pt-24 pt-10 min-h-calc265px mx-auto w-full px-6 pb-24 flex flex-1 items-center justify-center">
           <div className="mx-auto w-full">
             <div className="mx-auto text-center max-w-30.625">
               <h2 className="md:text-4xl mb-4 text-2xl tracking-0.01 font-semibold">
                 Your bids will be shown here
               </h2>
               <div className="mb-8 mx-auto font-base font-normal leading-1.7 max-w-18.75">
-                When you place a bid on a token, it will show up here.
+                When you place a bid on a art, it will show up here.
               </div>
               <Button
                 text={SHOW_AUCTIONS}
