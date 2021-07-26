@@ -442,7 +442,7 @@ function AToken({ token, tokenMetadata, auctionResult }) {
                 </div>
               </div>
             </div>
-            <div className="sm:text-2xl leading-1.3 text-lg font-medium">
+            <div className="sm:text-2xl leading-1.3 text-lg font-medium overflow-ellipsis	overflow-hidden">
               {token?.user?.bio}
             </div>
           </div>

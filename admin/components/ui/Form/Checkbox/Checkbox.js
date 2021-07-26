@@ -4,7 +4,7 @@ export const Checkbox = ({ label, ...props }) => {
       <input
         type="checkbox"
         {...props}
-        className="h-4 w-4 text-brand focus:ring-brand border-gray-300 rounded"
+        className="h-4 w-4 text-black focus:ring-black border-gray-300 rounded"
       />
       {label && (
         <label

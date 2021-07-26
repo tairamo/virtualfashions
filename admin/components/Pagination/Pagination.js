@@ -163,7 +163,7 @@ export default function Pagination({ totalDocs, onChangePage, currentPage }) {
                 onClick={() => setPage(page)}
                 className={`outline-none bg-white border-gray-300 text-gray-500 hover:bg-gray-50 relative inline-flex items-center px-4 py-2 border text-sm font-medium ${
                   pager.currentPage === page &&
-                  "border-gray-100 bg-gray-100 z-10 text-brand"
+                  "border-gray-100 bg-gray-100 z-10 text-brand-000000b8 border-brand-000000b8"
                 }`}
               >
                 {page}

@@ -224,7 +224,7 @@ function Profile({
                         @{userData?.username}
                       </div>
                     </div>
-                    <div className="text-sm text-gray-500 hover:text-black">
+                    <div className="text-sm text-gray-500 hover:text-black w-max">
                       {user?._id === userData?._id && (
                         <Link href="/profile/add-details">Edit profile</Link>
                       )}
@@ -234,12 +234,14 @@ function Profile({
                 <div className="md:gap-12 grid gap-8">
                   <div className="">
                     <div className="grid gap-12 ">
-                      <div>
+                      <div className="overflow-hidden">
                         <div className="leading-none pb-4 mb-4 border-b border-gray-200 text-lg">
                           Bio
                         </div>
                         <div className="text-sm leading-relaxed font-normal text-gray-500">
-                          <p>{userData?.bio || "No bio available"}</p>
+                          <p className="overflow-ellipsis	overflow-hidden">
+                            {userData?.bio || "No bio available"}
+                          </p>
                         </div>
                       </div>
                       <div className="md:block hidden">

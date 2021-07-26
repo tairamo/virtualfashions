@@ -95,7 +95,7 @@ export default class Token extends DBModel {
 
   async searchTokens(search: string) {
     const query = { status: 'Approved', title: new RegExp(search, 'i') }
-    const projection = { _id: 1, url: 1, title: 1, userId: 1, 'user.username': 1 }
+    const projection = { _id: 1, thumbnailUrl: 1, title: 1, userId: 1, 'user.username': 1, thumbnailContentType: 1 }
 
     return await this.aggregate(query, 3, projection, USER_LOOKUP)
   }

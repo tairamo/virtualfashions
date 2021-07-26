@@ -52,10 +52,11 @@ export const SearchBox = ({ users, tokens, isLoading }) => {
                   {tokens.map((token) => (
                     <SearchResult
                       token
-                      name={token.title}
                       key={token._id}
-                      imageUrl={token.url}
+                      name={token.title}
+                      imageUrl={token.thumbnailUrl}
                       username={token.user.username}
+                      contentType={token.thumbnailContentType}
                       url={`/${token.user.username}/${token._id}`}
                     />
                   ))}

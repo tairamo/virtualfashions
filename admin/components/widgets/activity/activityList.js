@@ -59,7 +59,7 @@ export const ActivityList = ({ event, bidPrice, activity }) => {
         target="_blank"
         rel="noreferrer"
         href={`${process.env.NEXT_PUBLIC_ETHER_SCAN_URL}/tx/${data?.chainInfo?.txId}`}
-        className="absolute flex items-center no-underline text-gray-600 cursor-pointer sm:ml-6 sm:relative sm:right-0 sm:bottom-0 right-5 bottom-5 hover:text-black"
+        className="absolute flex items-center no-underline text-gray-600 cursor-pointer sm:ml-6 sm:relative sm:right-0 sm:bottom-0 right-5 bottom-5 hover:text-black transition-all duration-300 ease-trans-expo"
       >
         <GotoIcon />
       </a>
