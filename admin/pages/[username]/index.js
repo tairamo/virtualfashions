@@ -83,11 +83,11 @@ function UserDetail() {
   };
 
   useEffect(() => {
-    if (!username || username === "") return;
+    if (!user || !username || username === "") return;
 
     // Call fetch user function
     fetchUser(username);
-  }, [username]);
+  }, [username, user]);
 
   const LoaderComponent = (
     <div className="mt-20">

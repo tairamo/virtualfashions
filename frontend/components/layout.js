@@ -17,15 +17,19 @@ export default function layout({ children }) {
 
   if (loading) {
     return LoaderComponent;
-  } else if (!loading && !user) {
-    // router.replace("/login");
-    // return LoaderComponent;
+  } else if (
+    (router.pathname === "/profile/add-details" ||
+      router.pathname === "/creator/create") &&
+    !user
+  ) {
+    router.replace("/login");
+    return LoaderComponent;
   }
 
   let classes = "w-full";
   if (
     router.pathname === "/profile/add-details" ||
-    router.pathname === "/profile/create/create"
+    router.pathname === "/creator/create"
   ) {
     classes = "w-full mx-auto px-6";
   } else if (router.pathname === "/") {

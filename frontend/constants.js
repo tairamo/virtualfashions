@@ -1,5 +1,6 @@
 export const INTERVAL = 1000;
 export const TOKEN = "token";
+export const BID_PERCENTAGE = 10;
 export const MAINNET_CHAIN_ID = "0x1";
 export const AGE_VERIFIED = "age-verified";
 export const joindedDataFormat = "MMMM YYYY";

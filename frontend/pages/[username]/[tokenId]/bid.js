@@ -24,6 +24,7 @@ import {
   AUCTION_ENDED,
   BID_PLACING_ERROR,
 } from "../../../constants";
+import { calculateMinBid } from "../../../utils/general";
 
 const web3 = new Web3Instance();
 
@@ -113,10 +114,8 @@ function Bid({ token }) {
     }
   };
 
-  let minBid = (auction?.minimumBid + 0.1).toFixed(2);
-  if (auction?.bids?.length > 0) {
-    minBid = (auction.bids[0].bidETH + 0.1).toFixed(2);
-  }
+  // Call calculate min bid function
+  let minBid = calculateMinBid(auction);
 
   const buttonCondition = () => {
     let text = SUBMIT;

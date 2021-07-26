@@ -1,11 +1,10 @@
-import { useState, useEffect, useMemo, useRef } from "react";
-import nookies from "nookies";
 import { toast } from "react-toastify";
 import firebase from "firebase";
 import "firebase/storage";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
+import { useState, useEffect, useMemo, useRef } from "react";
 
 import { useAuth } from "../../utils/auth";
 import Layout from "../../components/layout";
@@ -14,8 +13,8 @@ import { schema } from "../../schema/updateDetails";
 import Loading from "../../components/loading/Spinner";
 import UserService from "../../services/api/UserService";
 import { ErrorMsg } from "../../components/alerts/error";
-import AuthService from "../../services/api/AuthService";
 import { imageValidation } from "../../utils/fileValidation";
+import { getBannerUrl, getProfileUrl } from "../../utils/general";
 import { ReactComponent as HubIcon } from "../../public/icons/hub.svg";
 import { ReactComponent as UrlIcon } from "../../public/icons/globe.svg";
 import { ReactComponent as TwitterIcon } from "../../public/icons/twitter.svg";
@@ -28,7 +27,7 @@ import {
   INTERNAL_SERVER_ERROR,
 } from "../../constants";
 
-function RegisterDetails({ userData }) {
+function RegisterDetails(props) {
   let router = useRouter();
   const avatarRef = useRef(null);
   const bannerRef = useRef(null);
@@ -56,11 +55,11 @@ function RegisterDetails({ userData }) {
     reValidateMode: "onChange",
     defaultValues: useMemo(() => {
       return {
-        ...userData,
-        avatar: userData.profileUrl,
-        banner: userData.bannerUrl,
+        ...user,
+        avatar: getProfileUrl(user),
+        banner: getBannerUrl(user),
       };
-    }, [userData]),
+    }, [user]),
   });
 
   async function checkUsernameValidity(username) {
@@ -276,25 +275,27 @@ function RegisterDetails({ userData }) {
   }, [username]);
 
   useEffect(() => {
-    if (userData.bannerUrl) {
+    if (!user) return;
+
+    if (user.bannerUrl) {
       // Set banner state
-      setBanner({ file: userData.bannerUrl, loading: false });
+      setBanner({ file: user.bannerUrl, loading: false });
 
       // Set banner state
-      setValue("banner", userData.bannerUrl);
+      setValue("banner", user.bannerUrl);
     }
 
-    if (userData.profileUrl) {
+    if (user.profileUrl) {
       // Set avatar state
-      setAvatar({ file: userData.profileUrl, loading: false });
+      setAvatar({ file: user.profileUrl, loading: false });
 
       // Set banner state
-      setValue("avatar", userData.profileUrl);
+      setValue("avatar", user.profileUrl);
     }
 
     // Set text state
-    setText(userData.bio || "");
-  }, [userData]);
+    setText(user.bio || "");
+  }, [user]);
 
   return (
     <Layout>
@@ -759,37 +760,6 @@ function RegisterDetails({ userData }) {
       </div>
     </Layout>
   );
-}
-
-export async function getServerSideProps(context) {
-  try {
-    const cookies = nookies.get(context);
-    if (!cookies.token || cookies?.token === "") {
-      context.res.writeHead(302, { location: "/login" });
-      context.res.end();
-      return { props: {} };
-    }
-
-    const { data: user } = await AuthService.me({
-      Authorization: `Bearer ${cookies.token}`,
-    });
-
-    return {
-      props: {
-        userData: user,
-      },
-    };
-  } catch (err) {
-    console.log(err);
-
-    // Destroy token
-    nookies.destroy(context, TOKEN);
-
-    // Redirect to login page
-    context.res.writeHead(302, { location: "/login" });
-    context.res.end();
-    return { props: { userData: {} } };
-  }
 }
 
 export default RegisterDetails;

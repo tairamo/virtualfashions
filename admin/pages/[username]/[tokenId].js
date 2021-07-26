@@ -117,11 +117,11 @@ function AToken(props) {
   }
 
   useEffect(() => {
-    if (!username || !tokenId) return;
+    if (!user || !username || !tokenId) return;
 
     // Call fetch token detail function
     fetchTokenDetail(username, tokenId);
-  }, [username, tokenId]);
+  }, [username, tokenId, user]);
 
   const LoaderComponent = (
     <div className="mt-20">
@@ -129,7 +129,7 @@ function AToken(props) {
     </div>
   );
 
-  if (!user || loading || isLoading) return LoaderComponent;
+  if (loading || isLoading) return LoaderComponent;
 
   let profileImage = DEFAULT_PROFILE_IMAGE_URL;
   if (token?.user?.profileUrl) {

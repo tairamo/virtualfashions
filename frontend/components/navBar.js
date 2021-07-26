@@ -298,10 +298,10 @@ export default function navBar() {
                     Bids
                   </a>
                 </Link>
-                <Link href="/profile/create/create" passHref>
+                <Link href="/creator/create" passHref>
                   <a
                     className={`lg:ml-4 ${
-                      router.pathname === "/profile/create/create"
+                      router.pathname === "/creator/create"
                         ? "border-black text-gray-900"
                         : "border-transparent text-gray-500 hover:border-gray-300 hover:text-gray-700"
                     } inline-flex items-center px-1 pt-1 border-b-2 text-sm font-medium h-full`}
@@ -456,10 +456,10 @@ export default function navBar() {
                   Bids
                 </a>
               </Link>
-              <Link href="/profile/create/create" passHref>
+              <Link href="/creator/create" passHref>
                 <a
                   className={` ${
-                    router.pathname === "/profile/create/create"
+                    router.pathname === "/creator/create"
                       ? "bg-brand-f2f2f2 border-black text-black font-semibold "
                       : "border-transparent text-gray-600 hover:bg-gray-50 hover:border-gray-300 hover:text-gray-800"
                   } block pl-3 pr-4 py-2 border-l-4 text-base font-medium`}

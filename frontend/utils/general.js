@@ -3,6 +3,7 @@ import nookies from "nookies";
 import * as jwt from "jsonwebtoken";
 
 import {
+  BID_PERCENTAGE,
   DEFAULT_BANNER_IMAGE_URL,
   DEFAULT_PROFILE_IMAGE_URL,
 } from "../constants";
@@ -99,4 +100,16 @@ export const getBannerUrl = (user) => {
   if (user?.bannerUrl) bannerImage = user.bannerUrl;
 
   return bannerImage;
+};
+
+export const calculateMinBid = (auction) => {
+  let bidValue = auction?.minimumBid;
+  if (auction?.bids?.length > 0) {
+    bidValue = auction.bids[0].bidETH;
+  }
+
+  // 10% of price
+  const minBid = bidValue + bidValue / BID_PERCENTAGE;
+
+  return minBid.toFixed(2);
 };
