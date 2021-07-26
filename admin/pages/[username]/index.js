@@ -7,8 +7,10 @@ import { useAuth } from "../../context/auth";
 import Layout from "../../components/layout";
 import { Loader } from "../../components/ui/Loader";
 import UserService from "../../services/api/UserService";
+import { ErrorMsg } from "../../components/alerts/error";
 import TokenService from "../../services/api/TokenService";
 import {
+  USER_NOT_FOUND,
   USER_FETCHING_ERROR,
   DEFAULT_BANNER_IMAGE_URL,
   DEFAULT_PROFILE_IMAGE_URL,
@@ -32,8 +34,8 @@ function UserDetail() {
       const { data } = await UserService.fetchUser(name);
 
       if (!data) {
-        // Show error
-        toast.error("User not found!");
+        // Show error message
+        toast.error(<ErrorMsg msg={USER_NOT_FOUND} />);
 
         // Redirect to users page
         await router.push("/users");
@@ -47,8 +49,8 @@ function UserDetail() {
     } catch (err) {
       console.log(err);
 
-      // Show error
-      toast.error(USER_FETCHING_ERROR);
+      // Show error message
+      toast.error(<ErrorMsg msg={USER_FETCHING_ERROR} />);
     } finally {
       // Set is loading state
       setIsLoading(false);
@@ -75,12 +77,14 @@ function UserDetail() {
     } catch (err) {
       console.log(err);
 
-      // Show error
-      toast.error(USER_FETCHING_ERROR);
+      // Show error message
+      toast.error(<ErrorMsg msg={USER_FETCHING_ERROR} />);
     }
   };
 
   useEffect(() => {
+    if (!username || username === "") return;
+
     // Call fetch user function
     fetchUser(username);
   }, [username]);
@@ -91,7 +95,7 @@ function UserDetail() {
     </div>
   );
 
-  if (!user || loading || isLoading) return LoaderComponent;
+  if (loading || isLoading) return LoaderComponent;
 
   let bannerUrl = DEFAULT_BANNER_IMAGE_URL;
   if (userDetail?.bannerUrl) {

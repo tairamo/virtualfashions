@@ -7,9 +7,11 @@ import Layout from "../../components/layout";
 import { Loader } from "../../components/ui/Loader";
 import { Video } from "../../components/widgets/video";
 import { Image } from "../../components/widgets/image";
+import { ErrorMsg } from "../../components/alerts/error";
 import TokenService from "../../services/api/TokenService";
 import { Button } from "../../components/ui/Button/Button";
 import { UserWidget } from "../../components/widgets/user";
+import { SuccessMsg } from "../../components/alerts/success";
 import { Spinner } from "../../components/ui/Spinner/Spinner";
 import { Activity } from "../../components/activity/activity";
 import { ReactComponent as GotoIcon } from "../../public/icons/goto.svg";
@@ -17,6 +19,9 @@ import { ReactComponent as IPFSIcon } from "../../public/icons/ipfs.svg";
 import { ReactComponent as EtherscanIcon } from "../../public/icons/etherscan.svg";
 import { ReactComponent as IPFSMeatadataICon } from "../../public/icons/ipfs-metadata.svg";
 import {
+  APPROVED,
+  CHANGE_STATUS,
+  PENDING_REVIEW,
   ART_FETCHING_ERROR,
   STATUS_UPDATE_ERROR,
   STATUS_UPDATE_SUCCESS,
@@ -52,8 +57,8 @@ function AToken(props) {
     } catch (err) {
       console.log(err);
 
-      // Show error
-      toast.error(ART_FETCHING_ERROR);
+      // Show error message
+      toast.error(<ErrorMsg msg={ART_FETCHING_ERROR} />);
     } finally {
       // Set is loading state
       setIsLoading(false);
@@ -69,10 +74,10 @@ function AToken(props) {
       setIsLoading(true);
 
       let newStatus = "";
-      if (token.status === "Approved") {
-        newStatus = "Pending Review";
+      if (token.status === APPROVED) {
+        newStatus = PENDING_REVIEW;
       } else {
-        newStatus = "Approved";
+        newStatus = APPROVED;
       }
 
       // Update token status
@@ -98,14 +103,16 @@ function AToken(props) {
       // Set loading state
       setIsLoading(false);
 
-      toast.success(STATUS_UPDATE_SUCCESS);
+      // Show success message
+      toast.success(<SuccessMsg msg={STATUS_UPDATE_SUCCESS} />);
     } catch (err) {
       console.log({ err });
 
       // Set loading state
       setIsLoading(false);
 
-      toast.error(STATUS_UPDATE_ERROR);
+      // Show error message
+      toast.error(<ErrorMsg msg={STATUS_UPDATE_ERROR} />);
     }
   }
 
@@ -154,7 +161,7 @@ function AToken(props) {
           {!isVideoLoaded && (
             <div className="opacity-100">
               <div className="absolute transform -translate-y-1/2 -translate-x-1/2 left-2/4 top-2/4">
-                <Spinner color="text-brand" />
+                <Spinner color="text-black" />
               </div>
             </div>
           )}
@@ -255,7 +262,7 @@ function AToken(props) {
                     Status :{" "}
                     <span
                       className={`${
-                        token?.status === "Approved"
+                        token?.status === APPROVED
                           ? "text-pink-600"
                           : "text-gray-600"
                       }`}
@@ -264,11 +271,11 @@ function AToken(props) {
                     </span>{" "}
                   </h1>
                   <Button
-                    text="Change Status"
+                    text={CHANGE_STATUS}
                     disabled={isLoading}
                     onClick={changeStatus}
                     isSubmitting={isLoading}
-                    className={`flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-brand shadow-3xl transform-2px transition-all duration-300 ease-trans-expo ${
+                    className={`flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black shadow-3xl transform-2px transition-all duration-300 ease-trans-expo ${
                       isLoading
                         ? "cursor-default opacity-50"
                         : "hover:shadow-ho3xl"

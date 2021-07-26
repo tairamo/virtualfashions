@@ -10,6 +10,7 @@ import { errorMessage } from "../utils/general";
 import { Button } from "../components/ui/Button";
 import { Loader } from "../components/ui/Loader";
 import { Input } from "../components/ui/Form/Input";
+import { ErrorMsg } from "../components/alerts/error";
 import storage, { app as firebaseApp } from "../utils/firebase/storage";
 
 export default function Register() {
@@ -79,8 +80,9 @@ export default function Register() {
       // Redirect to main page
       router.replace("/index-2");
     } catch (error) {
-      console.log({ error });
-      toast.error(errorMessage(error));
+      console.log(error);
+      // Show error message
+      toast.error(<ErrorMsg msg={errorMessage(error)} />);
     }
   };
 

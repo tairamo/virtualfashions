@@ -1,4 +1,5 @@
 import { toast } from "react-toastify";
+import { useRouter } from "next/router";
 import { useEffect, useState } from "react";
 
 import { useAuth } from "../../context/auth";
@@ -6,10 +7,12 @@ import Layout from "../../components/layout";
 import { Loader } from "../../components/ui/Loader";
 import UserListCard from "../../components/userListCard";
 import UserService from "../../services/api/UserService";
+import { ErrorMsg } from "../../components/alerts/error";
 import Pagination from "../../components/Pagination/Pagination";
 import { NO_DATA_AVAILABLE, USERS_FETCHING_ERROR } from "../../constants";
 
 function Users(props) {
+  const router = useRouter();
   const { user, loading } = useAuth();
 
   const [users, setUsers] = useState([]);
@@ -32,8 +35,8 @@ function Users(props) {
     } catch (err) {
       console.log(err);
 
-      // Show error
-      toast.error(USERS_FETCHING_ERROR);
+      // Show error message
+      toast.error(<ErrorMsg msg={USERS_FETCHING_ERROR} />);
     } finally {
       // Set is loading state
       setIsLoading(false);

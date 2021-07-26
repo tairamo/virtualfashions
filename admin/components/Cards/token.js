@@ -4,8 +4,8 @@ import { useState } from "react";
 
 import { Video } from "../widgets/video";
 import { Image } from "../widgets/image";
-import { DATE_FORMAT } from "../../constants";
 import { Spinner } from "../ui/Spinner/Spinner";
+import { APPROVED, DATE_FORMAT } from "../../constants";
 
 export default function TokenCard({ token }) {
   const { auction } = token;
@@ -40,7 +40,7 @@ export default function TokenCard({ token }) {
           {!isVideoLoaded && (
             <div className="opacity-100">
               <div className="absolute transform -translate-y-1/2 -translate-x-1/2 left-2/4 top-2/4">
-                <Spinner color="text-brand" />
+                <Spinner color="text-black" />
               </div>
             </div>
           )}
@@ -70,10 +70,10 @@ export default function TokenCard({ token }) {
       <td className="px-6 py-4 items-center text-center">
         <span
           className={`${
-            token?.status === "Approved"
+            token?.status === APPROVED
               ? "bg-green-100 text-green-800"
               : "bg-yellow-100 text-yellow-800"
-          } px-2 inline-flex text-xs leading-5 font-semibold rounded-full text-center`}
+          } px-2 pt-px pb-3px inline-flex text-xs leading-5 font-semibold rounded-full text-center`}
         >
           {token?.status}
         </span>

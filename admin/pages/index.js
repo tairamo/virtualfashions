@@ -4,8 +4,16 @@ import { useEffect, useState } from "react";
 import { useETH } from "../context/ETH";
 import Web3Instance from "../utils/web3";
 import Layout from "../components/layout";
+import { ErrorMsg } from "../components/alerts/error";
 import { DashboradWidget } from "../components/widgets/dashboard";
-import { COMMISSION_FETCHING_ERROR, WITHDRAW_ERROR } from "../constants";
+import {
+  NOT_ENOUGH_ETH,
+  WITHDRAW_ERROR,
+  CONNECT_MAINNET,
+  CONTRACT_BALANCE,
+  COMMISSION_EARNED,
+  COMMISSION_FETCHING_ERROR,
+} from "../constants";
 
 const web3 = new Web3Instance();
 
@@ -28,8 +36,8 @@ function Dashboard(props) {
       // Set commission state
       setCommission(0);
 
-      // Show error
-      toast.error(COMMISSION_FETCHING_ERROR);
+      // Show error message
+      toast.error(<ErrorMsg msg={COMMISSION_FETCHING_ERROR} />);
     }
   };
 
@@ -51,7 +59,7 @@ function Dashboard(props) {
   const onWithdrawClickHandler = async () => {
     try {
       if (commission <= 0) {
-        throw new Error("No have enough amount to withdraw!");
+        throw new Error(NOT_ENOUGH_ETH);
       }
 
       // Set is loading state
@@ -68,8 +76,8 @@ function Dashboard(props) {
     } catch (err) {
       console.log(err);
 
-      // Show error
-      toast.error(WITHDRAW_ERROR);
+      // Show error message
+      toast.error(<ErrorMsg msg={WITHDRAW_ERROR} />);
     } finally {
       // Set is loading state
       setIsLoading(false);
@@ -86,11 +94,11 @@ function Dashboard(props) {
     getContractBalance();
   }, [ETHAccount, chainId]);
 
-  let buttonText = "Commission Earned";
+  let buttonText = COMMISSION_EARNED;
   let isDisabled = false;
   if (chainId !== "" && chainId !== process.env.NEXT_PUBLIC_CHAIN_ID) {
     isDisabled = true;
-    buttonText = "Please connect to mainnet";
+    buttonText = CONNECT_MAINNET;
   }
 
   return (
@@ -103,7 +111,7 @@ function Dashboard(props) {
 
       <div className="grid-cols-1sm grid gap-12 sm:grid-cols-2sm">
         <DashboradWidget
-          title="Contract Balance"
+          title={CONTRACT_BALANCE}
           amount={contractBalance}
           showButton={false}
         />
@@ -113,7 +121,7 @@ function Dashboard(props) {
           showButton={true}
           loading={isLoading}
           isDisabled={isDisabled}
-          title="Commission Earned"
+          title={COMMISSION_EARNED}
           withdraw={onWithdrawClickHandler}
         />
       </div>

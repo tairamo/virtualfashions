@@ -10,11 +10,11 @@ import "../styles/globals.css";
 import "react-toastify/dist/ReactToastify.css";
 
 const contextClass = {
-  success: "bg-blue-600",
-  error: "bg-red-600",
-  info: "bg-gray-600",
-  warning: "bg-orange-400",
-  default: "bg-indigo-600",
+  success: "bg-black text-white",
+  error: "bg-black text-white",
+  info: "bg-black text-white",
+  warning: "bg-black text-white",
+  default: "bg-black text-white",
   dark: "bg-white-600 font-gray-300",
 };
 

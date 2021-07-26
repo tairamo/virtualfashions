@@ -308,7 +308,7 @@ export default function Layout({ children }) {
                 <div>
                   <button
                     type="button"
-                    className="max-w-xs bg-white flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+                    className="max-w-xs bg-gray-500 flex items-center text-sm rounded-full focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black"
                     id="user-menu"
                     onClick={(event) => setIsOpenProfile(!isOpenProfile)}
                   >

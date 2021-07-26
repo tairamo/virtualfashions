@@ -84,10 +84,10 @@ export const TOKEN_MINTED_SUCCESS = "Art minted successfully";
 export const SUPPORT_REQUEST_SUCCESS = "Support requested successfully";
 export const TOKEN_LISTED_SUCCESS = "Art has been successfully listed";
 export const TOKEN_CREATED_SUCCESS =
-  "Art successfully created and under varification process. You will be informed by email, once varification process completed";
+  "Art successfully created and under verification process. You will be informed by email, once verification process completed";
 
 // Button text
-export const SAVE = "SAVE";
+export const SAVE = "Save";
 export const SUBMIT = "Submit";
 export const SIGN_IN = "Sign In";
 export const SIGN_UP = "Sign up";

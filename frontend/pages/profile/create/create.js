@@ -30,6 +30,7 @@ import {
   CHAINID_ERROR,
   MINTING_ERROR,
   FILE_UPLOAD_ERROR,
+  TOKEN_MINTED_SUCCESS,
   TOKEN_CREATED_SUCCESS,
 } from "../../../constants";
 
@@ -94,6 +95,9 @@ function Create(props) {
 
       const { data: token } = await TokenService.createToken(tokenData);
 
+      // Show toast notification
+      toast.success(<SuccessMsg msg={TOKEN_CREATED_SUCCESS} />);
+
       const tokenURI = `${process.env.NEXT_PUBLIC_API_URL}/tokens/${token._id}/metadata`;
 
       // Mint token
@@ -116,7 +120,7 @@ function Create(props) {
       setShowLoader(false);
 
       // Show toast notification
-      toast.success(<SuccessMsg msg={TOKEN_CREATED_SUCCESS} />);
+      toast.success(<SuccessMsg msg={TOKEN_MINTED_SUCCESS} />);
 
       // Redirect to profile page
       router.push(`/${user.username}`);

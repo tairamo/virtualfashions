@@ -5,6 +5,7 @@ import { useAuth } from "../context/auth";
 import Layout from "../components/layout";
 import { Loader } from "../components/ui/Loader";
 import TokenCard from "../components/Cards/token";
+import { ErrorMsg } from "../components/alerts/error";
 import TokenService from "../services/api/TokenService";
 import Pagination from "../components/Pagination/Pagination";
 import { ART_FETCHING_ERROR, NO_DATA_AVAILABLE } from "../constants";
@@ -32,8 +33,8 @@ function Tokens(props) {
     } catch (err) {
       console.log(err);
 
-      // Show error
-      toast.error(ART_FETCHING_ERROR);
+      // Show error message
+      toast.error(<ErrorMsg msg={ART_FETCHING_ERROR} />);
     } finally {
       // Set is loading state
       setIsLoading(false);

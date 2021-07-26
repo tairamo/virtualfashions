@@ -11,6 +11,7 @@ import { Button } from "../components/ui/Button";
 import { Loader } from "../components/ui/Loader";
 import { Input } from "../components/ui/Form/Input";
 import AuthService from "../services/api/AuthService";
+import { ErrorMsg } from "../components/alerts/error";
 
 export default function Login() {
   const router = useRouter();
@@ -40,7 +41,8 @@ export default function Login() {
     } catch (err) {
       console.error(err);
       if (err?.response?.data) {
-        toast.error(err.response.data);
+        // Show error message
+        toast.error(<ErrorMsg msg={err.response.data} />);
       }
     }
   };
