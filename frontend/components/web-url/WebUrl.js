@@ -6,54 +6,34 @@ import { ReactComponent as InstagramlIcon } from "../../public/icons/instagram.s
 
 export default function WebUrl({ url, type }) {
   return (
-    <div className="transition-all duration-300 ease-trans-expo transform-2px">
+    <div className="transition-all duration-300 ease-trans-expo transform-2px w-max">
       <a
         href={url}
         target="_blank"
-        className="outline-none flex text-black no-underline items-center active:outline-none focus:outline-none"
+        className="outline-none flex text-gray-500 no-underline items-center active:outline-none focus:outline-none hover:text-black"
       >
         <div className="mr-4">
           {type === "website" && (
-            <UrlIcon
-              className="text-gray-500 fill-current"
-              width="20"
-              height="20"
-            />
+            <UrlIcon className="fill-current" width="20" height="20" />
           )}
 
           {type === "instagram" && (
-            <InstagramlIcon
-              className="text-gray-500 fill-current"
-              width="20"
-              height="20"
-            />
+            <InstagramlIcon className="fill-current" width="20" height="20" />
           )}
 
           {type === "twitter" && (
-            <TwitterIcon
-              className="text-gray-500 fill-current"
-              width="20"
-              height="20"
-            />
+            <TwitterIcon className="fill-current" width="20" height="20" />
           )}
 
           {type === "pornhub" && (
-            <HubIcon
-              className="text-gray-500 fill-current"
-              width="20"
-              height="20"
-            />
+            <HubIcon className="fill-current" width="20" height="20" />
           )}
 
           {type === "only-fans" && (
-            <OnlyfansIcon
-              className="text-gray-500 fill-current"
-              width="20"
-              height="20"
-            />
+            <OnlyfansIcon className="fill-current" width="20" height="20" />
           )}
         </div>
-        <div className="text-sm text-gray-500">{url}</div>
+        <div className="text-sm">{url}</div>
       </a>
     </div>
   );
