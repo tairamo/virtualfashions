@@ -4,17 +4,21 @@ import ErrorPage from "next/error";
 import { useEffect, useState } from "react";
 import InfiniteScroll from "react-infinite-scroll-component";
 
-import config from "../../config";
 import { useAuth } from "../../utils/auth";
 import Layout from "../../components/layout";
 import Cards from "../../components/Cards/card";
 import { Loader } from "../../components/ui/Loader";
 import WebUrl from "../../components/web-url/WebUrl";
-import { FETCHING_DATA_ERROR } from "../../constants";
 import UserService from "../../services/api/UserService";
 import TokenService from "../../services/api/TokenService";
 import { Spinner } from "../../components/ui/Spinner/Spinner";
 import { getBannerUrl, getProfileUrl } from "../../utils/general";
+import {
+  USER_NOT_FOUND,
+  ART_FETCHING_ERROR,
+  USER_FETCHING_ERROR,
+  JOINDED_DATE_FORMATE,
+} from "../../constants";
 
 function Profile({
   userData,
@@ -72,7 +76,7 @@ function Profile({
       console.log(err);
 
       // Set error
-      setErr({ message: FETCHING_DATA_ERROR, statusCode: 400 });
+      setErr({ message: ART_FETCHING_ERROR, statusCode: 400 });
 
       // Set is loading state
       setIsLoading(false);
@@ -108,7 +112,7 @@ function Profile({
       console.log(err);
 
       // Set error
-      setErr({ message: FETCHING_DATA_ERROR, statusCode: 400 });
+      setErr({ message: ART_FETCHING_ERROR, statusCode: 400 });
 
       // Set is loading state
       setIsLoading(false);
@@ -167,6 +171,10 @@ function Profile({
     };
   }, [username]);
 
+  if (err?.message && err?.statusCode) {
+    return <ErrorPage statusCode={err?.statusCode} title={err?.message} />;
+  }
+
   if (!userData) return LoaderComponent;
 
   let socials;
@@ -180,11 +188,7 @@ function Profile({
 
   let createdAt;
   if (userData?.createdAt) {
-    createdAt = moment(userData.createdAt).format(config.joindedDataFormat);
-  }
-
-  if (err?.message && err?.statusCode) {
-    return <ErrorPage statusCode={err?.statusCode} title={err?.message} />;
+    createdAt = moment(userData.createdAt).format(JOINDED_DATE_FORMATE);
   }
 
   return (
@@ -370,20 +374,17 @@ function Profile({
   );
 }
 
-export async function getServerSideProps({ params, res }) {
+export async function getServerSideProps({ params }) {
   try {
     // User
-    const { data: user, status } = await UserService.fetchUser(params.username);
+    const { data: user } = await UserService.fetchUser(params.username);
 
+    let error = null;
     if (!user) {
-      res.writeHead(302, { location: "/creators" });
-      res.end();
       return {
         props: {
-          userData: {},
-          createdTokens: [],
-          collectedTokens: [],
-          error: { message: FETCHING_DATA_ERROR, statusCode: status },
+          userData: null,
+          error: { message: USER_NOT_FOUND, statusCode: 404 },
         },
       };
     }
@@ -402,7 +403,7 @@ export async function getServerSideProps({ params, res }) {
 
     return {
       props: {
-        error: null,
+        error: error,
         userData: user,
         username: params.username,
         createdCurrPage: createdTokensData.currPage,
@@ -414,8 +415,6 @@ export async function getServerSideProps({ params, res }) {
       },
     };
   } catch (err) {
-    console.log(err);
-
     return {
       props: {
         userData: {},
@@ -427,7 +426,7 @@ export async function getServerSideProps({ params, res }) {
         collectedCurrPage: 0,
         collectedTotalDocs: 0,
         error: {
-          message: FETCHING_DATA_ERROR,
+          message: USER_FETCHING_ERROR,
           statusCode: 400,
         },
       },

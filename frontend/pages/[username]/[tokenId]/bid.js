@@ -1,6 +1,7 @@
-import { useEffect, useState } from "react";
+import ErrorPage from "next/error";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
+import { useEffect, useState } from "react";
 
 import { useAuth } from "../../../utils/auth";
 import { useETH } from "../../../context/ETH";
@@ -9,29 +10,33 @@ import Layout from "../../../components/layout";
 import Card from "../../../components/Cards/card";
 import { Loader } from "../../../components/ui/Loader";
 import { connectWallet } from "../../../utils/ethereum";
+import { calculateMinBid } from "../../../utils/general";
 import BidService from "../../../services/api/BidService";
 import { ErrorMsg } from "../../../components/alerts/error";
 import TokenService from "../../../services/api/TokenService";
 import { Button } from "../../../components/ui/Button/Button";
+import { SuccessMsg } from "../../../components/alerts/success";
 import { ReactComponent as Ethericon } from "../../../public/icons/ethicon.svg";
 import {
   SUBMIT,
   ENOUGH_ETH,
-  NIFTY_SOLD,
+  TOKEN_SOLD,
   PLEASE_LOGIN,
   CONFIRMATION,
   WALLET_ERROR,
   AUCTION_ENDED,
+  ART_NOT_FOUND,
   BID_PLACING_ERROR,
+  ART_FETCHING_ERROR,
+  BID_PLACED_SUCCESS,
 } from "../../../constants";
-import { calculateMinBid } from "../../../utils/general";
 
 const web3 = new Web3Instance();
 
-function Bid({ token }) {
+function Bid({ token, error }) {
   const { auction } = token;
-  const { user } = useAuth();
   const router = useRouter();
+  const { user, loading } = useAuth();
   const { balance, ETHAccount, ethPrice } = useETH();
   const isAuctionOver =
     new Date(auction?.biddingEndDate).getTime() < new Date().getTime();
@@ -87,6 +92,9 @@ function Bid({ token }) {
 
       // Call bid place function
       await BidService.createBid(bidQuery);
+
+      // Show success message
+      toast.success(<SuccessMsg msg={BID_PLACED_SUCCESS} />);
 
       // Redirect to token page
       router.push(`/${token.ownedBy?.username}/${token._id}`);
@@ -151,7 +159,13 @@ function Bid({ token }) {
   useEffect(() => {
     // Call button condition function
     buttonCondition();
-  }, [bidValue, user, balance, ETHAccount]);
+  }, [bidValue, user, balance, ETHAccount, loading]);
+
+  if (error?.message && error?.statusCode) {
+    return <ErrorPage statusCode={error?.statusCode} title={error?.message} />;
+  }
+
+  if (loading) return LoaderComponent;
 
   if (user?._id === auction?.createdBy?._id) {
     router.push(`/${auction?.createdBy?.username}/${token?._id}`);
@@ -175,14 +189,22 @@ function Bid({ token }) {
               <div className="grid gap-6">
                 <div className="grid gap-2.5">
                   <div className="grid gap-6">
-                    <div className="md:text-left grid gap-2.5 text-center">
-                      <div className="text-lg leading-1.2 font-semibold text-brand-666666">
-                        You must bid at least
+                    {auction?.status === "Close" ? (
+                      <div className="md:text-left grid gap-2.5 text-center">
+                        <div className="text-lg leading-1.2 font-semibold text-brand-666666">
+                          Auction completed!
+                        </div>
                       </div>
-                      <div className="text-lg leading-1.2 font-semibold">
-                        {minBid} ETH
+                    ) : (
+                      <div className="md:text-left grid gap-2.5 text-center">
+                        <div className="text-lg leading-1.2 font-semibold text-brand-666666">
+                          You must bid at least
+                        </div>
+                        <div className="text-lg leading-1.2 font-semibold">
+                          {minBid} ETH
+                        </div>
                       </div>
-                    </div>
+                    )}
                     <div className="relative text-2.875">
                       <div className="rounded-18px bg-black flex">
                         <div className="m-0 min-w-0">
@@ -283,17 +305,20 @@ export async function getServerSideProps({ params }) {
       params.tokenId
     );
 
-    return {
-      props: {
-        token,
-      },
-    };
-  } catch (err) {
-    console.log(err);
+    let error = null;
+    if (!token) error = { message: ART_NOT_FOUND, statusCode: 404 };
 
     return {
       props: {
+        token,
+        error,
+      },
+    };
+  } catch (err) {
+    return {
+      props: {
         token: {},
+        error: { message: ART_FETCHING_ERROR, statusCode: 404 },
       },
     };
   }

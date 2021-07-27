@@ -10,12 +10,8 @@ import { UserWidget } from "../widget/user";
 import { Button } from "../ui/Button/Button";
 import { Spinner } from "../ui/Spinner/Spinner";
 import { TokenBid } from "../widget/bids/token-bid";
+import { INTERVAL, AUCTION_ENDED } from "../../constants";
 import { bidDuration, getProfileUrl } from "../../utils/general";
-import {
-  INTERVAL,
-  DEFAULT_PROFILE_IMAGE_URL,
-  AUCTION_ENDED,
-} from "../../constants";
 
 export const Token = ({ auction }) => {
   const { token } = auction;

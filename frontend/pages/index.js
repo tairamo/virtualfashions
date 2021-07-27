@@ -6,7 +6,7 @@ import { useAuth } from "../utils/auth";
 import Layout from "../components/layout";
 import { Token } from "../components/token";
 import Card from "../components/Cards/card";
-import { FETCHING_DATA_ERROR } from "../constants";
+import { AUCTIONS_FETCHING_ERROR } from "../constants";
 import CtaRegister from "../components/CTA/ctaRegister";
 import { Spinner } from "../components/ui/Spinner/Spinner";
 import AuctionService from "../services/api/AuctionService";
@@ -49,7 +49,7 @@ function Home({ auctionsData, totalDocuments, currPage, error }) {
       console.log(err);
 
       // Set error
-      setErr({ message: FETCHING_DATA_ERROR, statusCode: 400 });
+      setErr({ message: AUCTIONS_FETCHING_ERROR, statusCode: 400 });
 
       // Set is loading state
       setIsLoading(false);
@@ -131,15 +131,13 @@ export async function getServerSideProps() {
       },
     };
   } catch (err) {
-    console.log(err);
-
     return {
       props: {
         currPage: 0,
         auctionsData: [],
         totalDocuments: 0,
         error: {
-          message: FETCHING_DATA_ERROR,
+          message: AUCTIONS_FETCHING_ERROR,
           statusCode: 400,
         },
       },

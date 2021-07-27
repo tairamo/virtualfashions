@@ -300,10 +300,7 @@ function Create(props) {
     </div>
   );
 
-  if (!loading && !user) {
-    router.push("/login");
-    return LoaderComponent;
-  }
+  if (loading) return LoaderComponent;
 
   let isDisabled = false;
   let buttonText = CREATE_TOKEN;

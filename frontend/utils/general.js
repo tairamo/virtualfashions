@@ -54,6 +54,14 @@ export const bidDuration = (bidEndDate) => {
 
 // Duration counter time
 export const counterTime = (type, duration, symbol) => {
+  if (type === "hours" && (duration["days"]() > 0 || duration[type]() > 0)) {
+    return `${duration[type]()}${symbol}`;
+  }
+
+  if (type === "minutes" && (duration["hours"]() > 0 || duration[type]() > 0)) {
+    return `${duration[type]()}${symbol}`;
+  }
+
   if (duration[type]() > 0 || type === "seconds") {
     return `${duration[type]()}${symbol}`;
   }
@@ -108,8 +116,15 @@ export const calculateMinBid = (auction) => {
     bidValue = auction.bids[0].bidETH;
   }
 
+  // Minimum bid
+  let minBid = bidValue + 0.1;
+
   // 10% of price
-  const minBid = bidValue + bidValue / BID_PERCENTAGE;
+  const percentageBidValue = bidValue + bidValue / BID_PERCENTAGE;
+
+  if (minBid < percentageBidValue) {
+    minBid = percentageBidValue;
+  }
 
   return minBid.toFixed(2);
 };

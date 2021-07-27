@@ -1,10 +1,11 @@
 import { useState } from "react";
+import ErrorPage from "next/error";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import Layout from "../components/layout";
-import { FETCHING_DATA_ERROR } from "../constants";
 import CreatorCard from "../components/Cards/creator";
 import UserService from "../services/api/UserService";
+import { CREATORS_FETCHING_ERROR } from "../constants";
 import { Spinner } from "../components/ui/Spinner/Spinner";
 
 function Creators({ creatorsData, currPage, totalDocuments, error }) {
@@ -41,7 +42,7 @@ function Creators({ creatorsData, currPage, totalDocuments, error }) {
       console.log(err);
 
       // Set error
-      setErr({ message: FETCHING_DATA_ERROR, statusCode: 400 });
+      setErr({ message: CREATORS_FETCHING_ERROR, statusCode: 400 });
 
       // Set is loading state
       setIsLoading(false);
@@ -112,15 +113,13 @@ export async function getServerSideProps() {
       },
     };
   } catch (err) {
-    console.log(err);
-
     return {
       props: {
         currPage: 0,
         creatorsData: [],
         totalDocuments: 0,
         error: {
-          message: FETCHING_DATA_ERROR,
+          message: CREATORS_FETCHING_ERROR,
           statusCode: 400,
         },
       },

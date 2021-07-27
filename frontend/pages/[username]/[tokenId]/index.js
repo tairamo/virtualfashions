@@ -1,5 +1,6 @@
 import moment from "moment";
 import Link from "next/link";
+import ErrorPage from "next/error";
 import { toast } from "react-toastify";
 import { useRouter } from "next/router";
 import { useEffect, useRef, useState } from "react";
@@ -36,18 +37,19 @@ import {
   PLACE_A_BID,
   WALLET_ERROR,
   CONFIRMATION,
+  ART_NOT_FOUND,
   AUCTION_ENDED,
   CHAINID_ERROR,
   TRANSFER_TOKEN,
+  ART_FETCHING_ERROR,
   TOKEN_TRANSFER_ERROR,
   AUCTION_SETTLED_ERROR,
   AUCTION_ALREADY_SETTLED,
-  DEFAULT_PROFILE_IMAGE_URL,
 } from "../../../constants";
 
 const web3 = new Web3Instance();
 
-function AToken({ token, tokenMetadata, auctionResult }) {
+function AToken({ error, token, tokenMetadata, auctionResult }) {
   const interval = useRef();
   const router = useRouter();
   const { user } = useAuth();
@@ -172,6 +174,10 @@ function AToken({ token, tokenMetadata, auctionResult }) {
 
     return () => clearInterval(interval.current);
   }, []);
+
+  if (error?.message && error?.statusCode) {
+    return <ErrorPage statusCode={error?.statusCode} title={error?.message} />;
+  }
 
   let isDisabled = false;
   let buttonText = TRANSFER_TOKEN;
@@ -462,6 +468,17 @@ export async function getServerSideProps({ params }) {
       params.tokenId
     );
 
+    if (!token) {
+      return {
+        props: {
+          token: {},
+          tokenMetadata: {},
+          auctionResult: {},
+          error: { message: ART_NOT_FOUND, statusCode: 404 },
+        },
+      };
+    }
+
     // Token metadata
     const { data: tokenMetadata } = await TokenService.fetchTokenMetadata(
       params.tokenId
@@ -483,18 +500,18 @@ export async function getServerSideProps({ params }) {
     return {
       props: {
         token,
+        error: null,
         tokenMetadata,
         auctionResult,
       },
     };
   } catch (err) {
-    console.log(err);
-
     return {
       props: {
         token: {},
         tokenMetadata: {},
         auctionResult: {},
+        error: { message: ART_FETCHING_ERROR, statusCode: 400 },
       },
     };
   }
