@@ -1,5 +1,8 @@
+require("dotenv").config();
 const HDWalletProvider = require("@truffle/hdwallet-provider");
-const mnemonic = "";
+
+const infuraKey = process.env["INFURA_TOKEN"];
+const mnemonic = process.env["MNEMONIC"];
 
 /**
  * Use this file to configure your truffle project. It's seeded with some
@@ -20,8 +23,6 @@ const mnemonic = "";
  * phrase from a file you've .gitignored so it doesn't accidentally become public.
  *
  */
-
-// const HDWalletProvider = require('@truffle/hdwallet-provider');
 // const infuraKey = "fj4jll3k.....";
 //
 // const fs = require('fs');
@@ -37,7 +38,6 @@ module.exports = {
    *
    * $ truffle test --network <network-name>
    */
-  contracts_build_directory: "./frontend/src/contracts",
 
   networks: {
     // Useful for testing. The `development` name is special - truffle uses it by default
@@ -45,11 +45,44 @@ module.exports = {
     // You should run a client (like ganache-cli, geth or parity) in a separate terminal
     // tab if you use this network and you must also set the `host`, `port` and `network_id`
     // options below to some value.
-    //
+
+    // Test net
+    rinkeby: {
+      provider: () =>
+        new HDWalletProvider({
+          mnemonic: {
+            phrase: mnemonic,
+          },
+          providerOrUrl: `https://rinkeby.infura.io/v3/${infuraKey}`,
+          numberOfAddresses: 1,
+          shareNonce: true,
+        }),
+      network_id: 4,
+      gas: 6700000,
+      gasPrice: 10000000000,
+    },
+
+    // Main net
+    mainnet: {
+      provider: () =>
+        new HDWalletProvider({
+          mnemonic: {
+            phrase: mnemonic,
+          },
+          providerOrUrl: `https://mainnet.infura.io/v3/${infuraKey}`,
+          numberOfAddresses: 1,
+          shareNonce: true,
+        }),
+      network_id: 1,
+      gas: 6700000,
+      gasPrice: 10000000000,
+      confirmations: 3,
+    },
+
     // development: {
-    //  host: "127.0.0.1",     // Localhost (default: none)
-    //  port: 8545,            // Standard Ethereum port (default: none)
-    //  network_id: "*",       // Any network (default: none)
+    //   host: "127.0.0.1", // Localhost (default: none)
+    //   port: 7545, // Standard Ethereum port (default: none)
+    //   network_id: "*", // Any network (default: none)
     // },
     // Another network with more advanced options...
     // advanced: {
@@ -70,11 +103,6 @@ module.exports = {
     // timeoutBlocks: 200,  // # of blocks before a deployment times out  (minimum/default: 50)
     // skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
     // },
-    rinkeby: {
-      provider: () => new HDWalletProvider(mnemonic, "rinkeby url", 0, 1),
-      network_id: 4, //rinkeby
-      skipDryRun: true,
-    },
     // Useful for private networks
     // private: {
     // provider: () => new HDWalletProvider(mnemonic, `https://network.io`),
@@ -93,14 +121,13 @@ module.exports = {
     solc: {
       version: "0.8.0", // Fetch exact version from solc-bin (default: truffle's version)
       // docker: true,        // Use "0.5.1" you've installed locally with docker (default: false)
-      // settings: {
-      //   // See the solidity docs for advice about optimization and evmVersion
-      //   optimizer: {
-      //     enabled: false,
-      //     runs: 200,
-      //   },
-      //   evmVersion: "byzantium",
-      // },
+      // settings: {          // See the solidity docs for advice about optimization and evmVersion
+      //  optimizer: {
+      //    enabled: false,
+      //    runs: 200
+      //  },
+      //  evmVersion: "byzantium"
+      // }
     },
   },
 
