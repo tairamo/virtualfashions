@@ -1,6 +1,6 @@
 import * as Web3 from "web3";
 
-import { abi as tokenTokenAbi } from "../build/contracts/NiftyToken.json";
+import { abi as tokenTokenAbi } from "../build/contracts/NFTToken.json";
 import { abi as auctionManagerAbi } from "../build/contracts/AuctionManager.json";
 
 class Web3Instance {
