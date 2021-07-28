@@ -1,6 +1,8 @@
 const { dirname } = require("path");
 require("dotenv").config({ path: dirname(__dirname) + "/.env" });
 
+console.log(process.env);
+
 const Token = artifacts.require("NFTToken");
 const AuctionManager = artifacts.require("AuctionManager");
 
