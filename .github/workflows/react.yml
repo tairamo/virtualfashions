@@ -29,13 +29,13 @@ jobs:
         echo "NEXT_PUBLIC_FB_AUTH_DOMAIN=virtualfashion-60081.firebaseapp.com" | tee ./frontend/.env.local ./admin/.env.local -a
         echo "NEXT_PUBLIC_FB_STORAGE_BUCKET=virtualfashion-60081.appspot.com" | tee ./frontend/.env.local ./admin/.env.local -a
         echo "NEXT_PUBLIC_FB_MESSAGING_SENDER_ID=845038234937" | tee ./frontend/.env.local ./admin/.env.local -a
-        echo "NEXT_PUBLIC_ETHER_SCAN_URL=https://rinkeby.etherscan.io" | tee ./frontend/.env.local ./admin/.env.local -a
+        echo "NEXT_PUBLIC_ETHER_SCAN_URL=https://etherscan.io" | tee ./frontend/.env.local ./admin/.env.local -a
         echo "NEXT_PUBLIC_JWT_SECRET=VFS-App" | tee ./frontend/.env.local ./admin/.env.local -a
-        echo "NEXT_PUBLIC_AUCTION_TOKEN_CONTRACT_ADDRESS=0x5850d5E8c9c9Ca4ADE0A572054eEB8d14E828643" | tee ./frontend/.env.local ./admin/.env.local -a
-        echo "NEXT_PUBLIC_AUCTION_MANAGER_CONTRACT_ADDRESS=0xC392533714D72a228c6149469aebf8851E1494B8" | tee ./frontend/.env.local ./admin/.env.local -a
+        echo "NEXT_PUBLIC_AUCTION_TOKEN_CONTRACT_ADDRESS=0x5742D08299430b3D541d1f91d14Fd618E04Ca55c" | tee ./frontend/.env.local ./admin/.env.local -a
+        echo "NEXT_PUBLIC_AUCTION_MANAGER_CONTRACT_ADDRESS=0xfcc9dBECc141E268ae05DE5cb8505bA472B037d6" | tee ./frontend/.env.local ./admin/.env.local -a
         echo "NEXT_PUBLIC_DEFAULT_GAS_PRICE=30000000000" | tee ./frontend/.env.local ./admin/.env.local -a
         echo "NEXT_PUBLIC_EXTEND_GAS_LIMIT=500" | tee ./frontend/.env.local ./admin/.env.local -a
-        echo "NEXT_PUBLIC_CHAIN_ID=0x4" | tee ./frontend/.env.local ./admin/.env.local -a          
+        echo "NEXT_PUBLIC_CHAIN_ID=0x1" | tee ./frontend/.env.local ./admin/.env.local -a
         ls -al
     - run: |
         cd frontend
