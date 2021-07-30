@@ -102,5 +102,5 @@ export const TOKENS_MATCH = { $eq: ['$$id', '$tokenId'] }
 export const TOKEN_CREATED_SORT = { $sort: { createdAt: -1, 'auction.biddingEndDate': -1 } }
 export const TOKEN_COLLECTED_SORT = { $sort: { 'auction.biddingEndDate': -1, 'auction.createdAt': -1 } }
 
-export const SEARCH_REGEX = /[~`!@#%\^&*()+=\-\[\]\\';.,/{}|\\":<>\?]/
+export const SEARCH_REGEX = /[~`!@#%\^&*()+=\-\[\]\\';.,/{}|\\":<>\?]/g
 export const SPECIAL_CHARS_REGEX = /[~`!@#$%\^&*()+=\-\[\]\\';.,/{}|\\":<>\?]/
