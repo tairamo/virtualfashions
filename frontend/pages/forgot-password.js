@@ -74,7 +74,7 @@ export default function Register() {
           <form className="space-y-6" onSubmit={handleSubmit(onSubmit)}>
             <Input
               id="email"
-              type="email"
+              type="text"
               name="email"
               label="Email Address"
               autoComplete="off"

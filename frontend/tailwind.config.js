@@ -20,6 +20,10 @@ module.exports = {
           f2f2f2: "#f2f2f2",
           888: "#888",
           ffffff00: "#ffffff00",
+          "11BD6B": "#11BD6B",
+          e4f9ef: "#e4f9ef",
+          ffe9ea: "#ffe9ea",
+          F93A3A: "#F93A3A",
         },
       },
       backgroundColor: (theme) => ({
@@ -208,6 +212,7 @@ module.exports = {
         "6xl": "3rem",
         "18px": "18px",
         0.625: "0.625rem",
+        "5px": "5px",
       },
       textColor: {
         ccc: "#CCCCCC",

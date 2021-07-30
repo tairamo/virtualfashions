@@ -18,8 +18,7 @@ export default function layout({ children }) {
   if (loading) {
     return LoaderComponent;
   } else if (
-    (router.pathname === "/profile/add-details" ||
-      router.pathname === "/creator/create") &&
+    (router.pathname === "/profile" || router.pathname === "/creator/create") &&
     !user
   ) {
     router.replace("/login");
@@ -27,10 +26,7 @@ export default function layout({ children }) {
   }
 
   let classes = "w-full";
-  if (
-    router.pathname === "/profile/add-details" ||
-    router.pathname === "/creator/create"
-  ) {
+  if (router.pathname === "/profile" || router.pathname === "/creator/create") {
     classes = "w-full mx-auto px-6";
   } else if (router.pathname === "/") {
     classes = "mx-auto px-4 sm:px-6 lg:px-8";

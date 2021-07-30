@@ -36,13 +36,26 @@ export default function navBar() {
 
   // Search function
   const search = async (value) => {
-    if (value?.length === 0) return;
+    let searchValue = value;
+    if (searchValue?.length === 0) return;
 
     // Set show search box state
     setShowSearchBox(true);
 
+    if (searchValue.includes("#")) {
+      searchValue = searchValue.replaceAll("#", "%23");
+    }
+
+    if (searchValue.includes("+")) {
+      searchValue = searchValue.replaceAll("+", "%2B");
+    }
+
+    if (searchValue.includes("&")) {
+      searchValue = searchValue.replaceAll("&", "%26");
+    }
+
     // Call api
-    const { data } = await TokenService.searchTokens(value);
+    const { data } = await TokenService.searchTokens(searchValue);
 
     // Set search result
     setSearchResult(data);

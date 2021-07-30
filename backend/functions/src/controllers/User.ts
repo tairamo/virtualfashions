@@ -4,6 +4,7 @@ import { inject, injectable } from 'inversify'
 import User from '../services/User'
 import { TYPES } from '../services/Container/types'
 import { contactSupport } from '../utils/mail'
+import { SPECIAL_CHARS_REGEX } from '../constants'
 
 @injectable()
 export class UserController {
@@ -41,10 +42,31 @@ export class UserController {
   }
 
   async fetchUser(request: Request, response: Response) {
-    const { params } = request
+    const { username } = request.params
 
-    const user = await this.userService.user(params)
+    const user = await this.userService.user({ username })
     return response.json(user)
+  }
+
+  async checkUsername(request: Request, response: Response) {
+    const { query, authUser } = request
+    const { username } = query as { username: string }
+
+    if (SPECIAL_CHARS_REGEX.test(username)) {
+      return response.json({ isTaken: true })
+    }
+
+    const user = await this.userService.user({ username })
+
+    if (!user) {
+      return response.json({ isTaken: false })
+    }
+
+    if (user?._id?.toString() === authUser._id) {
+      return response.json({ isTaken: false })
+    } else {
+      return response.json({ isTaken: true })
+    }
   }
 
   // Admin
@@ -57,11 +79,11 @@ export class UserController {
   }
 
   async supportRequest(request: Request, response: Response) {
-    const { body } = request;
+    const { body } = request
 
     // Send mail
-    contactSupport(body);
+    contactSupport(body)
 
-    return response.json({ message: "Support request sent" })
+    return response.json({ message: 'Support request sent' })
   }
 }

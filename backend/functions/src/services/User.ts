@@ -114,8 +114,8 @@ export default class User extends DBModel {
     return await this.find(query, sort)
   }
 
-  async user(query: Query) {
-    return await this.findOne(query)
+  async user(data: { username: string }) {
+    return await this.findOne(data)
   }
 
   async searchUsers(search: string) {

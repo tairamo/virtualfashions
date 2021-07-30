@@ -1,40 +1,48 @@
 import { toast } from "react-toastify";
 import firebase from "firebase";
 import "firebase/storage";
+import ErrorPage from "next/error";
 import { useRouter } from "next/router";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
-import { useState, useEffect, useMemo, useRef } from "react";
+import { useState, useEffect, useRef } from "react";
 
 import { useAuth } from "../../utils/auth";
 import Layout from "../../components/layout";
 import { Button } from "../../components/ui/Button";
 import { schema } from "../../schema/updateDetails";
+import { Loader } from "../../components/ui/Loader";
 import Loading from "../../components/loading/Spinner";
+import AuthService from "../../services/api/AuthService";
 import UserService from "../../services/api/UserService";
 import { ErrorMsg } from "../../components/alerts/error";
 import { imageValidation } from "../../utils/fileValidation";
 import { getBannerUrl, getProfileUrl } from "../../utils/general";
-import { ReactComponent as HubIcon } from "../../public/icons/hub.svg";
+import { ErrorWidget } from "../../components/widget/validation/error";
 import { ReactComponent as UrlIcon } from "../../public/icons/globe.svg";
+import { SuccessWidget } from "../../components/widget/validation/success";
 import { ReactComponent as TwitterIcon } from "../../public/icons/twitter.svg";
-import { ReactComponent as OnlyfansIcon } from "../../public/icons/onlyfans.svg";
 import { ReactComponent as InstagramIcon } from "../../public/icons/instagram.svg";
 import {
   SAVE,
-  TOKEN,
   FILE_UPLOAD_ERROR,
+  USER_FETCHING_ERROR,
   INTERNAL_SERVER_ERROR,
+  INTERVAL,
 } from "../../constants";
+
+let timeout;
 
 function RegisterDetails(props) {
   let router = useRouter();
   const avatarRef = useRef(null);
   const bannerRef = useRef(null);
-  const { user, setUser } = useAuth();
+  const { setUser, loading } = useAuth();
 
+  const [err, setErr] = useState(null);
   const [text, setText] = useState("");
   const [username, setUsername] = useState("");
+  const [userData, setUserData] = useState(null);
   const [showLoader, setShowLoader] = useState(false);
   const [avatar, setAvatar] = useState({ file: null, loading: false });
   const [banner, setBanner] = useState({ file: null, loading: false });
@@ -46,6 +54,7 @@ function RegisterDetails(props) {
 
   // React hook form
   const {
+    reset,
     register,
     setValue,
     handleSubmit,
@@ -53,23 +62,31 @@ function RegisterDetails(props) {
   } = useForm({
     resolver: yupResolver(schema),
     reValidateMode: "onChange",
-    defaultValues: useMemo(() => {
-      return {
-        ...user,
-        avatar: getProfileUrl(user),
-        banner: getBannerUrl(user),
-      };
-    }, [user]),
+    defaultValues: {
+      ...userData,
+      avatar: getProfileUrl(userData),
+      banner: getBannerUrl(userData),
+    },
   });
 
   async function checkUsernameValidity(username) {
-    const { data: user } = await UserService.fetchUser(username);
+    try {
+      let user_name = username;
+      if (user_name.includes("#")) {
+        user_name = user_name.replaceAll("#", "%23");
+      }
 
-    if (user) {
-      setUsernameStatus({
-        type: "error",
-        message: `Username ${username} is taken`,
-      });
+      if (user_name.includes("+")) {
+        user_name = user_name.replaceAll("+", "%2B");
+      }
+
+      if (user_name.includes("&")) {
+        user_name = user_name.replaceAll("&", "%26");
+      }
+
+      return await UserService.checkUsername(user_name);
+    } catch (err) {
+      console.log(err);
     }
   }
 
@@ -96,7 +113,7 @@ function RegisterDetails(props) {
         const bannerRef = firebase
           .storage()
           .ref("users")
-          .child(user._id)
+          .child(userData._id)
           .child("banner");
 
         // Delete file
@@ -108,7 +125,7 @@ function RegisterDetails(props) {
         const avatarRef = firebase
           .storage()
           .ref("users")
-          .child(user._id)
+          .child(userData._id)
           .child("avatar");
 
         // Delete file
@@ -117,7 +134,7 @@ function RegisterDetails(props) {
 
       // Set auth user context
       setUser({
-        ...user,
+        ...userData,
         bannerUrl: banner || "",
         profileUrl: avatar || "",
       });
@@ -131,7 +148,7 @@ function RegisterDetails(props) {
         profileUrl: avatar || "",
       };
 
-      await UserService.updateUser(user._id, { updateData });
+      await UserService.updateUser(userData._id, { updateData });
 
       // Set show loader
       setShowLoader(false);
@@ -167,7 +184,7 @@ function RegisterDetails(props) {
       const avatarUploadTask = await firebase
         .storage()
         .ref("users")
-        .child(user._id)
+        .child(userData._id)
         .child("avatar")
         .put(file);
 
@@ -221,7 +238,7 @@ function RegisterDetails(props) {
       const bannerUploadTask = await firebase
         .storage()
         .ref("users")
-        .child(user._id)
+        .child(userData._id)
         .child("banner")
         .put(file);
 
@@ -259,14 +276,46 @@ function RegisterDetails(props) {
     }
   };
 
-  useEffect(() => {
-    if (username.length >= 3) {
-      checkUsernameValidity(username);
+  // Fetch user detail function
+  const fetchUserDetails = async () => {
+    try {
+      const { data: user } = await AuthService.me();
 
-      setUsernameStatus({
-        type: "success",
-        message: `Username ${username} is avaible!`,
-      });
+      // Set user data state
+      setUserData(user);
+    } catch (err) {
+      console.log(err);
+
+      // Set error state
+      setErr({ message: USER_FETCHING_ERROR, statusCode: 400 });
+    }
+  };
+
+  useEffect(() => {
+    // Call fetch user details
+    fetchUserDetails();
+  }, []);
+
+  useEffect(() => {
+    if (username.length > 0) {
+      // Clear settimeout function
+      clearTimeout(timeout);
+
+      timeout = setTimeout(() => {
+        checkUsernameValidity(username).then((response) => {
+          if (response?.data?.isTaken) {
+            setUsernameStatus({
+              type: "error",
+              message: `Username ${username} is already taken`,
+            });
+          } else {
+            setUsernameStatus({
+              type: "success",
+              message: `Username ${username} is available`,
+            });
+          }
+        });
+      }, INTERVAL);
     } else {
       setUsernameStatus({
         type: "hiden",
@@ -275,27 +324,45 @@ function RegisterDetails(props) {
   }, [username]);
 
   useEffect(() => {
-    if (!user) return;
+    if (!userData) return;
 
-    if (user.bannerUrl) {
+    // Reset form value
+    reset({
+      ...userData,
+      avatar: getProfileUrl(userData),
+      banner: getBannerUrl(userData),
+    });
+
+    if (userData.bannerUrl) {
       // Set banner state
-      setBanner({ file: user.bannerUrl, loading: false });
+      setBanner({ file: userData.bannerUrl, loading: false });
 
       // Set banner state
-      setValue("banner", user.bannerUrl);
+      setValue("banner", userData.bannerUrl);
     }
 
-    if (user.profileUrl) {
+    if (userData.profileUrl) {
       // Set avatar state
-      setAvatar({ file: user.profileUrl, loading: false });
+      setAvatar({ file: userData.profileUrl, loading: false });
 
       // Set banner state
-      setValue("avatar", user.profileUrl);
+      setValue("avatar", userData.profileUrl);
     }
 
     // Set text state
-    setText(user.bio || "");
-  }, [user]);
+    setText(userData.bio || "");
+
+    // Set username state
+    setUsername(userData.username || "");
+  }, [userData]);
+
+  const LoaderComponent = (
+    <div className="mt-20">
+      <Loader />
+    </div>
+  );
+
+  if (loading) return LoaderComponent;
 
   return (
     <Layout>
@@ -354,41 +421,22 @@ function RegisterDetails(props) {
                                 shouldValidate: true,
                               });
 
-                              if (value.length > 0) {
-                                // Set username state
-                                setUsername(value);
-                              }
-
-                              if (username.length > 0 && value.length === 0) {
-                                // Set username state
-                                setUsername("");
-                              }
+                              // Set username state
+                              setUsername(value);
                             }}
                           />
                         </div>
                       </div>
                       {errors.username && (
-                        <p className="text-xs leading-6 text-red-500">
-                          {errors.username.message}
-                        </p>
+                        <ErrorWidget msg={errors.username.message} />
                       )}
-                      {usernameStatus?.type && usernameStatus?.message && (
-                        <div
-                          className={`mt-2.5 rounded-md px-2.5 py-0.5 ${
-                            usernameStatus.type === "error"
-                              ? "bg-red-50"
-                              : "bg-green-50"
-                          }`}
-                        >
-                          <p
-                            className={`text-xs leading-6 text-${
-                              usernameStatus.type === "error" ? "red" : "green"
-                            }-500`}
-                          >
-                            {usernameStatus.message}
-                          </p>
-                        </div>
-                      )}
+                      {usernameStatus?.type &&
+                        usernameStatus?.message &&
+                        (usernameStatus.type === "error" ? (
+                          <ErrorWidget msg={usernameStatus.message} />
+                        ) : (
+                          <SuccessWidget msg={usernameStatus.message} />
+                        ))}
                     </div>
                   </div>
                 </div>

@@ -230,7 +230,7 @@ function Profile({
                     </div>
                     <div className="text-sm text-gray-500 hover:text-black w-max">
                       {user?._id === userData?._id && (
-                        <Link href="/profile/add-details">Edit profile</Link>
+                        <Link href="/profile">Edit profile</Link>
                       )}
                     </div>
                   </div>

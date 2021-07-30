@@ -5,7 +5,7 @@ import User from '../services/User'
 import Token from '../services/Token'
 import { TYPES } from '../services/Container/types'
 import Activity from '../services/Activity'
-import { EventTypes } from '../constants'
+import { EventTypes, SEARCH_REGEX } from '../constants'
 
 @injectable()
 export class TokenController {
@@ -77,7 +77,11 @@ export class TokenController {
 
   async search(request: Request, response: Response) {
     const { query } = request
-    const search = (query as { search: string }).search
+    let search = (query as { search: string }).search
+
+    if (SEARCH_REGEX.test(search)) {
+      search = search.replace(SEARCH_REGEX, '')
+    }
 
     // User
     const users = await this.userService.searchUsers(search)

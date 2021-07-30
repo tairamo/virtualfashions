@@ -140,7 +140,7 @@ export default function Register() {
                 <Input
                   disabled
                   id="email"
-                  type="email"
+                  type="text"
                   name="email"
                   value={query.email}
                   label="Email Address"
@@ -178,7 +178,7 @@ export default function Register() {
             >
               <Input
                 id="email"
-                type="email"
+                type="text"
                 name="email"
                 label="Email Address"
                 autoComplete="email"

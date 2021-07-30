@@ -25,6 +25,12 @@ class UserService {
     return await axios.get(endpoint);
   }
 
+  // Check username availability
+  static async checkUsername(username) {
+    const endpoint = `${process.env.NEXT_PUBLIC_API_URL}/users/username?username=${username}`;
+    return await axios.get(endpoint);
+  }
+
   // Request support
   static async requestSupport(data) {
     const endpoint = `${process.env.NEXT_PUBLIC_API_URL}/users/support`;

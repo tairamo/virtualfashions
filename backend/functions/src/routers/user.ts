@@ -12,6 +12,8 @@ router.post('/', catchError(userController, 'fetchUsers'))
 
 router.get('/creators', catchError(userController, 'fetchCreators'))
 
+router.get('/username', [auth], catchError(userController, 'checkUsername'))
+
 router.get('/:username', catchError(userController, 'fetchUser'))
 
 router.put('/:id', [auth], catchError(userController, 'updateUser'))
