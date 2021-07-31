@@ -12,7 +12,6 @@ import AuthService from "../services/api/AuthService";
 import { ErrorMsg } from "../components/alerts/error";
 import { SuccessMsg } from "../components/alerts/success";
 import { resetPasswordShema } from "../schema/resetPassword";
-import { jwtError, tokenVerification } from "../utils/general";
 import { INTERNAL_SERVER_ERROR, SUBMIT, VALID_TOKEN_ERROR } from "../constants";
 
 export default function Register() {
@@ -21,8 +20,7 @@ export default function Register() {
   const { token } = query;
   const { user, loading } = useAuth();
 
-  const [isVerify, setIsVerify] = useState(false);
-  const [isLoading, setIsLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(false);
 
   // Register use form
   const {
@@ -35,7 +33,7 @@ export default function Register() {
 
   const onSubmit = async (values) => {
     try {
-      if (!isVerify) throw { response: { data: VALID_TOKEN_ERROR } };
+      if (!token) throw { response: { data: VALID_TOKEN_ERROR } };
 
       const { newPassword, confirmPassword } = values;
 
@@ -55,40 +53,6 @@ export default function Register() {
       );
     }
   };
-
-  // Verify token
-  const verifyToken = (token) => {
-    try {
-      const data = tokenVerification(token);
-
-      // Set set is verify state
-      setIsVerify(true);
-
-      // Set loadind state
-      setIsLoading(false);
-    } catch (err) {
-      console.log(err);
-
-      toast.error(<ErrorMsg msg={jwtError(err.message)} />);
-
-      // Set loadind state
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    if (!token) {
-      setTimeout(() => {
-        // Set loadind state
-        setIsLoading(false);
-      }, 1000);
-
-      return;
-    }
-
-    // Call verify token
-    verifyToken(token);
-  }, [token]);
 
   const LoaderComponent = (
     <div className="mt-20">
@@ -143,11 +107,8 @@ export default function Register() {
               <Button
                 type="submit"
                 text={SUBMIT}
-                disabled={!isVerify}
                 isSubmitting={isSubmitting}
-                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black ${
-                  !isVerify ? "opacity-50 cursor-default" : ""
-                }`}
+                className={`w-full flex justify-center py-2 px-4 border border-transparent rounded-md shadow-sm text-sm font-medium text-white bg-black focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-black`}
               />
             </div>
           </form>
