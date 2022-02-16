@@ -28,10 +28,10 @@ export const BID_SUBMITTED = "BID_SUBMITTED";
 export const AUCTION_SETTLED = "AUCTION_SETTLED";
 
 // Url
-export const DISCORD_URL = "https://discord.com";
+export const DISCORD_URL = "https://discord.gg/tuNPuqDfYr";
 export const DISNEY_URL = "https://www.disney.com/";
-export const TWITTER_URL = "https://www.twitter.com";
-export const INSTAGRAM_URL = "https://www.instagram.com";
+export const TWITTER_URL = "https://twitter.com/vfashionio";
+export const INSTAGRAM_URL = "https://www.instagram.com/virtualfashion.io/";
 
 // Common
 export const AUCTION_ENDED = "Auction has ended";
