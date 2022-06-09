@@ -80,6 +80,7 @@ module.exports = {
       },
       height: {
         25: "25rem",
+        15: "15rem",
         2.375: "2.375rem",
         7.5: "7.5rem",
         3.25: "3.25rem",
@@ -259,6 +260,8 @@ module.exports = {
         md: "832px",
         dl: "1088px",
         lg: "1152px",
+        "max-sm": { max: "640px" },
+        "max-md": { max: "832px", min: "641px" },
       },
     },
   },

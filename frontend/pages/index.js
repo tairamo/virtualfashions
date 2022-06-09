@@ -1,18 +1,22 @@
 import { useState } from "react";
 import ErrorPage from "next/error";
-import InfiniteScroll from "react-infinite-scroll-component";
 
 import { useAuth } from "../utils/auth";
 import Layout from "../components/layout";
 import { Token } from "../components/token";
-import Card from "../components/Cards/card";
 import { AUCTIONS_FETCHING_ERROR } from "../constants";
 import CtaRegister from "../components/CTA/ctaRegister";
-import { Spinner } from "../components/ui/Spinner/Spinner";
 import AuctionService from "../services/api/AuctionService";
+import axios from "axios";
+import { Image } from "../components/widget/image";
 
-function Home({ auctionsData, totalDocuments, currPage, error }) {
+function Home({ auctionsData, totalDocuments, currPage, error, nfts }) {
   const { user } = useAuth();
+
+  const assetsToRender =
+    nfts?.reduce((prev, curr) => {
+      return [...prev, ...curr.assets];
+    }, []) ?? [];
 
   // State
   const [err, setErr] = useState(error);
@@ -74,7 +78,7 @@ function Home({ auctionsData, totalDocuments, currPage, error }) {
             Live auctions
           </div>
         </div>
-        {auctions.length === 0 && (
+        {assetsToRender.length === 0 && (
           <div className="flex flex-col items-center pb-24 pt-32 justify-center">
             <h2 className="md:text-3xl text-2xl tracking-0.01 font-semibold mb-4 text">
               No Auctions available
@@ -84,7 +88,60 @@ function Home({ auctionsData, totalDocuments, currPage, error }) {
             </div>
           </div>
         )}
-        <InfiniteScroll
+        <div className="grid grid-cols-4 max-sm:grid-cols-1 max-md:grid-cols-3 gap-8 mb-8">
+          {!!assetsToRender.length &&
+            assetsToRender.map((asset, index) => {
+              return (
+                <div
+                  index={index}
+                  onClick={() => window.open(asset.permalink)}
+                  className="token-card cursor-pointer box-border m-0 min-w-0 shadow-3xl rounded-xl relative transition-all duration-300 ease-trans-expo overflow-hidden flex flex-col transform-4px hover:shadow-ho3xl"
+                >
+                  <div className="box-border m-0 min-w-0 relative overflow-hidden">
+                    <div className="box-border m-0 min-w-0 w-full h-0 pb-100%"></div>
+                    <div className="box-border m-0 min-w-0 flex justify-center items-center bg-gray-200 inset-0 absolute">
+                      <Image
+                        alt={asset.name}
+                        url={asset.image_url}
+                        className="box-border m-0 min-w-0 opacity-1 max-w-full h-full w-full object-cover block"
+                      />
+                    </div>
+                  </div>
+
+                  <div className="box-border m-0 min-w-0 grid gap-6 shadow-3xl px-3 py-4 flex-1 bg-white">
+                    <div className="box-border m-0 min-w-0 flex justify-between">
+                      <div className="box-border m-0 min-w-0 text-xl font-semibold overflow-ellipsis overflow-hidden">
+                        <div>{asset.name}</div>
+                      </div>
+                    </div>
+                    <div className="box-border m-0 min-w-0 flex mt-auto">
+                      <div className="box-border m-0 min-w-0 flex z-30 relative text-gray-500 transition-all duration-300 ease-trans-expo">
+                        <div className="box-border m-0 min-w-0 cursor-pointer">
+                          <a className="transition duration-300 ease-trans-expo no-underline text-gray-500 hover:text-black">
+                            <div className="box-border m-0 min-w-0 mt-3 flex items-center bg-white no-underline">
+                              <div
+                                className="box-border m-0 min-w-0 bg-cover bg-center rounded-full border-black border-solid w-9 h-9 min-w-2.25 max-w-2.25 min-h-2.25 max-h-2.25"
+                                style={{
+                                  backgroundImage: `url(${asset.creator.profile_img_url})`,
+                                }}
+                              ></div>
+                              <div className="box-border m-0 min-w-0 flex">
+                                <div className="sm:text-base text-sm ml-2 font-semibold no-underline relative -top-0.5">
+                                  {`@${asset.creator.user.username}`}
+                                </div>
+                              </div>
+                            </div>
+                          </a>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              );
+            })}
+        </div>
+        {/* To Be removed */}
+        {/* <InfiniteScroll
           dataLength={auctions.length}
           next={fetchAuctions}
           hasMore={auctions.length < totalDocs}
@@ -110,7 +167,7 @@ function Home({ auctionsData, totalDocuments, currPage, error }) {
               />
             ))}
           </div>
-        </InfiniteScroll>
+        </InfiniteScroll> */}
       </div>
     </Layout>
   );
@@ -118,6 +175,40 @@ function Home({ auctionsData, totalDocuments, currPage, error }) {
 
 export async function getServerSideProps() {
   try {
+    const ownerAddress = "0xEa6107836417067dDb234535c372D22EB995A223";
+    const openseaAPIUrl = "https://opensea-data-query.p.rapidapi.com/api/v1";
+    const collections = await axios.get(`${openseaAPIUrl}/collections`, {
+      headers: {
+        "X-RapidAPI-Key": process.env.NEXT_PUBLIC_OPENSEA_RAPID_API_KEY,
+        "X-RapidAPI-Host": process.env.NEXT_PUBLIC_OPENSEA_RAPID_API_HOST,
+      },
+      params: {
+        asset_owner: ownerAddress,
+        limit: "50",
+        offset: "0",
+      },
+    });
+
+    const createdCollections = collections.data.filter(
+      (collection) => !collection.primary_asset_contracts.length
+    );
+
+    const pendingPromises = createdCollections.map((collection) =>
+      axios.get(`${openseaAPIUrl}/assets`, {
+        headers: {
+          "X-RapidAPI-Key": process.env.NEXT_PUBLIC_OPENSEA_RAPID_API_KEY,
+          "X-RapidAPI-Host": process.env.NEXT_PUBLIC_OPENSEA_RAPID_API_HOST,
+        },
+        params: {
+          collection: collection.slug,
+          order_direction: "desc",
+          limit: 50,
+        },
+      })
+    );
+
+    const resolvedPromises = await Promise.all(pendingPromises);
+
     // Tokens
     const page = 1;
     const { data } = await AuctionService.fetchAuctions(page);
@@ -128,6 +219,7 @@ export async function getServerSideProps() {
         auctionsData: data.auctions,
         currPage: parseInt(data.currPage),
         totalDocuments: data.totalDocuments,
+        nfts: resolvedPromises.map((res) => res.data),
       },
     };
   } catch (err) {
