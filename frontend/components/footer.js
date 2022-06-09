@@ -26,16 +26,19 @@ export default function Footer() {
           <FooterLinkWidget
             title="Instagram"
             link={INSTAGRAM_URL}
+            useLink
             className="text-13px mr-2.5 p-2.5"
           />
           <FooterLinkWidget
             title="Twitter"
             link={TWITTER_URL}
+            useLink
             className="text-13px mr-2.5 p-2.5"
           />
           <FooterLinkWidget
             title="Discord"
             link={DISCORD_URL}
+            useLink
             className="text-13px mr-2.5 p-2.5"
           />
           <FooterLinkWidget
