@@ -175,7 +175,7 @@ function Home({ auctionsData, totalDocuments, currPage, error, nfts }) {
 
 export async function getServerSideProps() {
   try {
-    const ownerAddress = "0xEa6107836417067dDb234535c372D22EB995A223";
+    const ownerAddress = process.env.NEXT_PUBLIC_OPENSEA_OWNER_ADDRESS;
     const openseaAPIUrl = "https://opensea-data-query.p.rapidapi.com/api/v1";
     const collections = await axios.get(`${openseaAPIUrl}/collections`, {
       headers: {
