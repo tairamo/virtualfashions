@@ -64,7 +64,7 @@ export default function Footer() {
           />
           <FooterLinkWidget
             title="Help"
-            link="/help"
+            link="/support/faq"
             className="text-13px mr-2.5 p-2.5"
           />
         </div>
