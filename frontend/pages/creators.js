@@ -3,16 +3,17 @@ import ErrorPage from "next/error";
 import InfiniteScroll from "react-infinite-scroll-component";
 
 import Layout from "../components/layout";
-import CreatorCard from "../components/Cards/creator";
+import CreatorCard from "../components/Cards/creatorV2";
 import UserService from "../services/api/UserService";
 import { CREATORS_FETCHING_ERROR } from "../constants";
 import { Spinner } from "../components/ui/Spinner/Spinner";
+import creatorsArray from "../utils/creators";
 
 function Creators({ creatorsData, currPage, totalDocuments, error }) {
   // State
   const [err, setErr] = useState(error);
   const [isLoading, setIsLoading] = useState(true);
-  const [creators, setCreators] = useState(creatorsData || []);
+  const [creators, setCreators] = useState(creatorsArray || []);
   const [currentPage, setCurrentPage] = useState(currPage || 0);
   const [totalDocs, setTotalDocs] = useState(totalDocuments || 0);
 
@@ -56,31 +57,31 @@ function Creators({ creatorsData, currPage, totalDocuments, error }) {
   return (
     <Layout>
       {creators?.length > 0 ? (
-        <InfiniteScroll
-          dataLength={creators.length}
-          next={fetchCreators}
-          hasMore={creators.length < totalDocs}
-          loader={
-            <div
-              className={`w-min ml-auto mr-2 my-3 ${
-                isLoading ? "block" : "hidden"
-              }`}
-            >
-              <div className="rounded-full shadow-3xl bg-white p-3">
-                <Spinner color="text-blck" />
-              </div>
-            </div>
-          }
-        >
-          <div className="md:py-16 py-8 flex mx-auto w-full px-6 relative z-10 flex-shrink-0	flex-grow	flex-col">
-            <div className="min-w-0 sm:gap-6 sm:grid-cols-2sm md:gap-8 md:grid-cols-3lg lg:grid-cols-4lg grid gap-1 grid-cols-1sm">
-              {creators.map((user) => (
-                <CreatorCard creator={user} key={user._id} />
-              ))}
-            </div>
+        // <InfiniteScroll
+        //   dataLength={creators.length}
+        //   next={fetchCreators}
+        //   hasMore={creators.length < totalDocs}
+        //   loader={
+        //     <div
+        //       className={`w-min ml-auto mr-2 my-3 ${
+        //         isLoading ? "block" : "hidden"
+        //       }`}
+        //     >
+        //       <div className="rounded-full shadow-3xl bg-white p-3">
+        //         <Spinner color="text-blck" />
+        //       </div>
+        //     </div>
+        //   }
+        // >
+        <div className="md:py-16 py-8 flex mx-auto w-full px-6 relative z-10 flex-shrink-0	flex-grow	flex-col">
+          <div className="min-w-0 sm:gap-6 sm:grid-cols-2sm md:gap-8 md:grid-cols-3lg lg:grid-cols-4lg grid gap-1 grid-cols-1sm">
+            {creators.map((user) => (
+              <CreatorCard creator={user} key={user._id} />
+            ))}
           </div>
-        </InfiniteScroll>
+        </div>
       ) : (
+        // </InfiniteScroll>
         <div className="sm:pt-12 md:pt-24 pt-10 min-h-calc265px mx-auto w-full px-6 pb-24 flex flex-1 items-center justify-center">
           <div className="mx-auto w-full">
             <div className="mx-auto text-center max-w-30.625">
